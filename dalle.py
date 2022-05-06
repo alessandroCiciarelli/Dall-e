@@ -22,11 +22,8 @@ def call_dalle(url, text, num_images=1):
     
 def create_and_show_images(text, num_images):
     valid = check_if_valid_backend(URL)
-    if not valid:
-        st.write("Il servizio Backend è in sovraccarico per le troppe richieste")
-    else:
-        resp = call_dalle(URL, text, num_images)
-        if resp is not None:
-            for data in resp.json():
-                img_data = base64.b64decode(data)
-                st.image(img_data)
+    resp = call_dalle(URL, text, num_images)
+    if resp is not None:
+        for data in resp.json():
+        img_data = base64.b64decode(data)
+        st.image(img_data)
