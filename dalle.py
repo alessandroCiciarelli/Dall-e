@@ -8,9 +8,10 @@ headers = {'Bypass-Tunnel-Reminder': "go",
 
 def check_if_valid_backend(url):
     try:
-        resp = requests.get(url, timeout=5, headers=headers)
+        resp = requests.get(url, timeout=50, headers=headers)
         return resp.status_code == 200
     except requests.exceptions.Timeout:
+        st.write(resp)
         return False
     
 def call_dalle(url, text, num_images=1):
