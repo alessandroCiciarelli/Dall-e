@@ -25,5 +25,5 @@ def create_and_show_images(text, num_images):
     resp = call_dalle(URL, text, num_images)
     if resp is not None:
         for data in resp.json():
-        img_data = base64.b64decode(data)
-        st.image(img_data)
+            img_data = base64.b64decode(data)
+            st.image(img_data)
