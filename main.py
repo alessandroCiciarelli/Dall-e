@@ -109,8 +109,6 @@ if st.session_state.premium == False:
             text2 = st.markdown("<b> COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             st.markdown("1️⃣ Sezione Analisi ", unsafe_allow_html=True)
             sezioneAnalisi = pd.read_csv("Analisi.csv")
-            #set sezioneAnalisi background color to light green and font color to black if "VERSIONE" column is "PREMIUM
-            sezioneAnalisi.style.background_apply(lambda x: '#02ab21' if x == 'PREMIUM' else '#fafafa')
             st.dataframe(sezioneAnalisi)
             st.write(" ")
             st.markdown("2️⃣ Sezione Ricerca ", unsafe_allow_html=True)
