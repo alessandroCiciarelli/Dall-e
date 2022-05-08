@@ -106,8 +106,9 @@ if st.session_state.premium == False:
                     st.error("Codice o Nome Utente errati")
                 
             st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
-            text2 = st.markdown("In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni d'Italia ci sono più ricerche.<br> La sezione di <bold>Analisi Keyword</bold> per ogni keyword inserita (MAX 5 per analisi) il tool genererà:<br>🔹Il trend di ricerca nel tempo<br>🔹Il trend di ricerca nelle regioni in Italia<br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I 4 competitor più forti sulla keyword<br>🔹Le 4 domande più frequenti fatte sulla keyword", unsafe_allow_html=True)
-            text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Incollare da 1 a 5 keyword (una per riga)<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <bold>'Scopri le tendenze🤘'</bold> ", unsafe_allow_html=True)
+            text2 = st.markdown("** COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 **")
+            text3 = st.markdown("1️⃣ Sezione Analisi ", unsafe_allow_html=True)
+            st.table(pd.read_csv("Analisi.csv"))
             st.write("  ")
             st.write("  ")
 else:
