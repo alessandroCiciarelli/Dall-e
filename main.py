@@ -1080,14 +1080,22 @@ if choose=="Contenuti":
     st.write("  ")
     st.write("  ")
     inp = st.text_area('Scrivi una frase o un paragrafo di ispirazione per la nostra I.A.',height=200)
-    lunghezza = st.slider('Lunghezza massima del testo generato :', 50, 700,200,10)
-    follia = st.slider('Numero di follia :', 0.5, 1.0,0.7,0.1)
-    numTesti = st.slider('Numero di testi da generare :', 1, 10,1,1)
+    if st.session_state.premium == True:
+        lunghezza = st.slider('Lunghezza massima del testo generato :', 50, 700,200,10)
+        follia = st.slider('Numero di follia :', 0.5, 1.0,0.7,0.1)
+        numTesti = st.slider('Numero di testi da generare :', 1, 5,1,1)
+    else:
+        lunghezza = st.slider('Lunghezza massima del testo generato ', 50, 700,200,10)
+        follia = st.slider('Numero di follia (PREMIUM 👑)', 0.5, 1.0,0.7,0.1, disabled=True)
+        follia = 0.7
+        numTesti = st.slider('Numero di testi da generare (PREMIUM 👑)', 1, 5,1,1, disabled=True)
+        numTesti = 1
+
     
     if st.button("Genera testo🤘") :
         nuovo = ittoen(inp)
         with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 '):
-            inp = ai_text(nuovo,lunghezza,0.7,numTesti)
+            inp = ai_text(nuovo,lunghezza,follia,numTesti)
             for i in range(len(inp)):
                 with st.expander(f"Genero il testo {str(i+1)}"):
                     st.write(inp[i])
