@@ -114,6 +114,7 @@ if st.session_state.premium == False:
             gb.configure_grid_options(enableRangeSelection=True)
             response = AgGrid(
                 sezioneAnalisi,
+                height="200px",
                 gridOptions=gb.build(),
                 fit_columns_on_grid_load=True,
                 allow_unsafe_jscode=True,
@@ -129,7 +130,8 @@ if st.session_state.premium == False:
             gb.configure_default_column(editable=True)
             gb.configure_grid_options(enableRangeSelection=True)
             response = AgGrid(
-                seziosezioneRicercaneAnalisi,
+                sezioneRicerca,
+                height="200px",
                 gridOptions=gb.build(),
                 fit_columns_on_grid_load=True,
                 allow_unsafe_jscode=True,
@@ -139,17 +141,47 @@ if st.session_state.premium == False:
             st.write(" ")
             st.markdown("<b>3️⃣ Sezione Competitor COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneCompetitor = pd.read_csv("Competitor.csv")
-            st.dataframe(sezioneCompetitor)
+            gb = GridOptionsBuilder.from_dataframe(sezioneCompetitor)
+            gb.configure_default_column(editable=True)
+            gb.configure_grid_options(enableRangeSelection=True)
+            response = AgGrid(
+                sezioneCompetitor,
+                height="200px",
+                gridOptions=gb.build(),
+                fit_columns_on_grid_load=True,
+                allow_unsafe_jscode=True,
+                enable_enterprise_modules=True
+            )
             st.write(" ")
             st.write(" ")
             st.markdown("<b>4️⃣ Sezione Domande COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneDomande = pd.read_csv("Domande.csv")
-            st.dataframe(sezioneDomande)
+            gb = GridOptionsBuilder.from_dataframe(sezioneDomande)
+            gb.configure_default_column(editable=True)
+            gb.configure_grid_options(enableRangeSelection=True)
+            response = AgGrid(
+                sezioneDomande,
+                height="200px",
+                gridOptions=gb.build(),
+                fit_columns_on_grid_load=True,
+                allow_unsafe_jscode=True,
+                enable_enterprise_modules=True
+            )
             st.write(" ")
             st.write(" ")
             st.markdown("<b>5️⃣ Sezione Contenuti COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneContenuti = pd.read_csv("Testo.csv")
-            st.dataframe(sezioneContenuti)
+            gb = GridOptionsBuilder.from_dataframe(sezioneContenuti)
+            gb.configure_default_column(editable=True)
+            gb.configure_grid_options(enableRangeSelection=True)
+            response = AgGrid(
+                sezioneContenuti,
+                height="200px",
+                gridOptions=gb.build(),
+                fit_columns_on_grid_load=True,
+                allow_unsafe_jscode=True,
+                enable_enterprise_modules=True
+            )
             st.write(" ")
             st.write(" ")
             st.markdown("### [ Passa ORA a PREMIUM 👑 per soli 4.99€ al mese ](https://www.intelligenzaartificialeitalia.net), disdici quando vuoi 🤓")
