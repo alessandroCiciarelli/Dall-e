@@ -382,7 +382,7 @@ if choose=="Analisi":
                         gb = GridOptionsBuilder.from_dataframe(related_queries.get(linesList[i]).get("top"))
                         gb.configure_default_column(editable=True)
                         gb.configure_grid_options(enableRangeSelection=True)
-                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐'):
+                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐 Potrebbe volerci qualche minuto 🙏'):
                             response = AgGrid(
                                 related_queries.get(linesList[i]).get("top"),
                                 gridOptions=gb.build(),
@@ -406,7 +406,7 @@ if choose=="Analisi":
                         gb = GridOptionsBuilder.from_dataframe(topTrendFree)
                         gb.configure_default_column(editable=True)
                         gb.configure_grid_options(enableRangeSelection=True)
-                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐'):
+                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐 Potrebbe volerci qualche minuto 🙏'):
                             response = AgGrid(
                                 topTrendFree,
                                 gridOptions=gb.build(),
@@ -426,7 +426,7 @@ if choose=="Analisi":
                         gb = GridOptionsBuilder.from_dataframe(related_queries.get(keykey).get("rising"))
                         gb.configure_default_column(editable=True)
                         gb.configure_grid_options(enableRangeSelection=True)
-                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐 '):
+                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐 Potrebbe volerci qualche minuto 🙏'):
                             response = AgGrid(
                                 related_queries.get(linesList[i]).get("rising"),
                                 gridOptions=gb.build(),
@@ -449,7 +449,7 @@ if choose=="Analisi":
                         gb = GridOptionsBuilder.from_dataframe(topTrendenzeFree)
                         gb.configure_default_column(editable=True)
                         gb.configure_grid_options(enableRangeSelection=True)
-                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐 '):
+                        with st.spinner('Stiamo hackerando GOOGLE per analizzare le keywords ... 🕐 Potrebbe volerci qualche minuto 🙏'):
                             response = AgGrid(
                                 topTrendenzeFree,
                                 gridOptions=gb.build(),
@@ -498,7 +498,7 @@ if choose=="Analisi":
                 gb = GridOptionsBuilder.from_dataframe(concorrenti)
                 gb.configure_default_column(editable=True)
                 gb.configure_grid_options(enableRangeSelection=True)
-                with st.spinner('Aspetta un attimo... 🕐'):
+                with st.spinner('Aspetta un attimo... 🕐 Potrebbe volerci qualche minuto 🙏'):
                     response = AgGrid(
                         concorrenti,
                         fit_columns_on_grid_load=True,
@@ -514,7 +514,7 @@ if choose=="Analisi":
                         concorrentiFree.at[index, "Dominio"] = "Solo per PREMIUM 👑"
                         concorrentiFree.at[index, "Titolo"] = "Solo per PREMIUM 👑"
   
-                with st.spinner('Aspetta un attimo... 🕐'):
+                with st.spinner('Aspetta un attimo... 🕐 Potrebbe volerci qualche minuto 🙏'):
                     response = AgGrid(
                         concorrentiFree,
                         fit_columns_on_grid_load=True,
@@ -525,14 +525,14 @@ if choose=="Analisi":
                 
             st.write("")
             st.subheader("Domande principali ❓")
-            with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐'):
+            with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐 Potrebbe volerci qualche minuto 🙏'):
                 domande = people_also_ask_it.get_related_questions(str(keykey), 10)
             if st.session_state.premium == True:
                 domandePremium = pd.DataFrame(columns=['Domanda'])
                 for dom in domande:
                     domanda = dom.split("Cerca: ")
                     domandePremium.loc[len(domandePremium)] = [domanda[1]]
-                with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐'):
+                with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐 Potrebbe volerci qualche minuto 🙏'):
                     response = AgGrid(
                         domandePremium,
                         fit_columns_on_grid_load=True,
@@ -549,7 +549,7 @@ if choose=="Analisi":
                 for index, row in domandeFree.iterrows():
                     if index > 2:
                         domandeFree.at[index, "Domanda"] = "Solo per PREMIUM 👑"
-                with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐'):
+                with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐 Potrebbe volerci qualche minuto 🙏'):
                     response = AgGrid(
                         domandeFree,
                         fit_columns_on_grid_load=True,
@@ -671,7 +671,7 @@ if choose=="Ricerca":
         finally:
             json.loads = old_loads
 
-    with st.spinner("Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🤘"):
+    with st.spinner("Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🤘 Potrebbe volerci qualche minuto 🙏"):
         # tree = suggests_tree("français", source="google", max_depth=1)
         tree = suggests_tree(keyword, source=SearchEngineLowerCase, max_depth=maxDepth)
 
@@ -891,7 +891,7 @@ if choose=="Ricerca":
         gb = GridOptionsBuilder.from_dataframe(concorrenti)
         gb.configure_default_column(editable=True)
         gb.configure_grid_options(enableRangeSelection=True)
-        with st.spinner('Aspetta un attimo...'):
+        with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏'):
             response = AgGrid(
                 concorrenti,
                 gridOptions=gb.build(),
@@ -913,7 +913,7 @@ if choose=="Ricerca":
         gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
         gb.configure_default_column(editable=True)
         gb.configure_grid_options(enableRangeSelection=True)
-        with st.spinner('Aspetta un attimo...'):
+        with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏'):
             response = AgGrid(
                 concorrentiFree,
                 gridOptions=gb.build(),
@@ -982,7 +982,7 @@ if choose=="Competitor":
             gb = GridOptionsBuilder.from_dataframe(concorrenti)
             gb.configure_default_column(editable=True)
             gb.configure_grid_options(enableRangeSelection=True)
-            with st.spinner('Aspetta un attimo ... 🕐 '):
+            with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
                 response = AgGrid(
                     concorrenti,
                     gridOptions=gb.build(),
@@ -1007,7 +1007,7 @@ if choose=="Competitor":
             gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
             gb.configure_default_column(editable=True)
             gb.configure_grid_options(enableRangeSelection=True)
-            with st.spinner('Aspetta un attimo ... 🕐 '):
+            with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
                 response = AgGrid(
                     concorrentiFree,
                     gridOptions=gb.build(),
@@ -1041,7 +1041,7 @@ if choose=="Domande":
             linesList = linesList[:MAX_LINES]
             
         st.subheader("Damande principali cercate su Google ❓")
-        with st.spinner("Stiamo intervistando personalmente Google e Bing per svelarti i sui dubbi dei clienti su questa keyword...❓"):
+        with st.spinner("Stiamo intervistando personalmente Google e Bing per svelarti i sui dubbi dei clienti su questa keyword...❓ Potrebbero volerci diversi minuti 🙏"):
             domande = people_also_ask_it.get_related_questions(str(linesList),25)
             #st.write(domande)
             if(len(domande) <= 0):
@@ -1094,7 +1094,7 @@ if choose=="Contenuti":
     
     if st.button("Genera testo🤘") :
         nuovo = ittoen(inp)
-        with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 '):
+        with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
             inp = ai_text(nuovo,lunghezza,follia,numTesti)
             for i in range(len(inp)):
                 with st.expander(f"Genero il testo {str(i+1)}"):
@@ -1110,10 +1110,11 @@ st.text("")
 st.text("")
 st.text("")
 st.text("")
+st.text("")
 st.write("Proprietà intellettuale di [Intelligenza Artificiale Italia © ](https://intelligenzaartificialeitalia.net)")
-st.success("Questo è un tool gratuito sviluppato per Marketers, Esperti SEO, Coprywriters e Gestori di E-commerce 🤑.")
-st.error("Al momento è basato sullo scraping dei dati da Google, NON ABUSARNE solo perchè è gratis, altrimenti lo mettiamo a pagamento come SEMRUSH🥵 ! ")
-st.markdown('<bold> Se ti è stato di aiuto condividi il nostro sito per supportarci </bold>\
+st.success("Questo è un tool gratuito sviluppato per Marketers, Esperti SEO, Coprywriters e Gestori di E-commerce 💣 .")
+st.error("Al momento è basato sullo scraping dei dati da Google, NON ABUSARNE solo perchè è gratis, PASSA ORA A PREMIUM PER SBLOCCARE TUTTE LE FUNZIONI ! 🕹️ ")
+st.markdown('<b> Se ti è stato di aiuto condividi il nostro sito per supportarci </b>\
        <ul> \
       <li><a href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Fintelligenzaartificialeitalia.net%2F" target="blank" rel="noopener noreferrer">Condividi su Facebook</a></li> \
       <li><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fintelligenzaartificialeitalia.net%2F&text=Blog%2C+Forum%2C+Progetti%2C+e+Servizi+Gratuiti+completamente+dedicati+all%27+Intelligenza+Artificiale." target="blank" rel="noopener noreferrer">Condividi su Twitter</a></li> \
