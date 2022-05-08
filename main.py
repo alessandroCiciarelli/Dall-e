@@ -109,7 +109,18 @@ if st.session_state.premium == False:
             text2 = st.markdown(" ", unsafe_allow_html=True)
             st.markdown("<b> 1️⃣ Sezione Analisi COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b> ", unsafe_allow_html=True)
             sezioneAnalisi = pd.read_csv("Analisi.csv")
-            st.dataframe(sezioneAnalisi)
+            #use AgGrid to display dataframe
+            st.agrid(sezioneAnalisi,
+            grid_options=GridOptionsBuilder(
+                data_return_mode=DataReturnMode.DATA_FRAME,
+                grid_update_mode=GridUpdateMode.CELL_CHANGE,
+                row_selection=True,
+                row_reordering=True,
+                row_resizing=True,
+            ).build()
+            )
+
+
             st.write(" ")
             st.write(" ")
             st.markdown("<b>2️⃣ Sezione Ricerca COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
