@@ -132,7 +132,7 @@ if st.session_state.premium == False:
             st.dataframe(sezioneContenuti)
             st.write(" ")
             st.write(" ")
-            st.markdown("## [ Passa ORA a PREMIUM 👑 per soli 4.99€ al mese ](https://www.intelligenzaartificialeitalia.net) e disdici quando vuoi 🤓")
+            st.markdown("### [ Passa ORA a PREMIUM 👑 per soli 4.99€ al mese ](https://www.intelligenzaartificialeitalia.net), disdici quando vuoi 🤓")
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
