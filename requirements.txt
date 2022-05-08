@@ -16,3 +16,4 @@ ecommercetools
 fake_useragent
 seolib
 people_also_ask_it==0.2
+streamlit-echarts
