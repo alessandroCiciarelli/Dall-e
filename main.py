@@ -132,7 +132,7 @@ if st.session_state.premium == False:
             st.dataframe(sezioneContenuti)
             st.write(" ")
             st.write(" ")
-            st.markdown("<center>< a href='#' target='blank'><h2>Passa ora a PREMIUM 👑 </h2></a>", unsafe_allow_html=True)
+            st.markdown("## [Passa ORA a PREMIUM 👑](www.intelligenzaartificialeitalia.net) ")
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
