@@ -109,15 +109,15 @@ if st.session_state.premium == False:
             text2 = st.markdown(" ", unsafe_allow_html=True)
             st.markdown("<b> 1️⃣ Sezione Analisi COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b> ", unsafe_allow_html=True)
             sezioneAnalisi = pd.read_csv("Analisi.csv")
-            #use AgGrid to display dataframe
-            st.agrid(sezioneAnalisi,
-            grid_options=GridOptionsBuilder(
-                data_return_mode=DataReturnMode.DATA_FRAME,
-                grid_update_mode=GridUpdateMode.CELL_CHANGE,
-                row_selection=True,
-                row_reordering=True,
-                row_resizing=True,
-            ).build()
+            gb = GridOptionsBuilder.from_dataframe(sezioneAnalisi)
+            gb.configure_default_column(editable=True)
+            gb.configure_grid_options(enableRangeSelection=True)
+            response = AgGrid(
+                sezioneAnalisi,
+                gridOptions=gb.build(),
+                fit_columns_on_grid_load=True,
+                allow_unsafe_jscode=True,
+                enable_enterprise_modules=True
             )
 
 
@@ -125,7 +125,16 @@ if st.session_state.premium == False:
             st.write(" ")
             st.markdown("<b>2️⃣ Sezione Ricerca COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneRicerca = pd.read_csv("Ricerca.csv")
-            st.dataframe(sezioneRicerca)
+            gb = GridOptionsBuilder.from_dataframe(sezioneRicerca)
+            gb.configure_default_column(editable=True)
+            gb.configure_grid_options(enableRangeSelection=True)
+            response = AgGrid(
+                seziosezioneRicercaneAnalisi,
+                gridOptions=gb.build(),
+                fit_columns_on_grid_load=True,
+                allow_unsafe_jscode=True,
+                enable_enterprise_modules=True
+            )
             st.write(" ")
             st.write(" ")
             st.markdown("<b>3️⃣ Sezione Competitor COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
