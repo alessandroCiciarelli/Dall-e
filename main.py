@@ -97,9 +97,11 @@ def premium_check(user,codice):
 if st.session_state.premium == False:
     with st.expander(" Sei un UTENTE PREMIUM 👑 ? "):
             st.markdown("<center><h1>Benvenuto Utente Premium 👑</h1>", unsafe_allow_html=True)
-            user = st.text_input("Inserisci il tuo nome utente 👤")
-            codice = st.text_input("Inserisci il tuo codice di accesso 🔑")
-            if st.button("Login"):
+            #define tree streamlit columns
+            cc1, cc2, cc3 = st.beta_columns(3)
+            user = cc1.text_input("Inserisci il tuo nome utente 👤")
+            codice = cc2.text_input("Inserisci il tuo codice di accesso 🔑")
+            if cc3.button("Login"):
                 if premium_check(user,codice):
                     st.success("Benvenuto "+user+" 👑 Tra poco questa sezione scomparirà 🤓") 
                 else:
@@ -107,7 +109,7 @@ if st.session_state.premium == False:
                 
             st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
-            st.markdown("<b> 1️⃣ Sezione Analisi COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b> ", unsafe_allow_html=True)
+            st.markdown("<center><b> 1️⃣ Sezione Analisi COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b> ", unsafe_allow_html=True)
             sezioneAnalisi = pd.read_csv("Analisi.csv")
             gb = GridOptionsBuilder.from_dataframe(sezioneAnalisi)
             gb.configure_default_column(editable=True)
@@ -124,7 +126,7 @@ if st.session_state.premium == False:
 
             st.write(" ")
             st.write(" ")
-            st.markdown("<b>2️⃣ Sezione Ricerca COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
+            st.markdown("<center><b>2️⃣ Sezione Ricerca COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneRicerca = pd.read_csv("Ricerca.csv")
             gb = GridOptionsBuilder.from_dataframe(sezioneRicerca)
             gb.configure_default_column(editable=True)
@@ -139,7 +141,7 @@ if st.session_state.premium == False:
             )
             st.write(" ")
             st.write(" ")
-            st.markdown("<b>3️⃣ Sezione Competitor COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
+            st.markdown("<center><b>3️⃣ Sezione Competitor COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneCompetitor = pd.read_csv("Competitor.csv")
             gb = GridOptionsBuilder.from_dataframe(sezioneCompetitor)
             gb.configure_default_column(editable=True)
@@ -154,7 +156,7 @@ if st.session_state.premium == False:
             )
             st.write(" ")
             st.write(" ")
-            st.markdown("<b>4️⃣ Sezione Domande COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
+            st.markdown("<center><b>4️⃣ Sezione Domande COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneDomande = pd.read_csv("Domande.csv")
             gb = GridOptionsBuilder.from_dataframe(sezioneDomande)
             gb.configure_default_column(editable=True)
@@ -169,7 +171,7 @@ if st.session_state.premium == False:
             )
             st.write(" ")
             st.write(" ")
-            st.markdown("<b>5️⃣ Sezione Contenuti COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
+            st.markdown("<center><b>5️⃣ Sezione Contenuti COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
             sezioneContenuti = pd.read_csv("Testo.csv")
             gb = GridOptionsBuilder.from_dataframe(sezioneContenuti)
             gb.configure_default_column(editable=True)
@@ -184,7 +186,7 @@ if st.session_state.premium == False:
             )
             st.write(" ")
             st.write(" ")
-            st.markdown("### [ Passa ORA a PREMIUM 👑 per soli 4.99€ al mese ](https://www.intelligenzaartificialeitalia.net), disdici quando vuoi 🤓")
+            st.markdown("##### [ Passa ORA a PREMIUM 👑 per soli 4.99€ al mese ](https://www.intelligenzaartificialeitalia.net), non te ne pentirai 🤓")
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
@@ -379,7 +381,7 @@ if choose=="Analisi":
     country = st.selectbox("Scegli il paese", country_names)
     st.write(f"Hai selezionato " + country)
     idx = country_names.index(country)
-    country_code = country_codes[idx],
+    country_code = country_codes[idx]
 
     #carico i periodi di tempo
     selected_timeframe = ""
@@ -688,7 +690,7 @@ if choose=="Ricerca":
             else:
                 SearchEngineLowerCase="google"
         else:
-            SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing"), disabled=True)
+            SearchEngine = st.selectbox("Google o Bing ? (PREMIUM 👑) ", ("Google", "Bing"), disabled=True)
             SearchEngineLowerCase="google"
 
    
@@ -726,7 +728,7 @@ if choose=="Ricerca":
         st.stop()
 
     if keyword and not button1:
-        c.success("🔽 'Clicca sul pulsante per cercare nuove suggerimenti'")
+        c.success("🔽 Clicca sul pulsante per cercare nuove suggerimenti")
         st.stop()
 
     # Patch suggests to support latin1 decoding
@@ -746,7 +748,7 @@ if choose=="Ricerca":
         finally:
             json.loads = old_loads
 
-    with st.spinner("Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🤘 Potrebbe volerci qualche minuto 🙏"):
+    with st.spinner("Stiamo HACKERANDO google e bing dacci qualche minuto ... 🤘 Potrebbero volerci diversi minuti 🙏"):
         # tree = suggests_tree("français", source="google", max_depth=1)
         tree = suggests_tree(keyword, source=SearchEngineLowerCase, max_depth=maxDepth)
 
@@ -1003,11 +1005,16 @@ if choose=="Competitor":
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Competitor 🤔"):
         text2 = st.markdown("In questa sezione potrai scoprire quali sono i tuoi competitor più forti sulla seo<br> La sezione di <bold>Competitor</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Lista dei competitor più forti<br>🔹Posizionamento per ogni competitor<br>🔹Link pagina indicizzata su Google<br>🔹Statistiche sul titolo e descrizione pagina indicizzata", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire la keyword (MAX 1)<br> 2️⃣ Clicca su <bold>'Svelami i Competitor🤘'</bold> ", unsafe_allow_html=True)
+        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga<br> 2️⃣ Clicca su <bold>'Svelami i Competitor🤘'</bold> ", unsafe_allow_html=True)
     st.write("  ")
     st.write("  ")
     text = st.text_area("Powered by IntelligenzaArtificialeItalia.net", height=150, key=1)
     if st.button("Svelami i Competitor🤘"):
+        if st.session_state.premium == True:
+            MAX_LINES = 10
+        else:
+            MAX_LINES = 1
+
         lines = text.split("\n")  # A list of lines
         linesList = []
         for x in lines:
@@ -1016,8 +1023,13 @@ if choose=="Competitor":
         linesList = list(filter(None, linesList))  # Remove empty
 
         if len(linesList) > MAX_LINES:
-            st.warning(f"⚠️ Attenzione, solo la prima keyword verraanalizzata")
-            linesList = linesList[:MAX_LINES]
+            if st.session_state.premium == True:
+                st.warning(f"⚠️ Attenzione, Puoi inserire al massima 10 keywords. ⚠️")
+                linesList = linesList[:MAX_LINES]
+            else:
+                st.warning(f"⚠️ Attenzione, Puoi inserire al massima 1 keywords. ⚠️")
+                linesList = linesList[:MAX_LINES]
+
             
         st.subheader("Competitor principali 🏈")
         import urllib
@@ -1115,7 +1127,7 @@ if choose=="Domande":
             st.warning(f"⚠️ Attenzione, solo la prima keyword verrà analizzata")
             linesList = linesList[:MAX_LINES]
             
-        st.subheader("Damande principali cercate su Google ❓")
+        st.subheader("Damande principali cercate sulla Keyword❓")
         with st.spinner("Stiamo intervistando personalmente Google e Bing per svelarti i sui dubbi dei clienti su questa keyword...❓ Potrebbero volerci diversi minuti 🙏"):
             domande = people_also_ask_it.get_related_questions(str(linesList),25)
             #st.write(domande)
@@ -1151,7 +1163,7 @@ if choose=="Domande":
 if choose=="Contenuti":
     with st.expander("Cos'è e come funziona la sezione Contenuti 🤔"):
         text2 = st.markdown("In questa sezione potrai generare articoli, testi e spiegazioni senza dover scrivere 😯<br> La sezione di <bold>Contenuti</bold> in base ad una frase o un paragrafo dato è in grado di aiutarti a scrivere grazie ad un Intelligenza artificiale che sono anni che apprende dal web🤯", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paagrafo<br>2️⃣ Scegliere lunghezza desiderata del testo generato<br>3️⃣ Clicca su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
+        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paragrafo<br>2️⃣ Scegliere lunghezza desiderata del testo generato<br>3️⃣ Clicca su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
     st.write("  ")
     st.write("  ")
     inp = st.text_area('Scrivi una frase o un paragrafo di ispirazione per la nostra I.A.',height=200)

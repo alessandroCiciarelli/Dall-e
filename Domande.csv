@@ -1,3 +1,7 @@
-VERSIONE,Domande ,Motore,Risposta,Competitor ,Informazioni,ESPORTAZIONE
-Gratis, MAX 8,Limitato,No,No,solo la prima,NO
-PREMIUM,MAX 25,TUTTI,SI,SI,TUTTE,SI
+,"Gratis","PREMIUM"
+"Domande "," MAX 8","MAX 25"
+"Risposta","No","SI"
+"Informazioni","solo la prima","ILLIMITATE"
+"Motore","Limitati","Google+Bing"
+"Competitor ","solo la prima","ILLIMITATI"
+"ESPORTAZIONE","NO","SI"

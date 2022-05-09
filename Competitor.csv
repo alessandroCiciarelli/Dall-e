@@ -1,3 +1,5 @@
-VERSIONE,Ricerca,Motore,Competitors,ESPORTAZIONE
-Gratis, MAX 1,Limitato,MAX 10,NO
-PREMIUM,MAX 10,TUTTI,TUTTI,SI
+,"Gratis","PREMIUM"
+"Ricerca"," MAX 1","MAX 10"
+"Motore","Limitati","Google+Bing"
+"Competitor ","Limitati","ILLIMITATI"
+"ESPORTAZIONE","NO","SI"
