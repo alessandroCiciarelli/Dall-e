@@ -49,7 +49,7 @@ choose = option_menu("La miglior Suite di SEO gratis 🐍🔥", ["Analisi" , "Ri
                  styles={
 "container": {"color": "blak","padding": "4!important", "background-color": "#ededed", "width": "100%"},
 "icon": {"color": "blak", "font-size": "12px"}, 
-"nav-link": {"color": "blak","font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"nav-link": {"color": "blak!important","font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
