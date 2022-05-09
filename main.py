@@ -1,4 +1,13 @@
 #Librerie
+import streamlit as st
+hide_st_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+    """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 import base64
 import io
 import json
@@ -7,7 +16,6 @@ from time import sleep
 from matplotlib import pyplot as plt
 from openpyxl import Workbook
 import pandas as pd
-import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
 import people_also_ask_it
@@ -28,14 +36,7 @@ from aitextgen import aitextgen
 #Impostazioni pagina
 st.set_page_config(layout="wide")
 
-hide_st_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    </style>
-    """
-st.markdown(hide_st_style, unsafe_allow_html=True)
+
 
 st.markdown("<center><h1> Italian Intelligence Seo Suite </h1>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
@@ -47,9 +48,9 @@ choose = option_menu("La miglior Suite di SEO gratis 🐍🔥", ["Analisi" , "Ri
                  icons=[ 'body-text', 'keyboard', 'exclamation-triangle', 'patch-question' ,'journal-bookmark'],
                  menu_icon="app-indicator", default_index=0,orientation='horizontal',
                  styles={
-"container": {"color": "blak","padding": "5!important", "background-color": "#fafafa", "width": "100%"},
-"icon": {"color": "blak", "font-size": "15px"}, 
-"nav-link": {"color": "blak","font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"container": {"color": "blak","padding": "4!important", "background-color": "#fafafa", "width": "100%"},
+"icon": {"color": "blak", "font-size": "13px"}, 
+"nav-link": {"background-color": "#eee", "color": "blak","font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
