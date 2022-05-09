@@ -98,9 +98,9 @@ if st.session_state.premium == False:
     with st.expander(" Sei un UTENTE PREMIUM 👑 ? "):
             st.markdown("<center><h1>Benvenuto Utente Premium 👑</h1>", unsafe_allow_html=True)
             #define tree streamlit columns
-            cc1, cc2, cc3 = st.beta_columns(3)
-            user = cc1.text_input("Inserisci il tuo nome utente 👤")
-            codice = cc2.text_input("Inserisci il tuo codice di accesso 🔑")
+            cc1, cc2, cc3 = st.columns(3)
+            user = cc1.text_input("", "Inserisci il tuo nome utente 👤")
+            codice = cc2.text_input("","Inserisci il tuo codice di accesso 🔑")
             if cc3.button("Login"):
                 if premium_check(user,codice):
                     st.success("Benvenuto "+user+" 👑 Tra poco questa sezione scomparirà 🤓") 
@@ -186,7 +186,7 @@ if st.session_state.premium == False:
             )
             st.write(" ")
             st.write(" ")
-            st.markdown("##### [ Passa ORA a PREMIUM 👑 per soli 4.99€ al mese ](https://www.intelligenzaartificialeitalia.net), non te ne pentirai 🤓")
+            st.markdown("<center><h3><a href='https://www.intelligenzaartificialeitalia.net' >Passa ORA a PREMIUM 👑 per SOLI 4.99€ al mese, non te ne pentirai 🤓</a><h3>", unsafe_allow_html=True)
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
@@ -384,36 +384,52 @@ if choose=="Analisi":
     country_code = country_codes[idx]
 
     #carico i periodi di tempo
-    selected_timeframe = ""
-    period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
-    tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
-    timeframe_selectbox = st.selectbox("Scegli il periodo", period_list)
-    idx = period_list.index(timeframe_selectbox)
-    selected_timeframe = tf[idx]
-    todays_date = date.today()
-    current_year = todays_date.year
+    if st.session_state.premium == True:
+        selected_timeframe = ""
+        period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
+        tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
+        timeframe_selectbox = st.selectbox("Scegli il periodo", period_list)
+        idx = period_list.index(timeframe_selectbox)
+        selected_timeframe = tf[idx]
+        todays_date = date.today()
+        current_year = todays_date.year
 
-    years = list(range(2005, current_year + 1))
-    months = list(range(1, 13))
-    days = list(range(1, 32))
+        years = list(range(2005, current_year + 1))
+        months = list(range(1, 13))
+        days = list(range(1, 32))
 
-    if selected_timeframe == "custom":
-        
-        st.write(f"Da")
+        if selected_timeframe == "custom":
+            
+            st.write(f"Da")
 
-        col11, col12, col13 = st.columns(3)
-        year_from = col11.selectbox("Anno", years, key="0")
-        month_from = col12.selectbox("Mese", months, key="1")
-        day_from = col13.selectbox("Giorno", days, key="2")
-        
-        st.write(f"a")
+            col11, col12, col13 = st.columns(3)
+            year_from = col11.selectbox("Anno", years, key="0")
+            month_from = col12.selectbox("Mese", months, key="1")
+            day_from = col13.selectbox("Giorno", days, key="2")
+            
+            st.write(f"a")
 
-        col21, col22, col23 = st.columns(3)
-        year_to = col21.selectbox("Anno", years, key="3")
-        month_to = col22.selectbox("Mese", months, key="4")
-        day_to = col23.selectbox("Giorno", days, key="5")
-        
-        selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
+            col21, col22, col23 = st.columns(3)
+            year_to = col21.selectbox("Anno", years, key="3")
+            month_to = col22.selectbox("Mese", months, key="4")
+            day_to = col23.selectbox("Giorno", days, key="5")
+            
+            selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
+    
+    else:
+        selected_timeframe = ""
+        period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
+        tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all"]
+        timeframe_selectbox = st.selectbox("Scegli il periodo 👑 ", period_list)
+        idx = period_list.index(timeframe_selectbox)
+        selected_timeframe = tf[idx]
+        todays_date = date.today()
+        current_year = todays_date.year
+
+        years = list(range(2005, current_year + 1))
+        months = list(range(1, 13))
+        days = list(range(1, 32))
+
         
 
     #bottone per scoprire le tendenze
