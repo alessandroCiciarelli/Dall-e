@@ -98,10 +98,11 @@ if st.session_state.premium == False:
     with st.expander(" Sei un UTENTE PREMIUM 👑 ? "):
             st.markdown("<center><h1>Benvenuto Utente Premium 👑</h1>", unsafe_allow_html=True)
             #define tree streamlit columns
-            cc1, cc2, cc3 = st.columns(3)
-            user = cc1.text_input("", "Inserisci il tuo nome utente 👤")
-            codice = cc2.text_input("","Inserisci il tuo codice di accesso 🔑")
-            if cc3.button("Login"):
+            cc1, cc2= st.columns(2)
+            user = cc1.text_input("Inserisci il tuo nome utente 👤")
+            codice = cc2.text_input("Inserisci il tuo codice di accesso 🔑")
+            dd1, dd2, dd3 = st.columns(3)
+            if dd2.button("Login 🔐"):
                 if premium_check(user,codice):
                     st.success("Benvenuto "+user+" 👑 Tra poco questa sezione scomparirà 🤓") 
                 else:
