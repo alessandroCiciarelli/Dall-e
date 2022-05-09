@@ -47,7 +47,7 @@ choose = option_menu("La miglior Suite di SEO gratis 🐍🔥", ["Analisi" , "Ri
                  icons=[ 'body-text', 'keyboard', 'exclamation-triangle', 'patch-question' ,'journal-bookmark'],
                  menu_icon="app-indicator", default_index=0,orientation='horizontal',
                  styles={
-"container": {"color": "blak","padding": "4!important", "background-color": "#dedede", "width": "100%"},
+"container": {"color": "blak","padding": "4!important", "background-color": "#ededed", "width": "100%"},
 "icon": {"color": "blak", "font-size": "12px"}, 
 "nav-link": {"color": "blak","font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
