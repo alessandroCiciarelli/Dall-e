@@ -375,15 +375,15 @@ if choose=="Analisi":
             st.warning(f"⚠️ Attenzione, Puoi inserire al massima 3 keywords. ⚠️")
             linesList = linesList[:MAX_LINES]
 
-    #carico i paesi
     from parseCountries import parse
     country_names, country_codes = parse()
     country_names, country_codes = country_names[:243], country_codes[:243]
     country = st.selectbox("Scegli il paese", country_names)
     st.write(f"Hai selezionato " + country)
     idx = country_names.index(country)
-    country_code = country_codes[idx]
+    country_code = country_codes[idx],
 
+    #carico i periodi di tempo
     selected_timeframe = ""
     period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
     tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
@@ -414,9 +414,6 @@ if choose=="Analisi":
         day_to = col23.selectbox("Giorno", days, key="5")
         
         selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
-    
-    
-
         
 
     #bottone per scoprire le tendenze
