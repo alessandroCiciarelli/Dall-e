@@ -102,11 +102,11 @@ if st.session_state.premium == False:
             user = cc1.text_input("Inserisci il tuo nome utente 👤")
             codice = cc2.text_input("Inserisci il tuo codice di accesso 🔑")
             dd1, dd2, dd3 = st.columns(3)
-            if dd2.button("Login 🔐"):
+            if dd2.button("Accedi ora e sblocca tutte le funzionalità PREMIUM, nulla sarà come prima 🔐"):
                 if premium_check(user,codice):
                     st.success("Benvenuto "+user+" 👑 Tra poco questa sezione scomparirà 🤓") 
                 else:
-                    st.error("Codice o Nome Utente errati")
+                    st.error("Codice o Nome Utente errati ❌")
                 
             st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
