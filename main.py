@@ -433,6 +433,7 @@ if choose=="Analisi":
         
         if len(linesList) == 1:
             linesList = removeRestrictedCharactersAndWhiteSpaces(linesList)
+            st.write(linesList, selected_timeframe, country_code[0] )
             pytrends.build_payload(linesList, timeframe=selected_timeframe, geo=country_code[0])
             related_queries = pytrends.related_queries()
             temp = pytrends.interest_over_time().drop('isPartial', axis=1)
@@ -440,6 +441,7 @@ if choose=="Analisi":
         
         else:
             linesList = removeRestrictedCharactersAndWhiteSpaces(linesList)
+            st.write(linesList, selected_timeframe, country_code[0] )
             pytrends.build_payload(linesList, timeframe=selected_timeframe, geo=country_code[0])
             related_queries = pytrends.related_queries()
             temp = pytrends.interest_over_time().drop('isPartial', axis=1)
