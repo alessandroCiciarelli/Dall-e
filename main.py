@@ -32,24 +32,24 @@ hide_st_style = """
     <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
+    header {visibility: hidden;margin:0;}
     </style>
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.markdown("<center><h1> Italian Intelligence Seo Suite </h1>", unsafe_allow_html=True)
+#st.markdown("<center><h1> Italian Intelligence Seo Suite </h1>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
 st.write(" ")
 
-choose = option_menu("La miglior Suite di SEO gratis 🐍🔥", ["Analisi" , "Ricerca", "Competitor", "Domande" , "Contenuti"],
+choose = option_menu("Intelligenza Artificiale e SEO  🐍🔥", ["Analisi" , "Ricerca", "Competitor", "Domande" , "Contenuti"],
                  icons=[ 'body-text', 'keyboard', 'exclamation-triangle', 'patch-question' ,'journal-bookmark'],
                  menu_icon="app-indicator", default_index=0,orientation='horizontal',
                  styles={
-"container": {"color": "blak","padding": "4!important", "background-color": "transparent", "width": "100%"},
-"icon": {"color": "blak", "font-size": "12px"}, 
-"nav-link": {"color": "blak!important","font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"container": {"color": "blak","padding": "5!important", "background-color": "transparent", "width": "100%"},
+"icon": {"color": "blak", "font-size": "10px"}, 
+"nav-link": {"color": "blak!important","font-size": "12px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
@@ -111,6 +111,7 @@ if st.session_state.premium == False:
             st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
             st.markdown("<center><b> 1️⃣ Sezione Analisi COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b> ", unsafe_allow_html=True)
+            """
             sezioneAnalisi = pd.read_csv("Analisi.csv")
             gb = GridOptionsBuilder.from_dataframe(sezioneAnalisi)
             gb.configure_default_column(editable=True)
@@ -185,6 +186,7 @@ if st.session_state.premium == False:
                 allow_unsafe_jscode=True,
                 enable_enterprise_modules=True
             )
+            """
             st.write(" ")
             st.write(" ")
             st.markdown("<center><h3><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h3>", unsafe_allow_html=True)
