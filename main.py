@@ -43,9 +43,12 @@ st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e 
 st.write(" ")
 st.write(" ")
 
+if 'index' not in st.session_state:
+    st.session_state['index'] =  0
+
 choose = option_menu(None, ["Analisi" , "Ricerca", "Competitor", "Domande" , "Contenuti"],
                  icons=[ 'body-text', 'keyboard', 'exclamation-triangle', 'patch-question' ,'journal-bookmark'],
-                 menu_icon="app-indicator", default_index=0,orientation='horizontal',
+                 menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
 "container": {"color": "blak","padding": "5!important", "background-color": "transparent", "width": "100%"},
 "icon": {"color": "blak", "font-size": "10px"}, 
@@ -64,8 +67,6 @@ if 'premium' not in st.session_state:
 if 'nome' not in st.session_state:
     st.session_state['nome'] =  ""
 
-if 'scelta' not in st.session_state:
-    st.session_state['scelta'] =  choose
 
 
 def premium_check(user,codice):
@@ -107,10 +108,10 @@ if st.session_state.premium == False:
                     st.success("Benvenuto "+user+" 👑 Tra poco questa sezione scomparirà 🤓") 
                 else:
                     st.error("Codice o Nome Utente errati ❌")
-                
+            st.write(" ")    
             st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
-            st.write(" ")
+            
             st.write(" ")
             st.markdown("<center><h4><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h4>", unsafe_allow_html=True)
 else:
@@ -266,7 +267,7 @@ def df_suggest(df, _type='liste', kwToRemove=[]):
     
 #1 Analisi
 if choose=="Analisi":
-    
+    st.session_state['index'] =  0
     with st.expander("Cos'è e come funziona la sezione Analisi 🤔"):
         text2 = st.markdown("In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni d'Italia ci sono più ricerche.<br> La sezione di <bold>Analisi Keyword</bold> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br>🔹Il trend di ricerca nelle regioni in Italia<br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword", unsafe_allow_html=True)
         text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) [MAX FREE 3 keywords]<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <bold>'Scopri le tendenze🤘'</bold> ", unsafe_allow_html=True)
@@ -565,6 +566,7 @@ if choose=="Analisi":
 
 #2 Ricerca
 if choose=="Ricerca":
+    st.session_state['index'] =  1
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Ricerca 🤔"):
         text2 = st.markdown("In questa sezione potrai scoprire quali sono le keyword correlate più cercate su google<br> La sezione di <bold>Ricerca Keyword</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Dalle tantissime keywords inerenti a quella data<br>🔹La distribuzione delle nuove keywords<br>🔹I 10 competitor più forti sulle keywords generate<br>", unsafe_allow_html=True)
@@ -927,6 +929,7 @@ if choose=="Ricerca":
 
 #3 Competitor principali 🏈
 if choose=="Competitor":
+    st.session_state['index'] =  2
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Competitor 🤔"):
         text2 = st.markdown("In questa sezione potrai scoprire quali sono i tuoi competitor più forti sulla seo<br> La sezione di <bold>Competitor</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Lista dei competitor più forti<br>🔹Posizionamento per ogni competitor<br>🔹Link pagina indicizzata su Google<br>🔹Statistiche sul titolo e descrizione pagina indicizzata", unsafe_allow_html=True)
@@ -1032,6 +1035,7 @@ if choose=="Competitor":
 
 #4 Domande
 if choose=="Domande":
+    st.session_state['index'] =  3
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Domande 🤔"):
         text2 = st.markdown("In questa sezione potrai scoprire quali sono i dubbi dei tuoi potenziali clienti in merito ad una keyword<br> La sezione <bold>Domande</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Le domande più cercate su Google<br>🔹Una risposta semplice per ogni domanda generata<br>🔹Statistiche e informazioni per ogni domanda", unsafe_allow_html=True)
@@ -1053,7 +1057,7 @@ if choose=="Domande":
             linesList = linesList[:MAX_LINES]
             
         st.subheader("Damande principali cercate sulla Keyword❓")
-        with st.spinner("Stiamo intervistando personalmente Google e Bing per svelarti i sui dubbi dei clienti su questa keyword...❓ Potrebbero volerci diversi minuti 🙏"):
+        with st.spinner("Stiamo intervistando personalmente Google e Bing❓ Potrebbero volerci diversi minuti 🙏"):
             domande = people_also_ask_it.get_related_questions(str(linesList),25)
             #st.write(domande)
             if(len(domande) <= 0):
@@ -1086,6 +1090,7 @@ if choose=="Domande":
 
 #5 Contenuti
 if choose=="Contenuti":
+    st.session_state['index'] =  4
     with st.expander("Cos'è e come funziona la sezione Contenuti 🤔"):
         text2 = st.markdown("In questa sezione potrai generare articoli, testi e spiegazioni senza dover scrivere 😯<br> La sezione di <bold>Contenuti</bold> in base ad una frase o un paragrafo dato è in grado di aiutarti a scrivere grazie ad un Intelligenza artificiale che sono anni che apprende dal web🤯", unsafe_allow_html=True)
         text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paragrafo<br>2️⃣ Scegliere lunghezza desiderata del testo generato<br>3️⃣ Clicca su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
