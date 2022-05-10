@@ -652,279 +652,279 @@ if choose=="Ricerca":
 
     if not keyword:
         c.success("🔼 Scrivi una keyword per iniziare")
-        st.stop()
 
     if keyword and not button1:
         c.success("🔽 Clicca sul pulsante per cercare nuove suggerimenti")
-        st.stop()
 
-    # Patch suggests to support latin1 decoding
-    def suggests_tree(*args, **kwargs):
-        try:
-            old_loads = json.loads
+    if button1 and keyword:
+        # Patch suggests to support latin1 decoding
+        def suggests_tree(*args, **kwargs):
+            try:
+                old_loads = json.loads
 
-            def new_loads(s, *args, **kwargs):
-                if isinstance(s, bytes):
-                    s = s.decode("latin1")
-                return old_loads(s, *args, **kwargs)
+                def new_loads(s, *args, **kwargs):
+                    if isinstance(s, bytes):
+                        s = s.decode("latin1")
+                    return old_loads(s, *args, **kwargs)
 
-            json.loads = new_loads
+                json.loads = new_loads
 
-            return get_suggests_tree(*args, **kwargs)
+                return get_suggests_tree(*args, **kwargs)
 
-        finally:
-            json.loads = old_loads
+            finally:
+                json.loads = old_loads
 
-    with st.spinner("Stiamo HACKERANDO google e bing dacci qualche minuto ... 🤘 Potrebbero volerci diversi minuti 🙏"):
-        # tree = suggests_tree("français", source="google", max_depth=1)
-        tree = suggests_tree(keyword, source=SearchEngineLowerCase, max_depth=maxDepth)
+        with st.spinner("Stiamo HACKERANDO google e bing dacci qualche minuto ... 🤘 Potrebbero volerci diversi minuti 🙏"):
+            # tree = suggests_tree("français", source="google", max_depth=1)
+            tree = suggests_tree(keyword, source=SearchEngineLowerCase, max_depth=maxDepth)
 
-        if maxDepth != 3:
+            if maxDepth != 3:
 
-            edges = to_edgelist(tree)
-            edges = add_parent_nodes(edges)
-            edges = edges.apply(add_metanodes, axis=1)
-            show_restricted_colsFullDF = [
-                "root",
-                "edge",
-                "rank",
-                "depth",
-                "search_engine",
-                "datetime",
-                "parent",
-                "source_add",
-                "target_add",
-            ]
-            edges = edges[show_restricted_colsFullDF]
-            edges = edges.dropna()
-            show_restricted_cols1level = ["source_add", "target_add"]
-            show_restricted_cols2levels = ["parent", "source_add", "target_add"]
-
-            if maxDepth == 2:
-                dflimitedcolumns = edges[show_restricted_cols2levels]
-                dfNoneRemoved = dflimitedcolumns.dropna()
-            else:
-                dflimitedcolumns = edges[show_restricted_cols1level]
-                dfNoneRemoved = dflimitedcolumns.dropna()
-
-            edges["datetime"] = pd.to_datetime(edges["datetime"])
-
-            edges = edges.rename(
-                {
-                    "root": "Root Keyword",
-                    "rank": "Rank",
-                    #'depth': 'Depth',
-                    "search_engine": "Search Engine",
-                    "datetime": "Date & Time scraped",
-                    "parent": "Level 01",
-                    "source_add": "Level 02",
-                    "target_add": "Level 03",
-                },
-                axis=1,
-            )
-
-            edges = edges[
-                [
-                    "Root Keyword",
-                    "Level 01",
-                    "Level 02",
-                    "Level 03",
-                    "Rank",
-                    #'Depth',
-                    "Search Engine",
-                    "Date & Time scraped",
+                edges = to_edgelist(tree)
+                edges = add_parent_nodes(edges)
+                edges = edges.apply(add_metanodes, axis=1)
+                show_restricted_colsFullDF = [
+                    "root",
+                    "edge",
+                    "rank",
+                    "depth",
+                    "search_engine",
+                    "datetime",
+                    "parent",
+                    "source_add",
+                    "target_add",
                 ]
-            ]
+                edges = edges[show_restricted_colsFullDF]
+                edges = edges.dropna()
+                show_restricted_cols1level = ["source_add", "target_add"]
+                show_restricted_cols2levels = ["parent", "source_add", "target_add"]
 
+                if maxDepth == 2:
+                    dflimitedcolumns = edges[show_restricted_cols2levels]
+                    dfNoneRemoved = dflimitedcolumns.dropna()
+                else:
+                    dflimitedcolumns = edges[show_restricted_cols1level]
+                    dfNoneRemoved = dflimitedcolumns.dropna()
 
-            class Node(object):
-                def __init__(self, name, size=None):
-                    self.name = name
-                    self.children = []
-                    self.size = size
+                edges["datetime"] = pd.to_datetime(edges["datetime"])
 
-                def child(self, cname, size=None):
-                    child_found = [c for c in self.children if c.name == cname]
-                    if not child_found:
-                        _child = Node(cname, size)
-                        self.children.append(_child)
-                    else:
-                        _child = child_found[0]
-                    return _child
-
-                def as_dict(self):
-                    res = {"name": self.name}
-                    if self.size is None:
-                        res["children"] = [c.as_dict() for c in self.children]
-                    else:
-                        res["size"] = self.size
-                    return res
-
-
-            root = Node(keyword)
-
-            if maxDepth == 2:
-                for index, row in dfNoneRemoved.iterrows():
-                    grp1, grp3, size = row
-                    root.child(grp1).child(grp3, size)
-            else:
-                for index, row in dfNoneRemoved.iterrows():
-                    grp3, size = row
-                    root.child(grp3, size)
-
-            jsonString = json.dumps(root.as_dict(), indent=4)
-            jsonJSON = json.loads(jsonString)
-
-            opts = {
-                "tooltip": {"trigger": "item", "triggerOn": "mousemove"},
-                "series": [
+                edges = edges.rename(
                     {
-                        "type": "tree",
-                        "data": [jsonJSON],
-                        "top": "1%",
-                        "left": "7%",
-                        "bottom": "1%",
-                        "right": "20%",
-                        "symbolSize": 9,
-                        "label": {
-                            "position": "left",
-                            "verticalAlign": "middle",
-                            "align": "right",
-                            "fontSize": 12,
-                        },
-                        "toolbox": {
-                            "show": True,
-                            "feature": {
-                                "dataZoom": {"yAxisIndex": "none"},
-                                "restore": {},
-                                "saveAsImage": {},
-                            },
-                        },
-                        "leaves": {
-                            "label": {
-                                "position": "right",
-                                "verticalAlign": "middle",
-                                "align": "left",
-                            }
-                        },
-                        "expandAndCollapse": True,
-                        "animationDuration": 550,
-                        "animationDurationUpdate": 750,
-                    }
-                ],
-            }
-
-            st.markdown("---")
-
-            st.markdown("## **🌳 Grafico ad albero INTERATTIVO**")
-
-            with st.expander("ℹ️ - Come uso questo grafico ? "):
-
-                st.write(
-                    """       
-            -  Clicca sul nodo per visualizzare i suggerimenti che lo contengono.
-            -  Usa il tasto desto per savare il grafico come foto 📷
-                    """
+                        "root": "Root Keyword",
+                        "rank": "Rank",
+                        #'depth': 'Depth',
+                        "search_engine": "Search Engine",
+                        "datetime": "Date & Time scraped",
+                        "parent": "Level 01",
+                        "source_add": "Level 02",
+                        "target_add": "Level 03",
+                    },
+                    axis=1,
                 )
 
-            st.markdown("")
+                edges = edges[
+                    [
+                        "Root Keyword",
+                        "Level 01",
+                        "Level 02",
+                        "Level 03",
+                        "Rank",
+                        #'Depth',
+                        "Search Engine",
+                        "Date & Time scraped",
+                    ]
+                ]
 
-            st_echarts(opts, height=1000, width=1000)
-            edges = edges.reset_index(drop=True)
-            cm = sns.light_palette("green", as_cmap=True)
-            edgescoloured = edges.style.background_gradient(cmap="Blues")
+
+                class Node(object):
+                    def __init__(self, name, size=None):
+                        self.name = name
+                        self.children = []
+                        self.size = size
+
+                    def child(self, cname, size=None):
+                        child_found = [c for c in self.children if c.name == cname]
+                        if not child_found:
+                            _child = Node(cname, size)
+                            self.children.append(_child)
+                        else:
+                            _child = child_found[0]
+                        return _child
+
+                    def as_dict(self):
+                        res = {"name": self.name}
+                        if self.size is None:
+                            res["children"] = [c.as_dict() for c in self.children]
+                        else:
+                            res["size"] = self.size
+                        return res
+
+
+                root = Node(keyword)
+
+                if maxDepth == 2:
+                    for index, row in dfNoneRemoved.iterrows():
+                        grp1, grp3, size = row
+                        root.child(grp1).child(grp3, size)
+                else:
+                    for index, row in dfNoneRemoved.iterrows():
+                        grp3, size = row
+                        root.child(grp3, size)
+
+                jsonString = json.dumps(root.as_dict(), indent=4)
+                jsonJSON = json.loads(jsonString)
+
+                opts = {
+                    "tooltip": {"trigger": "item", "triggerOn": "mousemove"},
+                    "series": [
+                        {
+                            "type": "tree",
+                            "data": [jsonJSON],
+                            "top": "1%",
+                            "left": "7%",
+                            "bottom": "1%",
+                            "right": "20%",
+                            "padding": "0",
+                            "symbolSize": 9,
+                            "label": {
+                                "position": "left",
+                                "verticalAlign": "middle",
+                                "align": "right",
+                                "fontSize": 12,
+                            },
+                            "toolbox": {
+                                "show": True,
+                                "feature": {
+                                    "dataZoom": {"yAxisIndex": "none"},
+                                    "restore": {},
+                                    "saveAsImage": {},
+                                },
+                            },
+                            "leaves": {
+                                "label": {
+                                    "position": "right",
+                                    "verticalAlign": "middle",
+                                    "align": "left",
+                                }
+                            },
+                            "expandAndCollapse": True,
+                            "animationDuration": 550,
+                            "animationDurationUpdate": 750,
+                        }
+                    ],
+                }
+
+                st.markdown("---")
+
+                st.markdown("## **🌳 Grafico ad albero INTERATTIVO**")
+
+                with st.expander("ℹ️ - Come uso questo grafico ? "):
+
+                    st.write(
+                        """       
+                -  Clicca sul nodo per visualizzare i suggerimenti che lo contengono.
+                -  Usa il tasto desto per savare il grafico come foto 📷
+                        """
+                    )
+
+                st.markdown("")
+
+                st_echarts(opts, height=1000)
+                edges = edges.reset_index(drop=True)
+                cm = sns.light_palette("green", as_cmap=True)
+                edgescoloured = edges.style.background_gradient(cmap="Blues")
+
+                st.markdown("---")
+
+
+            try:
+
+                if st.session_state.premium == True:
+                    st.markdown("##  Scarica ora i risultati 🎁 ")
+                    csv = edges.to_csv(index=False)
+                    st.download_button("Scarica ora i dati in formato csv", csv, "keyword_suggestions.csv")
+                else:
+                    st.markdown("##  🎁 Scarica i risultati ")
+                    st.markdown("** Scarica ora i dati in formato csv (PREMIUM 👑) **")
+
+            except NameError:
+                print("Aspetta")
 
             st.markdown("---")
+            st.markdown("## **👇 Ecco i suggerimenti generati**")
+            st.subheader("")
+            st.table(edgescoloured)
 
-
-        try:
-
-            if st.session_state.premium == True:
-                st.markdown("##  Scarica ora i risultati 🎁 ")
-                csv = edges.to_csv(index=False)
-                st.download_button("Scarica ora i dati in formato csv", csv, "keyword_suggestions.csv")
-            else:
-                st.markdown("##  🎁 Scarica i risultati ")
-                st.markdown("** Scarica ora i dati in formato csv (PREMIUM 👑) **")
-
-        except NameError:
-            print("Aspetta")
-
-        st.markdown("---")
-        st.markdown("## **👇 Ecco i suggerimenti generati**")
-        st.subheader("")
-        st.table(edgescoloured)
-
-    c.success("✅ Complimenti! I suggerimenti sono pronti!")
-    
-    st.subheader("Competitor principali 🏈")
-    import urllib
-    import requests
-
-    query = {
-        "q": keyword,
-        "cr": "IT",
-        "num" : 10,
-        "lr": "lang_it"
-
-    }
-
-    headers = {
-        "X-User-Agent": "desktop",
-        "X-Proxy-Location": "EU",
-        "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
-        "X-RapidAPI-Key": "f889417d30msh0879bcc629fc0b3p1ff6ddjsnc676de2ea528"
-    }
-    resp = requests.get("https://rapidapi.p.rapidapi.com/api/v1/search/" + urllib.parse.urlencode(query), headers=headers)
-
-    results = resp.json()
-    #create dataframe
-    concorrenti =  pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Titolo Indicizzato'])
-    #st.write(results)
-    i=1
-    for result in results["results"]:
-        title = result['title']
-        link = result['link']
+        c.success("✅ Complimenti! I suggerimenti sono pronti!")
         
-        subdomain= link.split("/")[2]
-        #st.write(title,link)
-        concorrenti.loc[i] = [i] + [subdomain] + [title] 
-        i=i+1
+        st.subheader("Competitor principali 🏈")
+        import urllib
+        import requests
 
-    if st.session_state.premium == True:
-        gb = GridOptionsBuilder.from_dataframe(concorrenti)
-        gb.configure_default_column(editable=True)
-        gb.configure_grid_options(enableRangeSelection=True)
-        with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏'):
-            response = AgGrid(
-                concorrenti,
-                gridOptions=gb.build(),
-                fit_columns_on_grid_load=True,
-                allow_unsafe_jscode=True,
-                enable_enterprise_modules=True
-            )    
-            st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
-    else:
-        concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Titolo Indicizzato'])
-        concorrentiFree = concorrenti
-        for index, row in concorrentiFree.iterrows():
-            if index % 2 != 0:
-                # write "Solo per PREMIUM 👑" only on "Dominio" column
-                concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
-                # write "Solo per PREMIUM 👑" only on "Titolo idicizzato" column
-                concorrentiFree.at[index, 'Titolo Indicizzato'] = "Solo per PREMIUM 👑"
+        query = {
+            "q": keyword,
+            "cr": "IT",
+            "num" : 10,
+            "lr": "lang_it"
 
-        gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
-        gb.configure_default_column(editable=True)
-        gb.configure_grid_options(enableRangeSelection=True)
-        with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏'):
-            response = AgGrid(
-                concorrentiFree,
-                gridOptions=gb.build(),
-                fit_columns_on_grid_load=True,
-                allow_unsafe_jscode=True
-            )
-            st.write("Per esportare i dati, passa a PREMIUM 🚀")
+        }
+
+        headers = {
+            "X-User-Agent": "desktop",
+            "X-Proxy-Location": "EU",
+            "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
+            "X-RapidAPI-Key": "f889417d30msh0879bcc629fc0b3p1ff6ddjsnc676de2ea528"
+        }
+        resp = requests.get("https://rapidapi.p.rapidapi.com/api/v1/search/" + urllib.parse.urlencode(query), headers=headers)
+
+        results = resp.json()
+        #create dataframe
+        concorrenti =  pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Titolo Indicizzato'])
+        #st.write(results)
+        i=1
+        for result in results["results"]:
+            title = result['title']
+            link = result['link']
+            
+            subdomain= link.split("/")[2]
+            #st.write(title,link)
+            concorrenti.loc[i] = [i] + [subdomain] + [title] 
+            i=i+1
+
+        if st.session_state.premium == True:
+            gb = GridOptionsBuilder.from_dataframe(concorrenti)
+            gb.configure_default_column(editable=True)
+            gb.configure_grid_options(enableRangeSelection=True)
+            with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏'):
+                response = AgGrid(
+                    concorrenti,
+                    gridOptions=gb.build(),
+                    fit_columns_on_grid_load=True,
+                    allow_unsafe_jscode=True,
+                    enable_enterprise_modules=True
+                )    
+                st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
+        else:
+            concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Titolo Indicizzato'])
+            concorrentiFree = concorrenti
+            for index, row in concorrentiFree.iterrows():
+                if index % 2 != 0:
+                    # write "Solo per PREMIUM 👑" only on "Dominio" column
+                    concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
+                    # write "Solo per PREMIUM 👑" only on "Titolo idicizzato" column
+                    concorrentiFree.at[index, 'Titolo Indicizzato'] = "Solo per PREMIUM 👑"
+
+            gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
+            gb.configure_default_column(editable=True)
+            gb.configure_grid_options(enableRangeSelection=True)
+            with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏'):
+                response = AgGrid(
+                    concorrentiFree,
+                    gridOptions=gb.build(),
+                    fit_columns_on_grid_load=True,
+                    allow_unsafe_jscode=True
+                )
+                st.write("Per esportare i dati, passa a PREMIUM 🚀")
         
 
 #3 Competitor principali 🏈
