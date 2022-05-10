@@ -37,13 +37,13 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-#st.markdown("<center><h1> Italian Intelligence Seo Suite </h1>", unsafe_allow_html=True)
+st.markdown("<center><h2>Intelligenza Artificiale e SEO  🤖🔥</h2>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
 st.write(" ")
 
-choose = option_menu("Intelligenza Artificiale e SEO  🐍🔥", ["Analisi" , "Ricerca", "Competitor", "Domande" , "Contenuti"],
+choose = option_menu(None, ["Analisi" , "Ricerca", "Competitor", "Domande" , "Contenuti"],
                  icons=[ 'body-text', 'keyboard', 'exclamation-triangle', 'patch-question' ,'journal-bookmark'],
                  menu_icon="app-indicator", default_index=0,orientation='horizontal',
                  styles={
