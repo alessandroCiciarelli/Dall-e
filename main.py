@@ -37,7 +37,7 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.markdown("<center><h2>Intelligenza Artificiale e SEO  🤖🔥</h2>", unsafe_allow_html=True)
+st.markdown("<center><h2 style='margin-top:-10px;'>Intelligenza Artificiale e SEO  🤖🔥</h2>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
@@ -111,82 +111,7 @@ if st.session_state.premium == False:
             st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
             st.markdown("<center><b> 1️⃣ Sezione Analisi COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b> ", unsafe_allow_html=True)
-            """
-            sezioneAnalisi = pd.read_csv("Analisi.csv")
-            gb = GridOptionsBuilder.from_dataframe(sezioneAnalisi)
-            gb.configure_default_column(editable=True)
-            gb.configure_grid_options(enableRangeSelection=True)
-            response = AgGrid(
-                sezioneAnalisi,
-                height="200px",
-                gridOptions=gb.build(),
-                fit_columns_on_grid_load=True,
-                allow_unsafe_jscode=True,
-                enable_enterprise_modules=True
-            )
-
-
-            st.write(" ")
-            st.write(" ")
-            st.markdown("<center><b>2️⃣ Sezione Ricerca COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
-            sezioneRicerca = pd.read_csv("Ricerca.csv")
-            gb = GridOptionsBuilder.from_dataframe(sezioneRicerca)
-            gb.configure_default_column(editable=True)
-            gb.configure_grid_options(enableRangeSelection=True)
-            response = AgGrid(
-                sezioneRicerca,
-                height="200px",
-                gridOptions=gb.build(),
-                fit_columns_on_grid_load=True,
-                allow_unsafe_jscode=True,
-                enable_enterprise_modules=True
-            )
-            st.write(" ")
-            st.write(" ")
-            st.markdown("<center><b>3️⃣ Sezione Competitor COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
-            sezioneCompetitor = pd.read_csv("Competitor.csv")
-            gb = GridOptionsBuilder.from_dataframe(sezioneCompetitor)
-            gb.configure_default_column(editable=True)
-            gb.configure_grid_options(enableRangeSelection=True)
-            response = AgGrid(
-                sezioneCompetitor,
-                height="200px",
-                gridOptions=gb.build(),
-                fit_columns_on_grid_load=True,
-                allow_unsafe_jscode=True,
-                enable_enterprise_modules=True
-            )
-            st.write(" ")
-            st.write(" ")
-            st.markdown("<center><b>4️⃣ Sezione Domande COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
-            sezioneDomande = pd.read_csv("Domande.csv")
-            gb = GridOptionsBuilder.from_dataframe(sezioneDomande)
-            gb.configure_default_column(editable=True)
-            gb.configure_grid_options(enableRangeSelection=True)
-            response = AgGrid(
-                sezioneDomande,
-                height="200px",
-                gridOptions=gb.build(),
-                fit_columns_on_grid_load=True,
-                allow_unsafe_jscode=True,
-                enable_enterprise_modules=True
-            )
-            st.write(" ")
-            st.write(" ")
-            st.markdown("<center><b>5️⃣ Sezione Contenuti COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b>", unsafe_allow_html=True)
-            sezioneContenuti = pd.read_csv("Testo.csv")
-            gb = GridOptionsBuilder.from_dataframe(sezioneContenuti)
-            gb.configure_default_column(editable=True)
-            gb.configure_grid_options(enableRangeSelection=True)
-            response = AgGrid(
-                sezioneContenuti,
-                height="200px",
-                gridOptions=gb.build(),
-                fit_columns_on_grid_load=True,
-                allow_unsafe_jscode=True,
-                enable_enterprise_modules=True
-            )
-            """
+            
             st.write(" ")
             st.write(" ")
             st.markdown("<center><h3><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h3>", unsafe_allow_html=True)
