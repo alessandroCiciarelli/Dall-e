@@ -781,9 +781,7 @@ if choose=="Ricerca":
                             "type": "tree",
                             "data": [jsonJSON],
                             "top": "1%",
-                            "left": "20%",
                             "bottom": "1%",
-                            "right": "30%",
                             "padding": "0",
                             "symbolSize": 10,
                             "label": {
