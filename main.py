@@ -37,7 +37,7 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.markdown("<center><h2 style='margin-top:-200px;'>Intelligenza Artificiale e SEO  🤖🔥</h2>", unsafe_allow_html=True)
+st.markdown("<center><h2 style='margin-top:-70px;'>Intelligenza Artificiale e SEO  🤖🔥</h2>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
