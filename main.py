@@ -37,7 +37,7 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.markdown("<center><h2 style='margin-top:-10px;'>Intelligenza Artificiale e SEO  🤖🔥</h2>", unsafe_allow_html=True)
+st.markdown("<center><h2 style='margin-top:-200px;'>Intelligenza Artificiale e SEO  🤖🔥</h2>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
@@ -110,11 +110,9 @@ if st.session_state.premium == False:
                 
             st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
-            st.markdown("<center><b> 1️⃣ Sezione Analisi COMPARAZIONE PIANI FREE👤 VS PREMIUM👑 </b> ", unsafe_allow_html=True)
-            
             st.write(" ")
             st.write(" ")
-            st.markdown("<center><h3><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h3>", unsafe_allow_html=True)
+            st.markdown("<center><h4><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h4>", unsafe_allow_html=True)
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
