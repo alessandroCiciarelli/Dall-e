@@ -52,7 +52,7 @@ choose = option_menu(None, ["Analisi" , "Ricerca", "Domande" , "Competitor", "Co
                  styles={
 "container": {"color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
 "icon": {"color": "blak", "font-size": "9px"}, 
-"nav-link": {"color": "blak!important","font-size": "10px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"nav-link": {"color": "blak!important","font-size": "12px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
