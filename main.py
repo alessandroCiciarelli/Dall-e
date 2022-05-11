@@ -964,7 +964,7 @@ if choose=="Competitor":
 
             query = {
                 "q": keyword,
-                "num" : 25,
+                "num" : 35,
                 "lr": "lang_it"
             }
 
