@@ -51,7 +51,7 @@ choose = option_menu(None, ["Analisi" , "Ricerca", "Domande" , "Competitor", "Co
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
 "container": {"color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
-"icon": {"color": "blak", "font-size": "12px"}, 
+"icon": {"color": "blak", "font-size": "11px"}, 
 "nav-link": {"color": "blak!important","font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
