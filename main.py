@@ -275,7 +275,7 @@ if choose=="Analisi":
         st.write("  ")
 
     #Inserimento Keyword    
-    text = st.text_area("Powered by IntelligenzaArtificialeItalia.net", height=150, key=1)
+    text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1)
 
     #pulisco il teso in input
     linesDeduped2 = []
@@ -934,13 +934,20 @@ if choose=="Competitor":
         text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga<br> 2️⃣ Clicca su <bold>'Svelami i Competitor🤘'</bold> ", unsafe_allow_html=True)
     st.write("  ")
     st.write("  ")
-    text = st.text_area("Powered by IntelligenzaArtificialeItalia.net", height=150, key=1)
+    text = st.text_area("Inserisci le keywords, una per riga ", height=150, key=1)
     selected_lang = ""
-    listLang = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco", "Portoghese", "Russo"]
-    tfLang = ["lang_it", "lang_en", "lang_es", "lang_fr", "lang_de", "lang_pt", "lang_ru"]
-    Lang_selectbox = st.selectbox("In che mercato vuoi cercare", listLang)
-    idxL = listLang.index(Lang_selectbox)
-    selected_lang = tfLang[idxL]
+
+    if st.session_state.premium == True:
+        listLang = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco", "Portoghese", "Russo"]
+        tfLang = ["lang_it", "lang_en", "lang_es", "lang_fr", "lang_de", "lang_pt", "lang_ru"]
+        Lang_selectbox = st.selectbox("In che mercato vuoi cercare", listLang)
+        idxL = listLang.index(Lang_selectbox)
+        selected_lang = tfLang[idxL]
+    else:
+        listLang = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco", "Portoghese", "Russo"]
+        Lang_selectbox = st.selectbox("In che mercato vuoi cercare (PREMIUM 👑)", listLang, disabled=True)
+        selected_lang = "lang_it"
+
     if st.button("Svelami i Competitor🤘"):
         if st.session_state.premium == True:
             MAX_LINES = 10
@@ -964,7 +971,7 @@ if choose=="Competitor":
 
         
         for keyword in linesList:
-            st.subheader(f"Competitor principali {keyword}🏈")
+            st.subheader(f"Competitor principali {keyword}🏈 nel mercato {Lang_selectbox}")
             import urllib
             import requests
 
@@ -1053,7 +1060,7 @@ if choose=="Domande":
     
     st.write("  ")
     st.write("  ")
-    text = st.text_area("Powered by IntelligenzaArtificialeItalia.net", height=150, key=1)
+    text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1)
     if st.button("Svelami i Dubbi🤘"):
         lines = text.split("\n")  # A list of lines
         linesList = []
