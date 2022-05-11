@@ -37,7 +37,7 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.markdown("<center><h3 style='margin-top:-70px;'>Intelligenza Artificiale e SEO 🤖</h3>", unsafe_allow_html=True)
+st.markdown("<center><h4 style='margin-top:-70px;'>Intelligenza Artificiale e SEO 🤖</h4>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
@@ -51,8 +51,8 @@ choose = option_menu(None, ["Analisi" , "Ricerca", "Domande" , "Competitor", "Co
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
 "container": {"color": "blak","padding": "5!important", "background-color": "transparent", "width": "100%"},
-"icon": {"color": "blak", "font-size": "13px"}, 
-"nav-link": {"color": "blak!important","font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"icon": {"color": "blak", "font-size": "9"}, 
+"nav-link": {"color": "blak!important","font-size": "9", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
@@ -552,7 +552,7 @@ if choose=="Analisi":
                 for index, row in domandeFree.iterrows():
                     if index > 2:
                         domandeFree.at[index, "Domanda"] = "Solo per PREMIUM 👑"
-                with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐 Potrebbe volerci qualche minuto 🙏'):
+                with st.spinner('Stiamo HACKERANDO Google e Bing 🕐 Potrebbe volerci qualche minuto 🙏'):
                     response = AgGrid(
                         domandeFree,
                         fit_columns_on_grid_load=True,
@@ -674,7 +674,7 @@ if choose=="Ricerca":
             finally:
                 json.loads = old_loads
 
-        with st.spinner("Stiamo HACKERANDO google e bing dacci qualche minuto ... 🤘 Potrebbero volerci diversi minuti 🙏"):
+        with st.spinner("Stiamo HACKERANDO Google e Bing 🤘 Potrebbero volerci diversi minuti 🙏"):
             # tree = suggests_tree("français", source="google", max_depth=1)
             tree = suggests_tree(keyword, source=SearchEngineLowerCase, max_depth=maxDepth)
 
