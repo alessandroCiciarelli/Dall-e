@@ -956,80 +956,81 @@ if choose=="Competitor":
                 st.warning(f"⚠️ Attenzione, Puoi inserire al massima 1 keywords. ⚠️")
                 linesList = linesList[:MAX_LINES]
 
-            
-        st.subheader("Competitor principali 🏈")
-        import urllib
-        import requests
+        
+        for keyword in linesList:
+            st.subheader(f"Competitor principali {keyword}🏈")
+            import urllib
+            import requests
 
-        query = {
-            "q": str(linesList),
-            "num" : 25,
-            "lr": "lang_it"
-        }
+            query = {
+                "q": keyword,
+                "num" : 25,
+                "lr": "lang_it"
+            }
 
-        headers = {
-            "X-User-Agent": "desktop",
-            "X-Proxy-Location": "EU",
-            "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
-            "X-RapidAPI-Key": "420c6c02f5msh1ef4b18dc0eb0fcp117e71jsn6fb5cadbc81a"
-        }
-        resp = requests.get("https://rapidapi.p.rapidapi.com/api/v1/search/" + urllib.parse.urlencode(query), headers=headers)
+            headers = {
+                "X-User-Agent": "desktop",
+                "X-Proxy-Location": "EU",
+                "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
+                "X-RapidAPI-Key": "420c6c02f5msh1ef4b18dc0eb0fcp117e71jsn6fb5cadbc81a"
+            }
+            resp = requests.get("https://rapidapi.p.rapidapi.com/api/v1/search/" + urllib.parse.urlencode(query), headers=headers)
 
-        results = resp.json()
-        #create dataframe
-        concorrenti =  pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
-        #st.write(results)
-        i=1
-        for result in results["results"]:
-            title = result['title']
-            link = result['link']
-            descrizione = result['description']
-            subdomain= link.split("/")[2]
-            nT = len(title)
-            nD = len(descrizione)
-            #st.write(title,link)
-            concorrenti.loc[i] = [i] + [subdomain] + [link] + [title] + [nT] + [descrizione] + [nD] 
-            i=i+1
+            results = resp.json()
+            #create dataframe
+            concorrenti =  pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
+            #st.write(results)
+            i=1
+            for result in results["results"]:
+                title = result['title']
+                link = result['link']
+                descrizione = result['description']
+                subdomain= link.split("/")[2]
+                nT = len(title)
+                nD = len(descrizione)
+                #st.write(title,link)
+                concorrenti.loc[i] = [i] + [subdomain] + [link] + [title] + [nT] + [descrizione] + [nD] 
+                i=i+1
 
-        if st.session_state.premium == True:
-            gb = GridOptionsBuilder.from_dataframe(concorrenti)
-            gb.configure_default_column(editable=True)
-            gb.configure_grid_options(enableRangeSelection=True)
-            with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
-                response = AgGrid(
-                    concorrenti,
-                    gridOptions=gb.build(),
-                    fit_columns_on_grid_load=True,
-                    allow_unsafe_jscode=True,
-                    enable_enterprise_modules=True
-                )   
-                st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
-        else:
-            concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
-            concorrentiFree = concorrenti
-            # write "Solo per PREMIUM 👑" on 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione' columns 
-            concorrentiFree['Lunghezza Titolo'] = "Solo per PREMIUM 👑"
-            concorrentiFree['Descrizione'] = "Solo per PREMIUM 👑"
-            concorrentiFree['Lunghezza Descrizione'] = "Solo per PREMIUM 👑"
-            #write "Solo per PREMIUM 👑" only on 'Dominio', 'Pagina indicizzata' ,'Titolo' columns for frist 5 rows
-            for index, row in concorrentiFree.head(5).iterrows():
-                concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
-                concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
-                concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
+            if st.session_state.premium == True:
+                gb = GridOptionsBuilder.from_dataframe(concorrenti)
+                gb.configure_default_column(editable=True)
+                gb.configure_grid_options(enableRangeSelection=True)
+                with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
+                    response = AgGrid(
+                        concorrenti,
+                        gridOptions=gb.build(),
+                        fit_columns_on_grid_load=True,
+                        allow_unsafe_jscode=True,
+                        enable_enterprise_modules=True
+                    )   
+                    st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
+            else:
+                concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
+                concorrentiFree = concorrenti
+                # write "Solo per PREMIUM 👑" on 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione' columns 
+                concorrentiFree['Lunghezza Titolo'] = "Solo per PREMIUM 👑"
+                concorrentiFree['Descrizione'] = "Solo per PREMIUM 👑"
+                concorrentiFree['Lunghezza Descrizione'] = "Solo per PREMIUM 👑"
+                #write "Solo per PREMIUM 👑" only on 'Dominio', 'Pagina indicizzata' ,'Titolo' columns for frist 5 rows
+                for index, row in concorrentiFree.head(5).iterrows():
+                    concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
+                    concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
+                    concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
 
-            gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
-            gb.configure_default_column(editable=True)
-            gb.configure_grid_options(enableRangeSelection=True)
-            with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
-                response = AgGrid(
-                    concorrentiFree,
-                    gridOptions=gb.build(),
-                    fit_columns_on_grid_load=True,
-                    allow_unsafe_jscode=True
-                )   
-                st.write("Per esportare i dati, passa a PREIUM 🚀")
+                gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
+                gb.configure_default_column(editable=True)
+                gb.configure_grid_options(enableRangeSelection=True)
+                with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
+                    response = AgGrid(
+                        concorrentiFree,
+                        gridOptions=gb.build(),
+                        fit_columns_on_grid_load=True,
+                        allow_unsafe_jscode=True
+                    )   
+                    st.write("Per esportare i dati, passa a PREIUM 🚀")
 
-        st.markdown("""<hr/><br>""", unsafe_allow_html=True)
+            st.markdown("""<hr/><br>""", unsafe_allow_html=True)
 
 #4 Domande
 if choose=="Domande":
