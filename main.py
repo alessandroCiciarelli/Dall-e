@@ -625,19 +625,19 @@ if choose=="Ricerca":
         if st.session_state.premium == True:
             maxDepth = st.slider(
                 "Scegli la profondità massima di ricerca",
-                min_value=1,
-                max_value=3,
-                value=1,
-                step=1,
+                1,
+                3,
+                1,
+                1,
                 key=None,
             )
         else:
             maxDepth = st.slider(
                 "Scegli la profondità di ricerca (PREMIUM 👑)",
-                min_value=1,
-                max_value=1,
-                value=1,
-                step=1,
+                1,
+                3,
+                1,
+                1,
                 key=None,
                 disabled=True,
             )
