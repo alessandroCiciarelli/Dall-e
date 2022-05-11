@@ -37,7 +37,7 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.markdown("<center><h3 style='margin-top:-70px;'>Intelligenza Artificiale e SEO  🤖🔥</h3>", unsafe_allow_html=True)
+st.markdown("<center><h3 style='margin-top:-70px;'>Intelligenza Artificiale e SEO🤖🔥</h3>", unsafe_allow_html=True)
 st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
@@ -50,9 +50,9 @@ choose = option_menu(None, ["Analisi" , "Ricerca", "Competitor", "Domande" , "Co
                  icons=[ 'body-text', 'keyboard', 'exclamation-triangle', 'patch-question' ,'journal-bookmark'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
-"container": {"color": "blak","padding": "3!important", "background-color": "transparent", "width": "100%"},
+"container": {"color": "blak","padding": "2!important", "background-color": "transparent", "width": "100%"},
 "icon": {"color": "blak", "font-size": "10px"}, 
-"nav-link": {"color": "blak!important","font-size": "14px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"nav-link": {"color": "blak!important","font-size": "12px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
