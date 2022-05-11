@@ -1060,7 +1060,7 @@ if choose=="Domande":
     
     st.write("  ")
     st.write("  ")
-    text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1)
+    text = st.text_area("Inserisci la keyword", height=50, key=1)
     if st.button("Svelami i Dubbi🤘"):
         lines = text.split("\n")  # A list of lines
         linesList = []
