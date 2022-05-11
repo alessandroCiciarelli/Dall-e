@@ -38,7 +38,7 @@ hide_st_style = """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 st.markdown("<center><h4 style='margin-top:-70px;'>Intelligenza Artificiale e SEO 🤖</h4>", unsafe_allow_html=True)
-st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
+
 
 st.write(" ")
 st.write(" ")
@@ -97,7 +97,7 @@ def premium_check(user,codice):
         
 if st.session_state.premium == False:
     with st.expander(" Sei un UTENTE PREMIUM 👑 ? "):
-            st.markdown("<center><h1>Login Utenti Premium 👑</h1>", unsafe_allow_html=True)
+            st.markdown("<center><h5>Login Utenti Premium 👑</h5>", unsafe_allow_html=True)
             #define tree streamlit columns
             cc1, cc2= st.columns(2)
             user = cc1.text_input("Inserisci il tuo nome utente 👤")
@@ -109,11 +109,11 @@ if st.session_state.premium == False:
                 else:
                     st.error("Codice o Nome Utente errati ❌")
             st.write(" ")    
-            st.markdown("<center><h1>Vuoi Diventare un Utente Premium 👑 ?</h1>", unsafe_allow_html=True)
+            st.markdown("<center><h4>Vuoi Diventare un Utente Premium 👑 ?</h4>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
-            
+            st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
             st.write(" ")
-            st.markdown("<center><h4><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h4>", unsafe_allow_html=True)
+            st.markdown("<center><h5><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h5>", unsafe_allow_html=True)
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
@@ -269,8 +269,8 @@ def df_suggest(df, _type='liste', kwToRemove=[]):
 if choose=="Analisi":
     st.session_state['index'] =  0
     with st.expander("Cos'è e come funziona la sezione Analisi 🤔"):
-        text2 = st.markdown("In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni d'Italia ci sono più ricerche.<br> La sezione di <bold>Analisi Keyword</bold> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br>🔹Il trend di ricerca nelle regioni in Italia<br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) [MAX FREE 3 keywords]<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <bold>'Scopri le tendenze🤘'</bold> ", unsafe_allow_html=True)
+        text2 = st.markdown("In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni d'Italia ci sono più ricerche.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br>🔹Il trend di ricerca nelle regioni in Italia<br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword", unsafe_allow_html=True)
+        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) [MAX FREE 3 keywords]<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.write("  ")
         st.write("  ")
 
@@ -842,8 +842,8 @@ if choose=="Ricerca":
                     csv = edges.to_csv(index=False)
                     st.download_button("Scarica ora i dati in formato csv", csv, "keyword_suggestions.csv")
                 else:
-                    st.markdown("##  🎁 Scarica i risultati ")
-                    st.markdown("** Scarica ora i dati in formato csv (PREMIUM 👑) **")
+                    st.markdown("###  🎁 Scarica i risultati (PREMIUM 👑) ")
+
 
             except NameError:
                 print("Aspetta")
@@ -971,84 +971,85 @@ if choose=="Competitor":
 
         
         for keyword in linesList:
-            st.subheader(f"Competitor principali {keyword}🏈 nel mercato {Lang_selectbox}")
-            import urllib
-            import requests
+            with st.spinner(f"Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏"):
+                st.subheader(f"Competitor principali {keyword}🏈 nel mercato {Lang_selectbox}")
+                import urllib
+                import requests
 
-            query = {
-                "q": keyword,
-                "num" : 50,
-                "lr": selected_lang
-            }
+                query = {
+                    "q": keyword,
+                    "num" : 50,
+                    "lr": selected_lang
+                }
 
-            headers = {
-                "X-User-Agent": "desktop",
-                "X-Proxy-Location": "EU",
-                "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
-                "X-RapidAPI-Key": "420c6c02f5msh1ef4b18dc0eb0fcp117e71jsn6fb5cadbc81a"
-            }
-            resp = requests.get("https://rapidapi.p.rapidapi.com/api/v1/search/" + urllib.parse.urlencode(query), headers=headers)
+                headers = {
+                    "X-User-Agent": "desktop",
+                    "X-Proxy-Location": "EU",
+                    "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
+                    "X-RapidAPI-Key": "420c6c02f5msh1ef4b18dc0eb0fcp117e71jsn6fb5cadbc81a"
+                }
+                resp = requests.get("https://rapidapi.p.rapidapi.com/api/v1/search/" + urllib.parse.urlencode(query), headers=headers)
 
-            results = resp.json()
-            #create dataframe
-            concorrenti =  pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
-            #st.write(results)
-            i=1
-            for result in results["results"]:
-                title = result['title']
-                link = result['link']
-                descrizione = result['description']
-                subdomain= link.split("/")[2]
-                nT = len(title)
-                nD = len(descrizione)
-                #st.write(title,link)
-                concorrenti.loc[i] = [i] + [subdomain] + [link] + [title] + [nT] + [descrizione] + [nD] 
-                i=i+1
+                results = resp.json()
+                #create dataframe
+                concorrenti =  pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
+                #st.write(results)
+                i=1
+                for result in results["results"]:
+                    title = result['title']
+                    link = result['link']
+                    descrizione = result['description']
+                    subdomain= link.split("/")[2]
+                    nT = len(title)
+                    nD = len(descrizione)
+                    #st.write(title,link)
+                    concorrenti.loc[i] = [i] + [subdomain] + [link] + [title] + [nT] + [descrizione] + [nD] 
+                    i=i+1
 
-            if st.session_state.premium == True:
-                gb = GridOptionsBuilder.from_dataframe(concorrenti)
-                gb.configure_default_column(editable=True)
-                gb.configure_grid_options(enableRangeSelection=True)
-                with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
-                    response = AgGrid(
-                        concorrenti,
-                        gridOptions=gb.build(),
-                        fit_columns_on_grid_load=True,
-                        allow_unsafe_jscode=True,
-                        enable_enterprise_modules=True
-                    )   
-                    st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
-            else:
-                concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
-                concorrentiFree = concorrenti
-                # write "Solo per PREMIUM 👑" on 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione' columns 
-                concorrentiFree['Lunghezza Titolo'] = "Solo per PREMIUM 👑"
-                concorrentiFree['Descrizione'] = "Solo per PREMIUM 👑"
-                concorrentiFree['Lunghezza Descrizione'] = "Solo per PREMIUM 👑"
-                #write "Solo per PREMIUM 👑" only on 'Dominio', 'Pagina indicizzata' ,'Titolo' columns for frist 5 rows
-                for index, row in concorrentiFree.head(5).iterrows():
-                    concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
-                    concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
-                    concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
-                #write "Solo per PREMIUM 👑" only on 'Dominio', 'Pagina indicizzata' ,'Titolo' columns for last 10 rows
-                for index, row in concorrentiFree.tail(10).iterrows():
-                    concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
-                    concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
-                    concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
-                
-                gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
-                gb.configure_default_column(editable=True)
-                gb.configure_grid_options(enableRangeSelection=True)
-                with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
-                    response = AgGrid(
-                        concorrentiFree,
-                        gridOptions=gb.build(),
-                        fit_columns_on_grid_load=True,
-                        allow_unsafe_jscode=True
-                    )   
-                    st.write("Per esportare i dati, passa a PREIUM 🚀")
+                if st.session_state.premium == True:
+                    gb = GridOptionsBuilder.from_dataframe(concorrenti)
+                    gb.configure_default_column(editable=True)
+                    gb.configure_grid_options(enableRangeSelection=True)
+                    with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
+                        response = AgGrid(
+                            concorrenti,
+                            gridOptions=gb.build(),
+                            fit_columns_on_grid_load=True,
+                            allow_unsafe_jscode=True,
+                            enable_enterprise_modules=True
+                        )   
+                        st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
+                else:
+                    concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
+                    concorrentiFree = concorrenti
+                    # write "Solo per PREMIUM 👑" on 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione' columns 
+                    concorrentiFree['Lunghezza Titolo'] = "Solo per PREMIUM 👑"
+                    concorrentiFree['Descrizione'] = "Solo per PREMIUM 👑"
+                    concorrentiFree['Lunghezza Descrizione'] = "Solo per PREMIUM 👑"
+                    #write "Solo per PREMIUM 👑" only on 'Dominio', 'Pagina indicizzata' ,'Titolo' columns for frist 5 rows
+                    for index, row in concorrentiFree.head(5).iterrows():
+                        concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
+                        concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
+                        concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
+                    #write "Solo per PREMIUM 👑" only on 'Dominio', 'Pagina indicizzata' ,'Titolo' columns for last 10 rows
+                    for index, row in concorrentiFree.tail(10).iterrows():
+                        concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
+                        concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
+                        concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
+                    
+                    gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
+                    gb.configure_default_column(editable=True)
+                    gb.configure_grid_options(enableRangeSelection=True)
+                    with st.spinner('Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏 '):
+                        response = AgGrid(
+                            concorrentiFree,
+                            gridOptions=gb.build(),
+                            fit_columns_on_grid_load=True,
+                            allow_unsafe_jscode=True
+                        )   
+                        st.write("Per esportare i dati, passa a PREIUM 🚀")
 
-            st.markdown("""<hr/><br>""", unsafe_allow_html=True)
+                st.markdown("""<hr/><br>""", unsafe_allow_html=True)
 
 #4 Domande
 if choose=="Domande":
