@@ -935,6 +935,12 @@ if choose=="Competitor":
     st.write("  ")
     st.write("  ")
     text = st.text_area("Powered by IntelligenzaArtificialeItalia.net", height=150, key=1)
+    selected_lang = ""
+    listLang = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco", "Portoghese", "Russo"]
+    tfLang = ["lang_it", "lang_en", "lang_es", "lang_fr", "lang_de", "lang_pt", "lang_ru"]
+    Lang_selectbox = st.selectbox("In che mercato vuoi cercare", listLang)
+    idxL = listLang.index(Lang_selectbox)
+    selected_lang = tfLang[idxL]
     if st.button("Svelami i Competitor🤘"):
         if st.session_state.premium == True:
             MAX_LINES = 10
@@ -964,8 +970,8 @@ if choose=="Competitor":
 
             query = {
                 "q": keyword,
-                "num" : 35,
-                "lr": "lang_it"
+                "num" : 50,
+                "lr": selected_lang
             }
 
             headers = {
@@ -1017,7 +1023,12 @@ if choose=="Competitor":
                     concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
                     concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
                     concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
-
+                #write "Solo per PREMIUM 👑" only on 'Dominio', 'Pagina indicizzata' ,'Titolo' columns for last 10 rows
+                for index, row in concorrentiFree.tail(10).iterrows():
+                    concorrentiFree.at[index, 'Dominio'] = "Solo per PREMIUM 👑"
+                    concorrentiFree.at[index, 'Pagina indicizzata'] = "Solo per PREMIUM 👑"
+                    concorrentiFree.at[index, 'Titolo'] = "Solo per PREMIUM 👑"
+                
                 gb = GridOptionsBuilder.from_dataframe(concorrentiFree)
                 gb.configure_default_column(editable=True)
                 gb.configure_grid_options(enableRangeSelection=True)
