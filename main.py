@@ -927,7 +927,7 @@ if choose=="Ricerca":
 
 #3 Competitor principali 🏈
 if choose=="Competitor":
-    st.session_state['index'] =  2
+    st.session_state['index'] =  3
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Competitor 🤔"):
         text2 = st.markdown("In questa sezione potrai scoprire quali sono i tuoi competitor più forti sulla seo<br> La sezione di <bold>Competitor</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Lista dei competitor più forti<br>🔹Posizionamento per ogni competitor<br>🔹Link pagina indicizzata su Google<br>🔹Statistiche sul titolo e descrizione pagina indicizzata", unsafe_allow_html=True)
@@ -1033,7 +1033,7 @@ if choose=="Competitor":
 
 #4 Domande
 if choose=="Domande":
-    st.session_state['index'] =  3
+    st.session_state['index'] =  2
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Domande 🤔"):
         text2 = st.markdown("In questa sezione potrai scoprire quali sono i dubbi dei tuoi potenziali clienti in merito ad una keyword<br> La sezione <bold>Domande</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Le domande più cercate su Google<br>🔹Una risposta semplice per ogni domanda generata<br>🔹Statistiche e informazioni per ogni domanda", unsafe_allow_html=True)
