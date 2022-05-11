@@ -50,9 +50,9 @@ choose = option_menu(None, ["Analisi" , "Ricerca", "Domande" , "Competitor", "Co
                  icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
-"container": {"color": "blak","padding": "1!important", "background-color": "transparent", "width": "100%"},
-"icon": {"color": "blak", "font-size": "10px"}, 
-"nav-link": {"color": "blak!important","font-size": "12px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"container": {"color": "blak","padding": "5!important", "background-color": "transparent", "width": "100%"},
+"icon": {"color": "blak", "font-size": "13px"}, 
+"nav-link": {"color": "blak!important","font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
