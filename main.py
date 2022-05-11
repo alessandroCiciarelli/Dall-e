@@ -38,7 +38,7 @@ hide_st_style = """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 st.markdown("<center><h3 style='margin-top:-70px;'>Intelligenza Artificiale e SEO 🤖</h3>", unsafe_allow_html=True)
-st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><s> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </s></center> ', unsafe_allow_html=True)
+st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
 
 st.write(" ")
 st.write(" ")
@@ -46,13 +46,13 @@ st.write(" ")
 if 'index' not in st.session_state:
     st.session_state['index'] =  0
 
-choose = option_menu(None, ["Analisi" , "Ricerca", "Competitor", "Domande" , "Contenuti"],
-                 icons=[ 'body-text', 'keyboard', 'exclamation-triangle', 'patch-question' ,'journal-bookmark'],
+choose = option_menu(None, ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti"],
+                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
 "container": {"color": "blak","padding": "1!important", "background-color": "transparent", "width": "100%"},
-"icon": {"color": "blak", "font-size": "9px"}, 
-"nav-link": {"color": "blak!important","font-size": "12px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"icon": {"color": "blak", "font-size": "910px"}, 
+"nav-link": {"color": "blak!important","font-size": "13px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 }
 )
