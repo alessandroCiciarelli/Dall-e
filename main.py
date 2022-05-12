@@ -1,6 +1,7 @@
 #Librerie
 #Impostazioni pagina
 import streamlit as st
+from wordcloud import WordCloud
 st.set_page_config(layout="wide")
 
 hide_st_style = """
@@ -1393,18 +1394,7 @@ if choose == "Testi":
             diversity=Diversity,
         )
 
-        st.markdown("## 🎈 Check & download results ")
-
-        st.header("")
-
-        #convert keywords in dataframe
-        dfkeykey = pd.DataFrame(keywords)
-        #save defkeykey in csv
-        csvKeyKey = dfkeykey.to_csv("defkeykey.csv")
-        #download csv defkeykey.csv 
-        link = "<a href='defkeykey.csv' target='_blank'>Download csv file 📥 </a>"
-        st.markdown(link, unsafe_allow_html=True)
-
+        st.markdown("## 🎈 Ecco la rilevanza delle parole chiave e frasi:")
         st.header("")
 
         df = (
@@ -1426,16 +1416,38 @@ if choose == "Testi":
             ],
         )
 
-        c1, c2, c3 = st.columns([1, 3, 1])
-
         format_dictionary = {
             "Rilevanza": "{:.1%}",
         }
 
         df = df.format(format_dictionary)
 
-        with c2:
-            st.table(df)      
+        st.table(df)  
+        #download df as csv
+        csv = df.to_csv(index=False)
+        b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+        href = f'<a href="data:file/csv;base64,{b64}">Download csv file 📎</a>'
+        st.markdown(href, unsafe_allow_html=True)
+
+        #create wordcloud of df["Keyword/Frase"]
+        st.subheader("🎈 Ecco la wordcloud delle parole chiave:")
+        st.markdown("")
+        wordcloud = WordCloud(
+            width=800,
+            height=400,
+            background_color="white",
+            max_words=100,
+            stopwords=StopWords,
+            max_font_size=200,
+            random_state=42,
+            colormap="RdBu_r",
+        ).generate(" ".join(df["Keyword/Frase"]))
+        plt.figure(figsize=(10, 10))
+        plt.imshow(wordcloud)
+        plt.axis("off")
+        st.pyplot()
+        st.markdown("")
+
 
 #Fine
 st.text("")
