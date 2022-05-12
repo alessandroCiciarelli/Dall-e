@@ -45,8 +45,8 @@ st.write(" ")
 if 'index' not in st.session_state:
     st.session_state['index'] =  0
 
-choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti"],
-                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark'],
+choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti", "Testi"],
+                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'pencil-alt'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
 "container": {"color": "blak","padding": "0!important", "margin":"0px!important", "background-color": "transparent", "width": "100%"},
@@ -1087,6 +1087,7 @@ if choose=="Domande":
         numeroDomande = st.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
     else:
         numeroDomande = st.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 1, 1)
+        numeroDomande+=2
 
 
     if st.button("Svelami i Dubbi🤘"):
@@ -1171,7 +1172,281 @@ if choose=="Contenuti":
                     else:
                         st.markdown("📎 Scarica il testo (Solo per PREMIUM 👑)", unsafe_allow_html=True)
 
-                        
+
+if choose == "Testi":
+    from keybert import KeyBERT
+    # For Flair (Keybert)
+    from flair.embeddings import TransformerDocumentEmbeddings
+    with st.expander("Cos'è e come funziona la sezione Testi 🤔", expanded=True):
+
+        st.write(
+            """   
+        In questa sezione potrai controllare i tuoi testi per verificare che contengano le giuste parole chiave. 
+        Una cosa è sicura, questo è l'inico tool che ti permetterà di riuscire a scrivere articoli per indicizzarti primo nei motori di ricerca. 
+    -   L'app *BERT Keyword Extractor* è un'interfaccia facile da usare integrata in Streamlit per la straordinaria libreria [KeyBERT](https://github.com/MaartenGr/KeyBERT) di Maarten Grotendorst!
+    -   Utilizza una tecnica di estrazione di parole chiave minima che sfrutta più incorporamenti di NLP e si basa su [Transformers] (https://huggingface.co/transformers/) 🤗 per creare parole chiave/frasi chiave più simili a un documento.
+
+    Per sfruttare al meglio questa sezione, dovrai :
+    1️⃣ Decidere delle parole chiave per cui ti vuoi indicizzare
+    2️⃣ Scrivere un Testo o generarlo automaticamente nella sezione *Contenuti*
+    3️⃣ Incollare all'interno di questa sezione il testo che vuoi indicizzare
+    4️⃣ Cliccare su *'Indicizza🤘'*
+    5️⃣ Controllare che la keyword per cui ti vuoi indicizzare abbia un alta *Rilevanza*
+            """
+        )
+
+        st.markdown("")
+
+    st.markdown("")
+
+    st.markdown("## **📌 Incolla qui sotto il testo **")
+
+
+    with st.form(key="my_form"):
+
+        ce, c1, ce, c2, c3 = st.columns([0.07, 1, 0.07, 5, 0.07])
+        with c1:
+            # Model type
+            if st.session_state.premium == True:
+                ModelType = st.radio(
+                    "Scegli il modello che vuoi usare",
+                    ["DistilBERT (Default)", "Flair"]
+                )
+            else:
+                ModelType = st.radio(
+                    "Passa a PREMIUM 👑 per usare il modello più potente",
+                    ["DistilBERT (Default)", "Flair"],
+                    disabled=True
+                )
+                ModelType = "DistilBERT (Default)"
+
+
+            if ModelType == "Default (DistilBERT)":
+
+                @st.cache(allow_output_mutation=True)
+                def load_model():
+                    return KeyBERT(model=roberta)
+
+                kw_model = load_model()
+
+            else:
+
+                @st.cache(allow_output_mutation=True)
+                def load_model():
+                    return KeyBERT("distilbert-base-nli-mean-tokens")
+
+                kw_model = load_model()
+
+            if st.session_state.premium == True:
+                top_N = st.slider(
+                    "Numero di keywords da visualizzare",
+                    min_value=1,
+                    max_value=30,
+                    value=10,
+                    help="Puoi scegliere il numero di parole chiave/frasi chiave da visualizzare. Tra 1 e 30, il numero predefinito è 10.",
+                )
+                min_Ngrams = st.number_input(
+                    "Minimum Ngram",
+                    min_value=1,
+                    max_value=4,
+                    help="""Il valore minimo per l'intervallo di ngram.
+        *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
+        Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+                )
+
+                max_Ngrams = st.number_input(
+                    "Maximum Ngram",
+                    value=2,
+                    min_value=1,
+                    max_value=4,
+                    help="""Il valore massimo per keyphrase_ngram_range.
+        *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
+        Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+                )
+
+                StopWordsCheckbox = st.checkbox(
+                    "Rimuovi le stop words",
+                    help="Spunta questa casella per rimuovere le parole non significative dal documento (attualmente solo in italiano)",
+                )
+
+                use_MMR = st.checkbox(
+                    "Usa MMR",
+                    value=True,
+                    help="È possibile utilizzare la rilevanza del margine massimo (MMR) per diversificare i risultati. Crea parole chiave/frasi chiave basate sulla somiglianza del coseno. Prova le impostazioni 'Diversità' alta/bassa di seguito per variazioni interessanti."
+                )
+
+                Diversity = st.slider(
+                    "Diversità keyword",
+                    value=0.5,
+                    min_value=0.0,
+                    max_value=1.0,
+                    step=0.1,
+                    help="""Maggiore è l'impostazione, più diverse saranno le parole chiave.
+                    
+        Nota che il dispositivo di scorrimento *Diversità delle parole chiave* funziona solo se la casella di controllo *MMR* è spuntata.
+        """,
+                )
+            else:
+                top_N = st.slider(
+                    "Numero di keywords da visualizzare disponibile in PREMIUM 👑",
+                    min_value=1,
+                    max_value=30,
+                    value=10,
+                    help="Puoi scegliere il numero di parole chiave/frasi chiave da visualizzare. Tra 1 e 30, il numero predefinito è 10.",
+                    disabled=True
+                )
+                top_N = 5
+                min_Ngrams = st.number_input(
+                    "Minimum Ngram disponibile in PREMIUM 👑",
+                    min_value=1,
+                    max_value=4,
+                    help="""Il valore minimo per l'intervallo di ngram.
+        *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
+        Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+                    disabled=True
+                )
+                min_Ngrams = 1
+                max_Ngrams = st.number_input(
+                    "Maximum Ngram disponibile in PREMIUM 👑",
+                    value=2,
+                    min_value=1,
+                    max_value=4,
+                    help="""Il valore massimo per keyphrase_ngram_range.
+        *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
+        Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+                    disabled=True
+                )
+                max_Ngrams = 2
+                StopWordsCheckbox = st.checkbox(
+                    "Rimuovi le stop words disponibile in PREMIUM 👑",
+                    help="Spunta questa casella per rimuovere le parole non significative dal documento (attualmente solo in italiano)",
+                    disabled=True
+                )
+                StopWordsCheckbox = False
+                use_MMR = st.checkbox(
+                    "Usa MMR disponibile in PREMIUM 👑",
+                    value=True,
+                    help="È possibile utilizzare la rilevanza del margine massimo (MMR) per diversificare i risultati. Crea parole chiave/frasi chiave basate sulla somiglianza del coseno. Prova le impostazioni 'Diversità' alta/bassa di seguito per variazioni interessanti.",
+                    disabled=True
+                )
+                use_MMR = True
+
+                Diversity = st.slider(
+                    "Diversità keyword disponibile in PREMIUM 👑",
+                    value=0.5,
+                    min_value=0.0,
+                    max_value=1.0,
+                    step=0.1,
+                    help="""Maggiore è l'impostazione, più diverse saranno le parole chiave.
+                    
+        Nota che il dispositivo di scorrimento *Diversità delle parole chiave* funziona solo se la casella di controllo *MMR* è spuntata.
+        """,
+                    disabled=True
+                )
+                Diversity = 0.5
+
+        with c2:
+            MAX_WORDS = 500
+            if st.session_state.premium == True:
+                testoDaIncollare = "Incolla quì il testo da analizza (max 1000 words)"
+                MAX_WORDS = 1000
+            else:
+                testoDaIncollare = "Passa a PREMIUM 👑 per incollare testii da oltre 10000 parole (max 500 words)"
+
+            doc = st.text_area(
+                testoDaIncollare,
+                height=510,
+            )
+            import re
+            res = len(re.findall(r"\w+", doc))
+            if res > MAX_WORDS:
+                st.warning(
+                    "⚠️ Attenzione il testo contiene più di "
+                    + str(res)
+                    + " parole."
+                    + " Sole una parte sarà analizzata! 😊"
+                )
+
+                doc = doc[:MAX_WORDS]
+
+            submit_button = st.form_submit_button(label="✨ Get me the data!")
+
+
+        if use_MMR:
+            mmr = True
+        else:
+            mmr = False
+
+        if StopWordsCheckbox:
+            StopWords = "english"
+        else:
+            StopWords = None
+
+    if min_Ngrams > max_Ngrams:
+        st.warning("min_Ngrams non può essere maggiore di max_Ngrams")
+
+
+    if submit_button and min_Ngrams > max_Ngrams:
+        keywords = kw_model.extract_keywords(
+            doc,
+            keyphrase_ngram_range=(min_Ngrams, max_Ngrams),
+            use_mmr=mmr,
+            stop_words=StopWords,
+            top_n=top_N,
+            diversity=Diversity,
+        )
+
+        st.markdown("## **🎈 Check & download results **")
+
+        st.header("")
+
+        cs, c1, c2, c3, cLast = st.columns([2, 1.5, 1.5, 1.5, 2])
+
+        with c1:
+           st.write("")
+        with c2:
+             #create href to download csv file of keywords
+            link = "data:text/csv;charset=utf-8," + urllib.parse.quote(
+                "\n".join(keywords)
+            )
+            st.markdown(
+                f"📄 **{len(keywords)}** keywords Estratte e valutate formato csv."
+            )
+
+        with c3:
+           st.write("")
+
+        st.header("")
+
+        df = (
+            pd.DataFrame(keywords, columns=["Keyword/Frase", "Rilevanza"])
+            .sort_values(by="Rilevanza", ascending=False)
+            .reset_index(drop=True)
+        )
+
+        df.index += 1
+
+        # Add Styling to the table columns and rows
+
+        cmGreen = sns.light_palette("green", as_cmap=True)
+        cmRed = sns.light_palette("red", as_cmap=True)
+        df = df.style.background_gradient(
+            cmap=cmGreen,
+            subset=[
+                "Rilevanza",
+            ],
+        )
+
+        c1, c2, c3 = st.columns([1, 3, 1])
+
+        format_dictionary = {
+            "Rilevanza": "{:.1%}",
+        }
+
+        df = df.format(format_dictionary)
+
+        with c2:
+            st.table(df)      
 
 #Fine
 st.text("")
