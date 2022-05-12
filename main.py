@@ -3,7 +3,7 @@
 import streamlit as st
 from wordcloud import WordCloud
 st.set_page_config(layout="wide")
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 hide_st_style = """
     <style>
     #MainMenu {visibility: hidden;}
