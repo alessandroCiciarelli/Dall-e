@@ -795,6 +795,8 @@ if choose=="Ricerca":
                             "data": [jsonJSON],
                             "top": "1%",
                             "bottom": "1%",
+                            "left": "10%",
+                            "right": "20%",
                             "padding": "0",
                             "symbolSize": 10,
                             "label": {
@@ -1295,7 +1297,7 @@ if choose == "Testi":
                     help="Puoi scegliere il numero di parole chiave/frasi chiave da visualizzare. Tra 1 e 30, il numero predefinito è 10.",
                     disabled=True
                 )
-                top_N = 5
+                top_N = 10
                 min_Ngrams = st.number_input(
                     "Minimum Ngram disponibile in PREMIUM 👑",
                     min_value=1,
@@ -1403,6 +1405,11 @@ if choose == "Testi":
             .reset_index(drop=True)
         )
 
+        csv = df.to_csv(index=False)
+        b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+        href = f'<a href="data:file/csv;base64,{b64}">Download csv file 📎</a>'
+        st.markdown(href, unsafe_allow_html=True)
+
         df.index += 1
 
         # Add Styling to the table columns and rows
@@ -1423,11 +1430,7 @@ if choose == "Testi":
         df = df.format(format_dictionary)
 
         st.table(df)  
-        #download df as csv
-        csv = df.to_csv(index=False)
-        b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-        href = f'<a href="data:file/csv;base64,{b64}">Download csv file 📎</a>'
-        st.markdown(href, unsafe_allow_html=True)
+        
 
         #create wordcloud of df["Keyword/Frase"]
         st.subheader("🎈 Ecco la wordcloud delle parole chiave:")
@@ -1459,7 +1462,7 @@ st.text("")
 st.text("")
 st.text("")
 st.write("Proprietà intellettuale di [Intelligenza Artificiale Italia © ](https://intelligenzaartificialeitalia.net)")
-st.success("Questo è un tool gratuito sviluppato per Marketers, Esperti SEO, Coprywriters e Gestori di E-commerce 💣 .")
+st.success("Questo è un tool gratuito sviluppato per Marketers, Esperti SEO e Coprywriters💣 .")
 st.error("Al momento è basato sullo scraping dei dati da Google, NON ABUSARNE solo perchè è gratis, PASSA ORA A PREMIUM PER SBLOCCARE TUTTE LE FUNZIONI ! 🕹️ ")
 st.markdown('<b> Se ti è stato di aiuto condividi il nostro sito per supportarci </b>\
        <ul> \
