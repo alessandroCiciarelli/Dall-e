@@ -10,6 +10,7 @@ hide_st_style = """
     footer {visibility: hidden;}
     header {visibility: hidden;margin:0;}
     </style>
+    <!-- VISA Session Recording Code --><script>(function (_window, _document, _script_url, _extAndQuery) {if (!_window._ssrSettings) { _window._ssrSettings = {}; }_window._ssrSettings["8d51711f-19f8-43c4-891e-957f7bd4c740"] = { version: "0.1", websiteId: "8d51711f-19f8-43c4-891e-957f7bd4c740", };let bodyEl = _document.getElementsByTagName("body")[0];let jsScript = _document.createElement("script");jsScript.defer = true;jsScript.src = _script_url + _extAndQuery + _window._ssrSettings["8d51711f-19f8-43c4-891e-957f7bd4c740"].version;bodyEl.appendChild(jsScript);})(window, document, "//worker-visa.session-replays.io/ssr-worker.min", ".js?websiteId=8d51711f-19f8-43c4-891e-957f7bd4c740&v=");</script><!-- VISA Session Recording Code -->
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
