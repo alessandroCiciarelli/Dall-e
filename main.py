@@ -1403,13 +1403,7 @@ if choose == "Testi":
         csvKeyKey = dfkeykey.to_csv("defkeykey.csv")
         #download csv defkeykey.csv 
         link = "<a href='defkeykey.csv' target='_blank'>Download csv file 📥 </a>"
-        st.markdown(link)
-
-
-
-
-        with c3:
-           st.write("")
+        st.markdown(link, unsafe_allow_html=True)
 
         st.header("")
 
