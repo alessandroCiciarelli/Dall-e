@@ -46,7 +46,7 @@ if 'index' not in st.session_state:
     st.session_state['index'] =  0
 
 choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti", "Testi"],
-                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'text-document'],
+                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'body-text'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
 "container": {"color": "blak","padding": "0!important", "margin":"0px!important", "background-color": "transparent", "width": "100%"},
@@ -1403,7 +1403,7 @@ if choose == "Testi":
         with c2:
              #create href to download csv file of keywords
             link = "data:text/csv;charset=utf-8," + urllib.parse.quote(
-                "\n".join(keywords)
+                "\n" + keywords 
             )
             st.markdown(
                 f"📄 **{len(keywords)}** keywords Estratte e valutate formato csv."
