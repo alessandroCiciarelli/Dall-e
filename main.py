@@ -1366,6 +1366,7 @@ if choose == "Testi":
                 )
 
                 doc = doc[:MAX_WORDS]
+            streamlit_button = st.form_submit_button(label="✨ Analizza il mio testo")
 
         if use_MMR:
             mmr = True
@@ -1381,7 +1382,7 @@ if choose == "Testi":
         st.warning("min_Ngrams non può essere maggiore di max_Ngrams")
 
 
-    if st.form_submit_button(label="✨ Get me the data!") and min_Ngrams > max_Ngrams:
+    if  streamlit_button is True:
         keywords = kw_model.extract_keywords(
             doc,
             keyphrase_ngram_range=(min_Ngrams, max_Ngrams),
