@@ -1401,8 +1401,10 @@ if choose == "Testi":
         with c1:
            st.write("")
         with c2:
-            #salva the values of the keywords in a csv file
-            csvKeyKey = keywords.to_csv(index=False)
+            #convert keywords in dataframe
+            dfkeykey = pd.DataFrame(keywords)
+            #save defkeykey in csv
+            csvKeyKey = dfkeykey.to_csv("defkeykey.csv")
             #dowload the csv file with href 
             st.markdown(
                 f"<a href='data:text/csv;charset=utf-8,{csvKeyKey}' download='keywords.csv'>📎 Scarica i risultati</a>",
