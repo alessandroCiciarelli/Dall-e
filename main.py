@@ -1404,7 +1404,7 @@ if choose == "Testi":
             .sort_values(by="Rilevanza", ascending=False)
             .reset_index(drop=True)
         )
-
+        dfTemKey = df.copy()
         csv = df.to_csv(index=False)
         b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
         href = f'<a href="data:file/csv;base64,{b64}">Download csv file 📎</a>'
@@ -1444,7 +1444,7 @@ if choose == "Testi":
             max_font_size=200,
             random_state=42,
             colormap="RdBu_r",
-        ).generate(" ".join(df["Keyword/Frase"]))
+        ).generate(" ".join(dfTemKey["Keyword/Frase"]))
         plt.figure(figsize=(10, 10))
         plt.imshow(wordcloud)
         plt.axis("off")
