@@ -357,18 +357,14 @@ if choose=="Analisi":
 
     
         
-    st.write(selected_timeframe + " " + country_code[0])
+    #st.write(selected_timeframe + " " + country_code[0])
     #bottone per scoprire le tendenze
     start_execution = st.button("Scopri le tendenze🤘")
 
 
 
-    if start_execution:
+    if start_execution and len(linesList) > 0:
 
-
-        if len(linesList) == 0:
-        
-            st.warning("Perfavore inserisci almeno una keyword.  ⚠️") # ⚠️
         
         if len(linesList) == 1:
             linesList = removeRestrictedCharactersAndWhiteSpaces(linesList)
@@ -544,14 +540,14 @@ if choose=="Analisi":
                 
             st.write("")
             st.subheader("Domande principali ❓")
-            with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐 Potrebbe volerci qualche minuto 🙏'):
+            with st.spinner('Stiamo HACKERANDO Google e Bing 🕐 Potrebbe volerci qualche minuto 🙏'):
                 domande = people_also_ask_it.get_related_questions(str(keykey), 10)
             if st.session_state.premium == True:
                 domandePremium = pd.DataFrame(columns=['Domanda'])
                 for dom in domande:
                     domanda = dom.split("Cerca: ")
                     domandePremium.loc[len(domandePremium)] = [domanda[1]]
-                with st.spinner('Stiamo HACKERANDO google e bing dacci qualche minuto (non è uno scherzo!) ... 🕐 Potrebbe volerci qualche minuto 🙏'):
+                with st.spinner('Stiamo HACKERANDO Google e Bing 🕐 Potrebbe volerci qualche minuto 🙏'):
                     response = AgGrid(
                         domandePremium,
                         fit_columns_on_grid_load=True,
@@ -1086,6 +1082,13 @@ if choose=="Domande":
     st.write("  ")
     st.write("  ")
     text = st.text_area("Inserisci la keyword", height=50, key=1)
+    numeroDomande= 0
+    if st.session_state.premium == True:
+        numeroDomande = st.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
+    else:
+        numeroDomande = st.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 1, 1)
+
+
     if st.button("Svelami i Dubbi🤘"):
         lines = text.split("\n")  # A list of lines
         linesList = []
@@ -1100,7 +1103,7 @@ if choose=="Domande":
             
         st.subheader("Damande principali cercate sulla Keyword❓")
         with st.spinner("Stiamo intervistando personalmente Google e Bing❓ Potrebbero volerci diversi minuti 🙏"):
-            domande = people_also_ask_it.get_related_questions(str(linesList),25)
+            domande = people_also_ask_it.get_related_questions(str(linesList),numeroDomande)
             #st.write(domande)
             if(len(domande) <= 0):
                 st.error("Nessuna domanda trovata, riprova con un altro termine 🤔 \n") 
@@ -1141,13 +1144,13 @@ if choose=="Contenuti":
     inp = st.text_area('Scrivi una frase o un paragrafo di ispirazione per la nostra I.A.',height=200)
     if st.session_state.premium == True:
         lunghezza = st.slider('Lunghezza massima del testo generato :', 50, 700,200,10)
-        follia = st.slider('Numero di follia :', 0.5, 1.0,0.6,0.1)
+        follia = st.slider('Imposta la "follia" del testo  :', 0.5, 1.0,0.6,0.1)
         numTesti = st.slider('Numero di testi da generare :', 1, 5,1,1)
     else:
-        lunghezza = st.slider('Lunghezza massima del testo generato ', 50, 300,200,10)
-        follia = st.slider('Numero di follia (PREMIUM 👑)', 0.5, 1.0,0.7,0.1, disabled=True)
+        lunghezza = st.slider('Genera testi da oltre 700 caratteri con PREMIUM 👑', 50, 300,200,10)
+        follia = st.slider('Controlla la "follia" del testo con PREMIUM 👑', 0.5, 1.0,0.7,0.1, disabled=True)
         follia = 0.7
-        numTesti = st.slider('Numero di testi da generare (PREMIUM 👑)', 1, 5,1,1, disabled=True)
+        numTesti = st.slider('Genera più testi insieme con PREMIUM 👑)', 1, 5,1,1, disabled=True)
         numTesti = 1
 
     
