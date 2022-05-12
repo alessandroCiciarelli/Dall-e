@@ -300,45 +300,62 @@ if choose=="Analisi":
             st.warning(f"⚠️ Attenzione, Puoi inserire al massima 3 keywords. ⚠️")
             linesList = linesList[:MAX_LINES]
 
-    from parseCountries import parse
-    country_names, country_codes = parse()
-    country_names, country_codes = country_names[:243], country_codes[:243]
-    country = st.selectbox("Scegli il paese", country_names)
-    st.write(f"Hai selezionato " + country)
-    idx = country_names.index(country)
-    country_code = country_codes[idx],
+    if st.session_state.premium == True:
+        from parseCountries import parse
+        country_names, country_codes = parse()
+        country_names, country_codes = country_names[:243], country_codes[:243]
+        country = st.selectbox("Scegli il paese", country_names)
+        st.write(f"Hai selezionato " + country)
+        idx = country_names.index(country)
+        country_code = country_codes[idx],
+        #carico i periodi di tempo
+        selected_timeframe = ""
+        period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
+        tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
+        timeframe_selectbox = st.selectbox("Scegli il periodo", period_list)
+        idx = period_list.index(timeframe_selectbox)
+        selected_timeframe = tf[idx]
+        todays_date = date.today()
+        current_year = todays_date.year
 
-    #carico i periodi di tempo
-    selected_timeframe = ""
-    period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
-    tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
-    timeframe_selectbox = st.selectbox("Scegli il periodo", period_list)
-    idx = period_list.index(timeframe_selectbox)
-    selected_timeframe = tf[idx]
-    todays_date = date.today()
-    current_year = todays_date.year
+        years = list(range(2005, current_year + 1))
+        months = list(range(1, 13))
+        days = list(range(1, 32))
 
-    years = list(range(2005, current_year + 1))
-    months = list(range(1, 13))
-    days = list(range(1, 32))
+        if selected_timeframe == "custom":
+            
+            st.write(f"Da")
 
-    if selected_timeframe == "custom":
-        
-        st.write(f"Da")
+            col11, col12, col13 = st.columns(3)
+            year_from = col11.selectbox("Anno", years, key="0")
+            month_from = col12.selectbox("Mese", months, key="1")
+            day_from = col13.selectbox("Giorno", days, key="2")
+            
+            st.write(f"a")
 
-        col11, col12, col13 = st.columns(3)
-        year_from = col11.selectbox("Anno", years, key="0")
-        month_from = col12.selectbox("Mese", months, key="1")
-        day_from = col13.selectbox("Giorno", days, key="2")
-        
-        st.write(f"a")
+            col21, col22, col23 = st.columns(3)
+            year_to = col21.selectbox("Anno", years, key="3")
+            month_to = col22.selectbox("Mese", months, key="4")
+            day_to = col23.selectbox("Giorno", days, key="5")
+            
+            selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
+    else:
+        country_code = "IT"
+        country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True)
+        selected_timeframe = ""
+        period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
+        tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all"]
+        timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list)
+        idx = period_list.index(timeframe_selectbox)
+        selected_timeframe = tf[idx]
+        todays_date = date.today()
+        current_year = todays_date.year
 
-        col21, col22, col23 = st.columns(3)
-        year_to = col21.selectbox("Anno", years, key="3")
-        month_to = col22.selectbox("Mese", months, key="4")
-        day_to = col23.selectbox("Giorno", days, key="5")
-        
-        selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
+        years = list(range(2005, current_year + 1))
+        months = list(range(1, 13))
+        days = list(range(1, 32))
+
+    
         
     st.write(selected_timeframe + " " + country_code[0])
     #bottone per scoprire le tendenze
