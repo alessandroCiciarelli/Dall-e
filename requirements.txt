@@ -19,3 +19,4 @@ people_also_ask_it==0.2
 streamlit-echarts
 keybert
 flair
+seaborn
