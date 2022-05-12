@@ -1177,6 +1177,7 @@ if choose == "Testi":
     from keybert import KeyBERT
     # For Flair (Keybert)
     from flair.embeddings import TransformerDocumentEmbeddings
+    import seaborn as sns
     with st.expander("Cos'è e come funziona la sezione Testi 🤔", expanded=False):
 
         st.write(
@@ -1405,11 +1406,7 @@ if choose == "Testi":
             dfkeykey = pd.DataFrame(keywords)
             #save defkeykey in csv
             csvKeyKey = dfkeykey.to_csv("defkeykey.csv")
-            #dowload the csv file with href 
-            st.markdown(
-                f"<a href='data:text/csv;charset=utf-8,{csvKeyKey}' download='keywords.csv'>📎 Scarica i risultati</a>",
-                unsafe_allow_html=True,
-            )
+            st.markdown("[📥 ** Download **](defkeykey.csv)")
 
 
 
