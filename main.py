@@ -3,7 +3,7 @@
 import streamlit as st
 from wordcloud import WordCloud
 st.set_page_config(layout="wide")
-st.set_option('deprecation.showPyplotGlobalUse', False)
+
 hide_st_style = """
     <style>
     #MainMenu {visibility: hidden;}
@@ -1350,10 +1350,10 @@ if choose == "Testi":
         with c2:
             MAX_WORDS = 500
             if st.session_state.premium == True:
-                testoDaIncollare = "Incolla quì il testo da analizza (max 1000 words)"
-                MAX_WORDS = 1000
+                testoDaIncollare = "Incolla quì il testo da analizza (max 2000 words)"
+                MAX_WORDS = 2000
             else:
-                testoDaIncollare = "Passa a PREMIUM 👑 per incollare testii da oltre 10000 parole (max 500 words)"
+                testoDaIncollare = "Passa a PREMIUM 👑 per incollare testii da oltre 2000 parole (max 500 words)"
 
             doc = st.text_area(
                 testoDaIncollare,
