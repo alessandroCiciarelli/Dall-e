@@ -340,7 +340,7 @@ if choose=="Analisi":
         
         selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
         
-
+    st.write(selected_timeframe + " " + country_code[0])
     #bottone per scoprire le tendenze
     start_execution = st.button("Scopri le tendenze🤘")
 
@@ -839,7 +839,15 @@ if choose=="Ricerca":
                 if st.session_state.premium == True:
                     st.markdown("##  Scarica ora i risultati 🎁 ")
                     csv = edges.to_csv(index=False)
-                    st.download_button("Scarica ora i dati in formato csv", csv, "keyword_suggestions.csv")
+                    #create href to download csv file
+                    href = f"data:text/csv;charset=utf-8,{csv}"
+                    link = html.A(
+                        "Scarica i risultati 🎁",
+                        href=href,
+                        download="risultati.csv",
+                        target="_blank",
+                    )
+                    st.markdown(link)
                 else:
                     st.markdown("###  🎁 Scarica i risultati (PREMIUM 👑) ")
 
@@ -1116,10 +1124,10 @@ if choose=="Contenuti":
     inp = st.text_area('Scrivi una frase o un paragrafo di ispirazione per la nostra I.A.',height=200)
     if st.session_state.premium == True:
         lunghezza = st.slider('Lunghezza massima del testo generato :', 50, 700,200,10)
-        follia = st.slider('Numero di follia :', 0.5, 1.0,0.7,0.1)
+        follia = st.slider('Numero di follia :', 0.5, 1.0,0.6,0.1)
         numTesti = st.slider('Numero di testi da generare :', 1, 5,1,1)
     else:
-        lunghezza = st.slider('Lunghezza massima del testo generato ', 50, 700,200,10)
+        lunghezza = st.slider('Lunghezza massima del testo generato ', 50, 300,200,10)
         follia = st.slider('Numero di follia (PREMIUM 👑)', 0.5, 1.0,0.7,0.1, disabled=True)
         follia = 0.7
         numTesti = st.slider('Numero di testi da generare (PREMIUM 👑)', 1, 5,1,1, disabled=True)
@@ -1133,6 +1141,15 @@ if choose=="Contenuti":
             for i in range(len(inp)):
                 with st.expander(f"Genero il testo {str(i+1)}"):
                     st.write(inp[i])
+                    #share the file
+                    if st.session_state.premium == True:
+                         #create a file with the text to share
+                        with open(f"{str(i+1)}.txt", "w") as f:
+                            f.write(inp[i])
+                        st.markdown(f"<a href='{str(i+1)}.txt'>📎 Scarica il testo {str(i+1)}</a>", unsafe_allow_html=True)
+                        st.write("  ")
+                    else:
+                        st.markdown("📎 Scarica il testo (Solo per PREMIUM 👑)", unsafe_allow_html=True)
 
                         
 
