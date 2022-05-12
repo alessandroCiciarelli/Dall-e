@@ -1177,7 +1177,7 @@ if choose == "Testi":
     from keybert import KeyBERT
     # For Flair (Keybert)
     from flair.embeddings import TransformerDocumentEmbeddings
-    with st.expander("Cos'è e come funziona la sezione Testi 🤔", expanded=True):
+    with st.expander("Cos'è e come funziona la sezione Testi 🤔", expanded=False):
 
         st.write(
             """   
@@ -1197,7 +1197,7 @@ if choose == "Testi":
 
     st.markdown("")
 
-    st.markdown("## **📌 Incolla qui sotto il testo **")
+    st.markdown("#### 📌 Incolla qui sotto il testo che vuoi indicizzare 📌")
 
 
     with st.form(key="my_form"):
@@ -1401,13 +1401,16 @@ if choose == "Testi":
         with c1:
            st.write("")
         with c2:
-             #create href to download csv file of keywords
-            link = "data:text/csv;charset=utf-8," + urllib.parse.quote(
-                "\n" + keywords 
-            )
+            #salva the values of the keywords in a csv file
+            csvKeyKey = keywords.to_csv(index=False)
+            #dowload the csv file with href 
             st.markdown(
-                f"📄 **{len(keywords)}** keywords Estratte e valutate formato csv."
+                f"<a href='data:text/csv;charset=utf-8,{csvKeyKey}' download='keywords.csv'>📎 Scarica i risultati</a>",
+                unsafe_allow_html=True,
             )
+
+
+
 
         with c3:
            st.write("")
