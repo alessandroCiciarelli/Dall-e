@@ -46,7 +46,7 @@ if 'index' not in st.session_state:
     st.session_state['index'] =  0
 
 choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti", "Testi"],
-                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'pencil-alt'],
+                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'text-document'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
 "container": {"color": "blak","padding": "0!important", "margin":"0px!important", "background-color": "transparent", "width": "100%"},
@@ -1183,15 +1183,13 @@ if choose == "Testi":
             """   
         In questa sezione potrai controllare i tuoi testi per verificare che contengano le giuste parole chiave. 
         Una cosa è sicura, questo è l'inico tool che ti permetterà di riuscire a scrivere articoli per indicizzarti primo nei motori di ricerca. 
-    -   L'app *BERT Keyword Extractor* è un'interfaccia facile da usare integrata in Streamlit per la straordinaria libreria [KeyBERT](https://github.com/MaartenGr/KeyBERT) di Maarten Grotendorst!
-    -   Utilizza una tecnica di estrazione di parole chiave minima che sfrutta più incorporamenti di NLP e si basa su [Transformers] (https://huggingface.co/transformers/) 🤗 per creare parole chiave/frasi chiave più simili a un documento.
-
+   
     Per sfruttare al meglio questa sezione, dovrai :
-    1️⃣ Decidere delle parole chiave per cui ti vuoi indicizzare
-    2️⃣ Scrivere un Testo o generarlo automaticamente nella sezione *Contenuti*
-    3️⃣ Incollare all'interno di questa sezione il testo che vuoi indicizzare
-    4️⃣ Cliccare su *'Indicizza🤘'*
-    5️⃣ Controllare che la keyword per cui ti vuoi indicizzare abbia un alta *Rilevanza*
+    - 1️⃣ Decidere delle parole chiave per cui ti vuoi indicizzare
+    - 2️⃣ Scrivere un Testo o generarlo automaticamente nella sezione *Contenuti*
+    - 3️⃣ Incollare all'interno di questa sezione il testo che vuoi indicizzare
+    - 4️⃣ Cliccare su *'Indicizza🤘'*
+    - 5️⃣ Controllare che la keyword per cui ti vuoi indicizzare abbia un alta *Rilevanza*
             """
         )
 
@@ -1204,7 +1202,7 @@ if choose == "Testi":
 
     with st.form(key="my_form"):
 
-        ce, c1, ce, c2, c3 = st.columns([0.07, 1, 0.07, 5, 0.07])
+        c1, c2= st.columns([2,3])
         with c1:
             # Model type
             if st.session_state.premium == True:
@@ -1369,16 +1367,13 @@ if choose == "Testi":
 
                 doc = doc[:MAX_WORDS]
 
-            submit_button = st.form_submit_button(label="✨ Get me the data!")
-
-
         if use_MMR:
             mmr = True
         else:
             mmr = False
 
         if StopWordsCheckbox:
-            StopWords = "english"
+            StopWords = "italian"
         else:
             StopWords = None
 
@@ -1386,7 +1381,7 @@ if choose == "Testi":
         st.warning("min_Ngrams non può essere maggiore di max_Ngrams")
 
 
-    if submit_button and min_Ngrams > max_Ngrams:
+    if st.form_submit_button(label="✨ Get me the data!") and min_Ngrams > max_Ngrams:
         keywords = kw_model.extract_keywords(
             doc,
             keyphrase_ngram_range=(min_Ngrams, max_Ngrams),
