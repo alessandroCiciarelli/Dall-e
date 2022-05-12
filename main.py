@@ -1375,7 +1375,7 @@ if choose == "Testi":
             mmr = False
 
         if StopWordsCheckbox:
-            StopWords = "italian"
+            StopWords = None
         else:
             StopWords = None
 
@@ -1393,20 +1393,17 @@ if choose == "Testi":
             diversity=Diversity,
         )
 
-        st.markdown("## **🎈 Check & download results **")
+        st.markdown("## 🎈 Check & download results ")
 
         st.header("")
 
-        cs, c1, c2, c3, cLast = st.columns([2, 1.5, 1.5, 1.5, 2])
-
-        with c1:
-           st.write("")
-        with c2:
-            #convert keywords in dataframe
-            dfkeykey = pd.DataFrame(keywords)
-            #save defkeykey in csv
-            csvKeyKey = dfkeykey.to_csv("defkeykey.csv")
-            st.markdown("[📥 ** Download **](defkeykey.csv)")
+        #convert keywords in dataframe
+        dfkeykey = pd.DataFrame(keywords)
+        #save defkeykey in csv
+        csvKeyKey = dfkeykey.to_csv("defkeykey.csv")
+        #download csv defkeykey.csv 
+        link = "<a href='defkeykey.csv' target='_blank'>Download csv file 📥 </a>"
+        st.markdown(link)
 
 
 
