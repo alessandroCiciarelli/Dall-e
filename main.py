@@ -340,7 +340,7 @@ if choose=="Analisi":
             
             selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
     else:
-        country_code = "IT"
+        country_code = ["IT", "EN"]
         country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True)
         selected_timeframe = ""
         period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
