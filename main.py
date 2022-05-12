@@ -1,4 +1,17 @@
 #Librerie
+#Impostazioni pagina
+import streamlit as st
+st.set_page_config(layout="wide")
+
+hide_st_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;margin:0;}
+    </style>
+    """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 import base64
 import io
 import json
@@ -7,7 +20,6 @@ from time import sleep
 from matplotlib import pyplot as plt
 from openpyxl import Workbook
 import pandas as pd
-import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
 import people_also_ask_it
@@ -25,19 +37,6 @@ from nltk.probability import FreqDist
 from deep_translator import GoogleTranslator
 from aitextgen import aitextgen
 
-#Impostazioni pagina
-st.set_page_config(layout="wide")
-
-hide_st_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;margin:0;}
-    </style>
-    """
-st.markdown(hide_st_style, unsafe_allow_html=True)
-
-st.markdown("<center><h4 style='margin-top:-70px;'>Intelligenza Artificiale e SEO 🤖</h4>", unsafe_allow_html=True)
 
 
 st.write(" ")
@@ -46,7 +45,7 @@ st.write(" ")
 if 'index' not in st.session_state:
     st.session_state['index'] =  0
 
-choose = option_menu(None, ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti"],
+choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti"],
                  icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
@@ -111,9 +110,9 @@ if st.session_state.premium == False:
             st.write(" ")    
             st.markdown("<center><h4>Vuoi Diventare un Utente Premium 👑 ?</h4>", unsafe_allow_html=True)
             text2 = st.markdown(" ", unsafe_allow_html=True)
-            st.markdown('<center><b>Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br><small> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></center> ', unsafe_allow_html=True)
+            st.markdown('<center><b style="font-size:12px;">Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br></center> ', unsafe_allow_html=True)
             st.write(" ")
-            st.markdown("<center><h5><a href='https://www.intelligenzaartificialeitalia.net/compra-seoia' >Passa ORA a PREMIUM 👑 per SOLI 5€ al mese, non te ne pentirai 🤓</a><h5>", unsafe_allow_html=True)
+            st.markdown("<center><h5><a href='https://www.intelligenzaartificialeitalia.net/la-seo-con-intelligenza-artificiale-tool-gratuito' >Passa ORA a PREMIUM 👑 per SOLI 5€ , non te ne pentirai 🤓</a><h5>", unsafe_allow_html=True)
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
