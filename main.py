@@ -810,8 +810,8 @@ if choose=="Ricerca":
                             "data": [jsonJSON],
                             "top": "1%",
                             "bottom": "1%",
-                            "left": "10",
-                            "right": "40",
+                            "left": "50%",
+                            "right": "50%",
                             "padding": "0",
                             "symbolSize": 10,
                             "label": {
