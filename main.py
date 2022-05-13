@@ -131,7 +131,6 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
 if 'aitextgen' not in st.session_state:
         st.session_state['aitextgen'] =  aitextgen()
         ai = st.session_state.aitextgen 
-        st.write(st.session_state.aitextgen)
 
     
 
