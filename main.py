@@ -50,20 +50,6 @@ from aitextgen import aitextgen
 
 ## GESTIONE UTENTI PREMIUM
 
-if 'premium' not in st.session_state:
-    #set session premium key to false
-    st.session_state['premium'] =  False
-
-if 'nome' not in st.session_state:
-    st.session_state['nome'] =  ""
-
-if 'primaVolta' not in st.session_state:
-    st.session_state['primavolta'] = TrendReq()
-    nltk.download('punkt')
-    pytrends = st.session_state.primavolta
-else:
-    pytrends = st.session_state.primavolta
-
 
 def premium_check(user,codice):
     #test if codice is in Secrets Management of streamlit
@@ -89,7 +75,9 @@ def premium_check(user,codice):
         st.session_state.premium = False
         return False
 
-
+if 'premium' not in st.session_state:
+    #set session premium key to false
+    st.session_state['premium'] =  False
         
 if st.session_state.premium == False:
     with st.expander("👑 Sei un UTENTE PREMIUM ? 👑"):
@@ -110,6 +98,19 @@ if st.session_state.premium == False:
             st.markdown("<center><h5><a href='https://www.intelligenzaartificialeitalia.net/la-seo-con-intelligenza-artificiale-tool-gratuito' >Passa ORA a PREMIUM 👑 per SOLI 5€ , non te ne pentirai 🤓</a><h5>", unsafe_allow_html=True)
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
+
+
+
+if 'nome' not in st.session_state:
+    st.session_state['nome'] =  ""
+
+if 'primaVolta' not in st.session_state:
+    st.session_state['primavolta'] = TrendReq()
+    nltk.download('punkt')
+    pytrends = st.session_state.primavolta
+else:
+    pytrends = st.session_state.primavolta
+
 
 
 #####MENU
