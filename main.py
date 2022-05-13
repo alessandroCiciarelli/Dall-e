@@ -876,8 +876,8 @@ if choose=="Ricerca":
                     #create href to download csv file
                     b64 = base64.b64encode(csv.encode()).decode()
                     href = f'<a href="data:file/csv;base64,{b64}">Scarica i risultati in formato CSV 📎</a>'
-                    st.markdown(href)
-                    
+                    st.markdown(href, unsafe_allow_html=True)
+
                 else:
                     st.markdown("###  🎁 Scarica i risultati (PREMIUM 👑) ")
 
@@ -1180,18 +1180,6 @@ if choose=="Contenuti":
                 for i in range(len(inp)):
                     with st.expander(f"Genero il testo {str(i+1)}"):
                         st.write(inp[i])
-                        #share the file
-                        if st.session_state.premium == True:
-                            #create a file with the text to share
-                            with open(f"{str(i+1)}.txt", "w") as f:
-                                f.write(inp[i])
-                                txt = open(f"{str(i+1)}.txt", "w")
-                                b64 = base64.b64encode(txt.read())
-                                href = f"<a href='data:file/txt;base64,{b64}'>Scarica il testo {str(i+1)}</a>"
-                                st.markdown(href, unsafe_allow_html=True)
-                            st.write("  ")
-                        else:
-                            st.markdown("📎 Scarica il testo (Solo per PREMIUM 👑)", unsafe_allow_html=True)
         except:
             st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
 
