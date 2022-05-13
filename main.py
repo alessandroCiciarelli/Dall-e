@@ -46,7 +46,15 @@ from nltk.probability import FreqDist
 from deep_translator import GoogleTranslator
 from aitextgen import aitextgen
 
+pid = 0
+if 'pid' not in st.session_state:
+    #generate random id
+    pid = random.randint(1, 9999999)
+    st.session_state['pid'] = pid
+else:
+    pid = st.session_state['pid']
 
+st.write(pid)
 try:
 
     ## GESTIONE UTENTI PREMIUM
