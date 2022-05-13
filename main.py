@@ -131,14 +131,17 @@ else:
 #Funzioni di uso genrale
 
 #def function to generate multiple texts with ai.generate_samples()
-@st.cache(allow_output_mutation=True)
+@st.cache()
 def ai_text(inp,lunghezza, temp, num):
     listaTesti = []
-    ai = aitextgen()
-    for i in range(num):
-        generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
-        listaTesti.append(entoit(generated_text))
-    return listaTesti
+    try:
+        ai = aitextgen()
+        for i in range(num):
+            generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
+            listaTesti.append(entoit(generated_text))
+        return listaTesti
+    except:
+        return ["Errore","Riprova più tardi"]
 
 def ittoen(testo):
     return GoogleTranslator(source='auto', target='en').translate(testo)
@@ -871,14 +874,10 @@ if choose=="Ricerca":
                     st.markdown("##  Scarica ora i risultati 🎁 ")
                     csv = edges.to_csv(index=False)
                     #create href to download csv file
-                    href = f"data:text/csv;charset=utf-8,{csv}"
-                    link = html.A(
-                        "Scarica i risultati 🎁",
-                        href=href,
-                        download="risultati.csv",
-                        target="_blank",
-                    )
-                    st.markdown(link)
+                    b64 = base64.b64encode(csv.encode()).decode()
+                    href = f'<a href="data:file/csv;base64,{b64}">Scarica i risultati in formato CSV 📎</a>'
+                    st.markdown(href)
+                    
                 else:
                     st.markdown("###  🎁 Scarica i risultati (PREMIUM 👑) ")
 
