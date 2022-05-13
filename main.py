@@ -122,6 +122,7 @@ else:
 #Funzioni di uso genrale
 
 #def function to generate multiple texts with ai.generate_samples()
+@st.cache(allow_output_mutation=True)
 def ai_text(inp,lunghezza, temp, num):
     listaTesti = []
     ai = aitextgen()
@@ -380,15 +381,21 @@ if choose=="Analisi":
             pytrends.build_payload(linesList, timeframe=selected_timeframe, geo=country_code[0])
             related_queries = pytrends.related_queries()
             temp = pytrends.interest_over_time().drop('isPartial', axis=1)
-            st.line_chart(temp)
+            try:
+                st.line_chart(temp)
+            except:
+                st.warning("⚠️ Attenzione, riprova con altre keyword ⚠️")
             citta = pytrends.interest_by_region(resolution='CITY', inc_low_vol=False, inc_geo_code=False)
             
         
         for i in range(len(linesList)):
             keykey = linesList[i]
             st.header("Analisi della keyword {} : {}".format(i+1, str(linesList[i])))
-            st.line_chart(temp[str(linesList[i])])
-            st.bar_chart(citta[str(linesList[i])])
+            try:
+                st.line_chart(temp[str(linesList[i])])
+                st.bar_chart(citta[str(linesList[i])])
+            except:
+                st.warning("Non ci sono dati per questa keyword 😢")
             c29, c31 = st.columns(2)
 
             with c29:
@@ -430,11 +437,9 @@ if choose=="Analisi":
                                 fit_columns_on_grid_load=True,
                                 allow_unsafe_jscode=True
                             )
-                            st.write("Per esportare i dati, passa a Premium 🚀")
-
-                    
+                            st.write("Per esportare i dati, passa a Premium 🚀")             
                 except:
-                    st.write("Nessuna query in tendenza")
+                    st.warning("Non ci sono dati per questa keyword 😢")
 
             with c31:
                 st.subheader("Tendenze in aumento⚡")
@@ -477,7 +482,7 @@ if choose=="Analisi":
 
                     
                 except:
-                    st.write("Nessuna query in tendenza")
+                    st.warning("Non ci sono dati per questa keyword 😢")
 
             from ecommercetools import seo
             st.subheader("Competitor principali 🏈")
@@ -796,7 +801,7 @@ if choose=="Ricerca":
                             "data": [jsonJSON],
                             "top": "1%",
                             "bottom": "1%",
-                            "left": "10%",
+                            "left": "20%",
                             "right": "20%",
                             "padding": "0",
                             "symbolSize": 10,
@@ -804,7 +809,7 @@ if choose=="Ricerca":
                                 "position": "left",
                                 "verticalAlign": "middle",
                                 "align": "right",
-                                "fontSize": 15,
+                                "fontSize": 12,
                             },
                             "toolbox": {
                                 "show": True,
@@ -870,7 +875,7 @@ if choose=="Ricerca":
 
 
             except NameError:
-                print("Aspetta")
+                st.warning("Non ci sono risultati da scaricare 😞")
 
             st.markdown("---")
             st.markdown("## **👇 Ecco i suggerimenti generati**")
@@ -1161,21 +1166,26 @@ if choose=="Contenuti":
     
     if st.button("Genera testo🤘") :
         nuovo = ittoen(inp)
-        with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
-            inp = ai_text(nuovo,lunghezza,follia,numTesti)
-            for i in range(len(inp)):
-                with st.expander(f"Genero il testo {str(i+1)}"):
-                    st.write(inp[i])
-                    #share the file
-                    if st.session_state.premium == True:
-                         #create a file with the text to share
-                        with open(f"{str(i+1)}.txt", "w") as f:
-                            f.write(inp[i])
-                        st.markdown(f"<a href='{str(i+1)}.txt'>📎 Scarica il testo {str(i+1)}</a>", unsafe_allow_html=True)
-                        st.write("  ")
-                    else:
-                        st.markdown("📎 Scarica il testo (Solo per PREMIUM 👑)", unsafe_allow_html=True)
-
+        try:
+            with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
+                inp = ai_text(nuovo,lunghezza,follia,numTesti)
+                for i in range(len(inp)):
+                    with st.expander(f"Genero il testo {str(i+1)}"):
+                        st.write(inp[i])
+                        #share the file
+                        if st.session_state.premium == True:
+                            #create a file with the text to share
+                            with open(f"{str(i+1)}.txt", "w") as f:
+                                f.write(inp[i])
+                                txt = open(f"{str(i+1)}.txt", "w")
+                                b64 = base64.b64encode(txt.read())
+                                href = f"<a href='data:file/txt;base64,{b64}'>Scarica il testo {str(i+1)}</a>"
+                                st.markdown(href, unsafe_allow_html=True)
+                            st.write("  ")
+                        else:
+                            st.markdown("📎 Scarica il testo (Solo per PREMIUM 👑)", unsafe_allow_html=True)
+        except:
+            st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
 
 if choose == "Testi":
     from keybert import KeyBERT
@@ -1446,11 +1456,13 @@ if choose == "Testi":
             random_state=42,
             colormap="RdBu_r",
         ).generate(" ".join(dfTemKey["Keyword/Frase"]))
-        plt.figure(figsize=(10, 10))
-        plt.imshow(wordcloud)
+        #plot wordcloud use fig
+        fig = plt.figure(figsize=(10, 10))
+        plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
-        st.pyplot()
-        st.markdown("")
+        st.pyplot(fig)
+
+        
 
 
 #Fine
