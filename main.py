@@ -126,16 +126,18 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
 #Funzioni di uso genrale
 
 #def function to generate multiple texts with ai.generate_samples()
+if 'aitextgen' not in st.session_state:
+        st.session_state['aitextgen'] =  aitextgen()
+        ai = st.session_state.aitextgen 
+        st.write(st.session_state.aitextgen)
+
+    
+
 @st.cache()
 def ai_text(inp,lunghezza, temp, num):
     listaTesti = []
     try:
-        if 'aitextgen' not in st.session_state:
-            st.session_state['aitextgen'] =  aitextgen()
-            ai = st.session_state.aitextgen 
-        else:
-            ai = st.session_state.aitextgen
-        
+        ai = st.session_state.aitextgen
         for i in range(num):
             generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
             listaTesti.append(entoit(generated_text))
