@@ -279,13 +279,13 @@ if choose=="Analisi":
     st.session_state['index'] =  0
     with st.expander("Cos'è e come funziona la sezione Analisi 🤔"):
         text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Analisi ?</b></h4>In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni del mercato selezionato ci sono più ricerche e quindi più interesse.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br> 🔹Il trend di ricerca nelle regioni <br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword <br>", unsafe_allow_html=True)
-        text3 = st.markdown("<br><h4><b>Come funziona la seziona Analisi ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) <br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Confrontare interessi dei consumatori nel tempo di keyword, prodotti o servizi<br> \
                     🔸Sapere in quali regioni o città c'è più interesse<br>\
                     🔸Scoprire quali sono i trend più consolidati<br>\
                     🔸Trovare nuove tendenze più o meno correlate<br>\
                     🔸Scovare competitor e capire se il mercato è saturo<br>\
                     🔸Portare alla luce i dubbi dei consumatori<br>", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Analisi ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) <br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.write("  ")
         st.write("  ")
 
@@ -594,8 +594,18 @@ if choose=="Ricerca":
     st.session_state['index'] =  1
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Ricerca 🤔"):
-        text2 = st.markdown("In questa sezione potrai scoprire quali sono le keyword correlate più cercate su google<br> La sezione di <bold>Ricerca Keyword</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Dalle tantissime keywords inerenti a quella data<br>🔹La distribuzione delle nuove keywords<br>🔹I 10 competitor più forti sulle keywords generate<br>", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire la keyword (MAX 1)<br> 2️⃣ Clicca su <bold>'Svelami nuove keyword🤘'</bold> ", unsafe_allow_html=True)
+        text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Ricerca ?</b></h4>La ricerca di parole chiave o Keyword Research è il primo passo di una qualunque strategia SEO ed è essenziale per capire quali e quanti contenuti ha senso creare, per cercare di posizionarti sugli argomenti di maggior interesse per il tuo business online. Sì, perché prima di lavorare sui contenuti del tuo sito web devi scoprire quali termini di ricerca vengono utilizzati dal tuo pubblico. Questi termini sono le tue parole chiave e, sulla base di quest’ultime, puoi iniziare a creare e pubblicare contenuti utili e di alta qualità.<br> La sezione di <b>Ricerca Keyword</b> per la keyword inserita genererà:<br>🔹Tantissime nuove keywords <br>🔹La ramificazione delle nuove keywords<br>🔹I 10 competitor più forti sulle keywords generate<br>", unsafe_allow_html=True)
+        st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Capire le nicchie della keyword, prodotto o servizo<br> \
+                    🔸Saper identificare le tematiche più inerenti<br>\
+                    🔸Scoprire i livelli difficoltà di posizionamento<br>\
+                    🔸Trovare nuove tendenze più o meno correlate<br>\
+                    🔸Scovare competitor e capire se il mercato è saturo<br>\
+                    🔸Creare piani editorali in 2 minuti<br>\
+                    🔸Sviluppare una Content Strategy basata su dati", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il motore di ricerca<br>3️⃣Scegliere il <b>grado di profondità</b><br>4️⃣Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
+        st.markdown("<h5>🔧 Grado di profondità</h5>🧐 Livello 1 🧐 Genera dalle 50 alle 250 keywords<br>🤓 Livello 2 🤓 Genera dalle 250 alle 500 keywords<br><b>🤩 Livello 3 🤩 Genera dalle 500 alle 5000 Keywords</b>", unsafe_allow_html=True)
+        st.write("  ")
+        st.write("  ")
     st.write("  ")
     st.write("  ")
 
