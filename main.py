@@ -47,7 +47,6 @@ from deep_translator import GoogleTranslator
 from aitextgen import aitextgen
 
 
-pytrends=""
 
 ## GESTIONE UTENTI PREMIUM
 
@@ -59,11 +58,12 @@ if 'nome' not in st.session_state:
     st.session_state['nome'] =  ""
 
 if 'primaVolta' not in st.session_state:
-    st.session_state['primaVolta'] = TrendReq()
+    st.session_state['primavolta'] = TrendReq()
+    st.write(st.session_state.primavolta)
     nltk.download('punkt')
-    pytrends = TrendReq()
+    pytrends = st.session_state.primavolta
 else:
-    pytrends = st.session_state.primaVolta
+    pytrends = st.session_state.primavolta
 
 
 def premium_check(user,codice):
