@@ -39,9 +39,7 @@ import requests
 from datetime import date
 from pytrends.request import TrendReq
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder, JsCode
-pytrends = TrendReq()
 import nltk
-nltk.download('punkt')
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
@@ -59,6 +57,10 @@ if 'premium' not in st.session_state:
 if 'nome' not in st.session_state:
     st.session_state['nome'] =  ""
 
+if 'primaVolta' not in st.session_state:
+    st.session_state['primaVolta'] = True
+    nltk.download('punkt')
+    pytrends = TrendReq()
 
 
 def premium_check(user,codice):
