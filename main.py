@@ -51,7 +51,7 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
                  icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'body-text'],
                  menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                  styles={
-"container": {"margin-top":"-10%","color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
+"container": {"margin-top":"-1%","color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
 "icon": {"color": "blak", "font-size": "13px", "margin":"0px"}, 
 "nav-link": {"color": "blak!important","font-size": "15px", "text-align": "left", "padding": "5px!important", "margin":"0px", "--hover-color": "#eee"},
 "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
