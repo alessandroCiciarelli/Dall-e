@@ -59,7 +59,6 @@ if 'nome' not in st.session_state:
 
 if 'primaVolta' not in st.session_state:
     st.session_state['primavolta'] = TrendReq()
-    st.write(st.session_state.primavolta)
     nltk.download('punkt')
     pytrends = st.session_state.primavolta
 else:
@@ -723,7 +722,7 @@ if choose=="Ricerca":
             # tree = suggests_tree("français", source="google", max_depth=1)
             tree = suggests_tree(keyword, source=SearchEngineLowerCase, max_depth=maxDepth)
 
-            if maxDepth != 3:
+            if maxDepth < 6:
 
                 edges = to_edgelist(tree)
                 edges = add_parent_nodes(edges)
