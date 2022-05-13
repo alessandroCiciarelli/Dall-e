@@ -130,7 +130,12 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
 def ai_text(inp,lunghezza, temp, num):
     listaTesti = []
     try:
-        ai = aitextgen()
+        if 'aitextgen' not in st.session_state:
+            st.session_state['aitextgen'] =  aitextgen()
+            ai = st.session_state.aitextgen 
+        else:
+            ai = st.session_state.aitextgen
+        
         for i in range(num):
             generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
             listaTesti.append(entoit(generated_text))
