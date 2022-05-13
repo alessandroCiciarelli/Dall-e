@@ -279,11 +279,12 @@ if choose=="Analisi":
     st.session_state['index'] =  0
     with st.expander("Cos'è e come funziona la sezione Analisi 🤔"):
         text2 = st.markdown("<b>Cosa puoi fare nella sezione Analisi ?</b><br>In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni del mercato selezionato ci sono più ricerche e quindi più interesse.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br> 🔹Il trend di ricerca nelle regioni <br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword <br>", unsafe_allow_html=True)
+        text3 = st.markdown("<b>Come funziona la seziona Analisi ? </b><br>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) <br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.markdown("<b>Questa sezione ti permetterà di : </b><br>🔸Confrontare interessi dei consumatori nel tempo di keyword, prodotti o servizi<br> \
-                    🔸Sapere in quali regioni o città c'è più interesse\
-                    🔸Scoprire quali sono i trend più consolidati\
-                    🔸Trovare nuove tendenze più o meno correlate\
-                    🔸Scovare competitor e capire se il mercato è saturo\
+                    🔸Sapere in quali regioni o città c'è più interesse<br>\
+                    🔸Scoprire quali sono i trend più consolidati<br>\
+                    🔸Trovare nuove tendenze più o meno correlate<br>\
+                    🔸Scovare competitor e capire se il mercato è saturo<br>\
                     🔸Portare alla luce i dubbi dei consumatori<br>", unsafe_allow_html=True)
         text3 = st.markdown("<b>Come funziona la seziona Analisi ? </b><br>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) <br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.write("  ")
