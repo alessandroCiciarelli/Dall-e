@@ -127,10 +127,9 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
 
 #def function to generate multiple texts with ai.generate_samples()
 @st.cache()
-def ai_text(inp,lunghezza, temp, num):
+def ai_text(ai,inp,lunghezza, temp, num):
     listaTesti = []
     try:
-        ai = aitextgen()
         for i in range(num):
             generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
             listaTesti.append(entoit(generated_text))
@@ -285,7 +284,7 @@ if choose=="Analisi":
                     🔸Trovare nuove tendenze più o meno correlate<br>\
                     🔸Scovare competitor e capire se il mercato è saturo<br>\
                     🔸Portare alla luce i dubbi dei consumatori<br>", unsafe_allow_html=True)
-        text3 = st.markdown("<h4><b>Come funziona la seziona Analisi ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) <br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Analisi ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords, una per riga<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣Premere <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.write("  ")
         st.write("  ")
 
@@ -601,7 +600,7 @@ if choose=="Ricerca":
                     🔸Trovare nuove tendenze più o meno correlate<br>\
                     🔸Creare piani editorali in 2 minuti<br>\
                     🔸Sviluppare una Content Strategy basata su dati", unsafe_allow_html=True)
-        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il motore di ricerca<br>3️⃣Scegliere il <b>grado di profondità</b><br>4️⃣Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il motore di ricerca<br>3️⃣Scegliere il <b>grado di profondità</b><br>4️⃣Premere <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.markdown("<br><h5>🔧 Grado di profondità</h5>🧐 Livello 1 🧐 Genera dalle 50 alle 250 keywords<br>🤓 Livello 2 🤓 Genera dalle 250 alle 500 keywords<br><b>🤩 Livello 3 🤩 Genera dalle 500 alle 5000 Keywords</b>", unsafe_allow_html=True)
         st.write("  ")
         st.write("  ")
@@ -977,7 +976,7 @@ if choose=="Competitor":
                     🔸Scovare le strategie SEO dei tuoi concorrenti<br>\
                     🔸Trovare potenziali affiliati<br>\
                     🔸Aumentare il tuo traffico organico richiedendo backlink", unsafe_allow_html=True)
-        text3 = st.markdown("<h4><b>Come funziona la seziona Competitor ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga <br>2️⃣ Scegliere il mercato di riferimento<br>3️⃣ Premere <b>'Svelami i Competitors🤘'</b> ", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Competitor ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga <br>2️⃣ Scegliere il mercato di riferimento<br>3️⃣ Premere <b>'Svelami Competitors🤘'</b> ", unsafe_allow_html=True)
         
     st.write("  ")
     st.write("  ")
@@ -1110,9 +1109,8 @@ if choose=="Domande":
                     🔸Trovare migliaia di intenzioni di ricerca<br>\
                     🔸Trovare potenziali affiliati<br>\
                     🔸Sviluppare una Content Strategy basata su dati", unsafe_allow_html=True)
-        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il numero di domande<br>3️⃣ Premere <b>'Svelami i Dubbi🤘'</b> ", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il numero di domande<br>3️⃣ Premere <b>'Svelami i Dubbi🤘'</b><br><br>", unsafe_allow_html=True)
         
-    st.write("  ")
     st.write("  ")
     v1,v2 = st.columns(2)
     text = v1.text_input("Inserisci la keyword", value="Marketing")
@@ -1171,9 +1169,19 @@ if choose=="Domande":
 #5 Contenuti
 if choose=="Contenuti":
     st.session_state['index'] =  4
+
     with st.expander("Cos'è e come funziona la sezione Contenuti 🤔"):
-        text2 = st.markdown("In questa sezione potrai generare articoli, testi e spiegazioni senza dover scrivere 😯<br> La sezione di <bold>Contenuti</bold> in base ad una frase o un paragrafo dato è in grado di aiutarti a scrivere grazie ad un Intelligenza artificiale che sono anni che apprende dal web🤯", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paragrafo<br>2️⃣ Scegliere lunghezza desiderata del testo generato<br>3️⃣ Clicca su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
+
+        text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Contenuti ?</b></h4>Non sai cosa dire nella didascalia di Instagram o nell'introduzione del post sul blog? Genera testi di marketing, annunci social, scrittura di blog, slogan, contenuti di siti Web e altro in pochi secondi con uno strumento gratuito per la scrittura di intelligenza artificiale. Accedi gratuitamente a un generatore di scrittura IA istantaneo, all'espansore di frasi e a un generatore di testo IA con il nostro scrittore di contenuti AI all-in-one. Non perdere un secondo a fissare uno schermo vuoto. Un'intelligenza artificiale efficace, sul pezzo e gratis è a portata di clic.<br> La sezione di <b>Genera Contenuti</b> per il paragrafo genererà:<br>🔹Diversi testi scritti da un I.A.<br>", unsafe_allow_html=True)
+        st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Non perdere un secondo quando ti manca l'ispirazione<br> \
+                    🔸Generare titoli efficaci per il tuo blog post<br>\
+                    🔸Generare indici e sommari per il tuo post<br>\
+                    🔸Riempi facilmente le lacune nei tuoi contenuti<br>\
+                    🔸Non pensare alla grammatica ma solo alla semantica<br>\
+                    🔸Aumentare il tuo traffico producendo più contenuti rispetto ai competitor", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Contenuti ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paragrafo<br>2️⃣Scegliere lunghezza desiderata del testo generato<br>3️⃣Cliccare su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
+        st.markdown("<br><h4><b>Esempi per generare Contenuti 😯 </b></h4>1️⃣", unsafe_allow_html=True)
+
     st.write("  ")
     st.write("  ")
     inp = st.text_area('Scrivi una frase o un paragrafo di ispirazione per la nostra I.A.',height=200)
@@ -1188,17 +1196,23 @@ if choose=="Contenuti":
         numTesti = st.slider('Genera più testi insieme con PREMIUM 👑)', 1, 5,1,1, disabled=True)
         numTesti = 1
 
+    try:
+        ai = aitextgen()
+        if st.button("Genera testo🤘") :
+            nuovo = ittoen(inp)
+            try:
+                with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
+                    inp = ai_text(ai,nuovo,lunghezza,follia,numTesti)
+                    for i in range(len(inp)):
+                        with st.expander(f"Genero il testo {str(i+1)}"):
+                            st.write(inp[i])
+            except:
+                st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
+    except:
+        st.error("Errore di connessione al server AI 🤔 Riprova più tardi 🙏")
+
     
-    if st.button("Genera testo🤘") :
-        nuovo = ittoen(inp)
-        try:
-            with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
-                inp = ai_text(nuovo,lunghezza,follia,numTesti)
-                for i in range(len(inp)):
-                    with st.expander(f"Genero il testo {str(i+1)}"):
-                        st.write(inp[i])
-        except:
-            st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
+    
 
 if choose == "Testi":
     from keybert import KeyBERT
