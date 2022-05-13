@@ -970,8 +970,15 @@ if choose=="Competitor":
     st.session_state['index'] =  3
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Competitor 🤔"):
-        text2 = st.markdown("In questa sezione potrai scoprire quali sono i tuoi competitor più forti sulla seo<br> La sezione di <bold>Competitor</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Lista dei competitor più forti<br>🔹Posizionamento per ogni competitor<br>🔹Link pagina indicizzata su Google<br>🔹Statistiche sul titolo e descrizione pagina indicizzata", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga<br> 2️⃣ Clicca su <bold>'Svelami i Competitor🤘'</bold> ", unsafe_allow_html=True)
+        text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Competitor ?</b></h4> La sezione <b>Competitor</b> ti aiuterà a identificare e rispondere alla domanda del tuo potenziale cliente su ogni pagina di prodotto in modo che possa posizionarsi più in alto nei motori di ricerca e fornire informazioni utili ai visitatori. Con questo strumento sarai in grado di creare una strategia di contenuti pertinente alle esigenze dei tuoi clienti. Avrai anche accesso a modelli con domande pre-scritte su prodotti o categorie specifici che possono far risparmiare tempo durante la creazione di nuove pagine.<br> La sezione di <b>Ricerca Keyword</b> per la keyword inserita genererà:<br>🔹Le domande più cercate su Google<br>🔹I competitor per ogni domanda generata<br>🔹Statistiche e informazioni per ogni domanda<br>", unsafe_allow_html=True)
+        st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Individuare le parole chiave che non sono state prese di mira dai concorrenti<br> \
+                    🔸Ottenere intenzioni di ricerca long tail che non pensavi di utilizzare prima<br>\
+                    🔸Scoprire nuove opportunità dai risultati dei tuoi concorrenti<br>\
+                    🔸Scovare le strategie SEO dei tuoi concorrenti<br>\
+                    🔸Trovare potenziali affiliati<br>\
+                    🔸Aumentare il tuo traffico organico richiedendo backlink", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Competitor ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga <br>2️⃣ Scegliere il mercato di riferimento<br>3️⃣ Premere <b>'Svelami i Competitors🤘'</b> ", unsafe_allow_html=True)
+        
     st.write("  ")
     st.write("  ")
     text = st.text_area("Inserisci la keyword, una per riga ", height=150, key=1)
@@ -988,7 +995,7 @@ if choose=="Competitor":
         Lang_selectbox = st.selectbox("In che mercato vuoi cercare (PREMIUM 👑)", listLang, disabled=True)
         selected_lang = "lang_it"
 
-    if st.button("Svelami i Competitor🤘"):
+    if st.button("Svelami i Competitors🤘"):
         if st.session_state.premium == True:
             MAX_LINES = 10
         else:
@@ -1103,12 +1110,12 @@ if choose=="Domande":
                     🔸Trovare migliaia di intenzioni di ricerca<br>\
                     🔸Trovare potenziali affiliati<br>\
                     🔸Sviluppare una Content Strategy basata su dati", unsafe_allow_html=True)
-        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il numero di domande<br>3️⃣ Premere <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il numero di domande<br>3️⃣ Premere <b>'Svelami i Dubbi🤘'</b> ", unsafe_allow_html=True)
         
     st.write("  ")
     st.write("  ")
     v1,v2 = st.columns(2)
-    text = v1.text_input("Inserisci la keyword")
+    text = v1.text_input("Inserisci la keyword", value="Marketing")
     numeroDomande= 0
     if st.session_state.premium == True:
         numeroDomande = v2.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
