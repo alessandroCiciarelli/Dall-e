@@ -92,14 +92,14 @@ def premium_check(user,codice):
 
         
 if st.session_state.premium == False:
-    with st.expander(" Sei un UTENTE PREMIUM 👑 ? "):
+    with st.expander("👑 Sei un UTENTE PREMIUM ? 👑"):
             st.markdown("<center><h5>Login Utenti Premium 👑</h5>", unsafe_allow_html=True)
             #define tree streamlit columns
             cc1, cc2= st.columns(2)
             user = cc1.text_input("Inserisci il tuo nome utente 👤")
             codice = cc2.text_input("Inserisci il tuo codice di accesso 🔑")
             dd1, dd2, dd3 = st.columns(3)
-            if dd2.button("Accedi ora e sblocca tutte le funzionalità PREMIUM, nulla sarà come prima 🔐"):
+            if dd2.button("Accedi ora e sblocca funzionalità PREMIUM 🔐"):
                 if premium_check(user,codice):
                     st.success("Benvenuto "+user+" 👑 Tra poco questa sezione scomparirà 🤓") 
                 else:
@@ -692,15 +692,11 @@ if choose=="Ricerca":
 
     c = st.container()
 
-    button1 = st.button("Cerca nuove suggerimenti 🤘") 
-
     if not keyword:
         c.success("🔼 Scrivi una keyword per iniziare")
 
-    if keyword and not button1:
-        c.success("🔽 Clicca sul pulsante per cercare nuove suggerimenti")
 
-    if button1 and keyword:
+    if st.button("Cerca nuove suggerimenti 🤘")  and keyword:
         # Patch suggests to support latin1 decoding
         def suggests_tree(*args, **kwargs):
             try:
