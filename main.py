@@ -286,7 +286,6 @@ if choose=="Analisi":
                     🔸Trovare nuove tendenze più o meno correlate<br>\
                     🔸Scovare competitor e capire se il mercato è saturo<br>\
                     🔸Portare alla luce i dubbi dei consumatori<br>", unsafe_allow_html=True)
-        text3 = st.markdown("<b>Come funziona la seziona Analisi ? </b><br>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) <br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.write("  ")
         st.write("  ")
 
@@ -372,15 +371,8 @@ if choose=="Analisi":
         months = list(range(1, 13))
         days = list(range(1, 32))
 
-    
-        
-    #st.write(selected_timeframe + " " + country_code[0])
-    #bottone per scoprire le tendenze
-    start_execution = st.button("Scopri le tendenze🤘")
 
-
-
-    if start_execution and len(linesList) > 0:
+    if st.button("Scopri le tendenze🤘") and len(linesList) > 0:
 
         
         if len(linesList) == 1:
