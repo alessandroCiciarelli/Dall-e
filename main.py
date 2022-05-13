@@ -131,13 +131,14 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
 #Funzioni di uso genrale
 
 def load_text_gen_model():
-    return aitextgen()
-
-
-#def function to generate multiple texts with ai.generate_samples()
-if 'aitextgen' not in st.session_state:
-        st.session_state['aitextgen'] =  load_text_gen_model()
+    #def function to generate multiple texts with ai.generate_samples()
+    if 'aitextgen' not in st.session_state:
+            st.session_state['aitextgen'] =  aitextgen()
+            ai = st.session_state.aitextgen
+    else:
         ai = st.session_state.aitextgen 
+
+load_text_gen_model()
 
 
 
