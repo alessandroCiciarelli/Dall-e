@@ -1239,7 +1239,7 @@ if choose == "Testi":
     - 1️⃣ Decidere delle parole chiave per cui ti vuoi indicizzare
     - 2️⃣ Scrivere un Testo o generarlo automaticamente nella sezione *Contenuti*
     - 3️⃣ Incollare all'interno di questa sezione il testo che vuoi indicizzare
-    - 4️⃣ Cliccare su *'Indicizza🤘'*
+    - 4️⃣ Cliccare su *'Analizza il mio testo 🤖'*
     - 5️⃣ Controllare che la keyword per cui ti vuoi indicizzare abbia un alta *Rilevanza*
             """
         )
