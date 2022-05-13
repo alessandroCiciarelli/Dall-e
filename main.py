@@ -92,7 +92,7 @@ def premium_check(user,codice):
 
         
 if st.session_state.premium == False:
-    with st.expander(" Sei un UTENTE PREMIUM 👑 ? "):
+    with st.expander("** Sei un UTENTE PREMIUM 👑 ? **"):
             st.markdown("<center><h5>Login Utenti Premium 👑</h5>", unsafe_allow_html=True)
             #define tree streamlit columns
             cc1, cc2= st.columns(2)
