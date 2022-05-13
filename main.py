@@ -1191,7 +1191,6 @@ if choose=="Contenuti":
                     🔸Non pensare alla grammatica ma solo alla semantica<br>\
                     🔸Aumentare il tuo traffico producendo più contenuti rispetto ai competitor", unsafe_allow_html=True)
         text3 = st.markdown("<h4><b>Come funziona la seziona Contenuti ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paragrafo<br>2️⃣Scegliere lunghezza desiderata del testo generato<br>3️⃣Cliccare su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
-        st.markdown("<br><h4><b>Esempi per generare Contenuti 😯 </b></h4>1️⃣", unsafe_allow_html=True)
 
     st.write("  ")
     st.write("  ")
