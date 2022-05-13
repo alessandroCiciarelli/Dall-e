@@ -139,7 +139,7 @@ try:
 
     #Funzioni di uso genrale
     @st.cache(allow_output_mutation=True, show_spinner=False)
-    def load_text_gen_model():
+    def load_text_gen_model(pid):
         #def function to generate multiple texts with ai.generate_samples()
         if 'aitextgen' not in st.session_state:
                 st.session_state['aitextgen'] =  aitextgen()
@@ -147,7 +147,7 @@ try:
         else:
             ai = st.session_state.aitextgen 
 
-    load_text_gen_model()
+    load_text_gen_model(pid)
 
 
 
