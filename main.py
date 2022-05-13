@@ -974,7 +974,7 @@ if choose=="Competitor":
         text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga<br> 2️⃣ Clicca su <bold>'Svelami i Competitor🤘'</bold> ", unsafe_allow_html=True)
     st.write("  ")
     st.write("  ")
-    text = st.text_area("Inserisci le keywords, una per riga ", height=150, key=1)
+    text = st.text_area("Inserisci la keyword")
     selected_lang = ""
 
     if st.session_state.premium == True:
