@@ -810,6 +810,10 @@ if choose=="Ricerca":
                     for index, row in dfNoneRemoved.iterrows():
                         grp1, grp3, size = row
                         root.child(grp1).child(grp3, size)
+                elif maxDepth == 3:
+                    for index, row in dfNoneRemoved.iterrows():
+                        grp1, grp2, grp3, size = row
+                        root.child(grp1).child(grp2).child(grp3, size)
                 else:
                     for index, row in dfNoneRemoved.iterrows():
                         grp3, size = row
