@@ -599,11 +599,10 @@ if choose=="Ricerca":
                     🔸Saper identificare le tematiche più inerenti<br>\
                     🔸Scoprire i livelli difficoltà di posizionamento<br>\
                     🔸Trovare nuove tendenze più o meno correlate<br>\
-                    🔸Scovare competitor e capire se il mercato è saturo<br>\
                     🔸Creare piani editorali in 2 minuti<br>\
                     🔸Sviluppare una Content Strategy basata su dati", unsafe_allow_html=True)
         text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il motore di ricerca<br>3️⃣Scegliere il <b>grado di profondità</b><br>4️⃣Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
-        st.markdown("<h5>🔧 Grado di profondità</h5>🧐 Livello 1 🧐 Genera dalle 50 alle 250 keywords<br>🤓 Livello 2 🤓 Genera dalle 250 alle 500 keywords<br><b>🤩 Livello 3 🤩 Genera dalle 500 alle 5000 Keywords</b>", unsafe_allow_html=True)
+        st.markdown("<br><h5>🔧 Grado di profondità</h5>🧐 Livello 1 🧐 Genera dalle 50 alle 250 keywords<br>🤓 Livello 2 🤓 Genera dalle 250 alle 500 keywords<br><b>🤩 Livello 3 🤩 Genera dalle 500 alle 5000 Keywords</b>", unsafe_allow_html=True)
         st.write("  ")
         st.write("  ")
     st.write("  ")
@@ -1097,17 +1096,24 @@ if choose=="Domande":
     st.session_state['index'] =  2
     MAX_LINES = 1
     with st.expander("Cos'è e come funziona la sezione Domande 🤔"):
-        text2 = st.markdown("In questa sezione potrai scoprire quali sono i dubbi dei tuoi potenziali clienti in merito ad una keyword<br> La sezione <bold>Domande</bold> per la keyword inserita (MAX 1) genererà:<br>🔹Le domande più cercate su Google<br>🔹Una risposta semplice per ogni domanda generata<br>🔹Statistiche e informazioni per ogni domanda", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire la keyword (MAX 1)<br> 2️⃣ Clicca su <bold>'Svelami i Dubbi🤘'</bold> ", unsafe_allow_html=True)
-    
+        text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Domande ?</b></h4> La sezione <b>Domande</b> ti aiuterà a identificare e rispondere alla domanda del tuo potenziale cliente su ogni pagina di prodotto in modo che possa posizionarsi più in alto nei motori di ricerca e fornire informazioni utili ai visitatori. Con questo strumento sarai in grado di creare una strategia di contenuti pertinente alle esigenze dei tuoi clienti. Avrai anche accesso a modelli con domande pre-scritte su prodotti o categorie specifici che possono far risparmiare tempo durante la creazione di nuove pagine.<br> La sezione di <b>Ricerca Keyword</b> per la keyword inserita genererà:<br>🔹Le domande più cercate su Google<br>🔹I competitor per ogni domanda generata<br>🔹Statistiche e informazioni per ogni domanda<br>", unsafe_allow_html=True)
+        st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Capire le principali domande e preoccupazioni dei tuoi clienti<br> \
+                    🔸Ottenere intenzioni di ricerca long tail<br>\
+                    🔸Scoprire nuovi argomenti secondari che contano<br>\
+                    🔸Trovare migliaia di intenzioni di ricerca<br>\
+                    🔸Trovare potenziali affiliati<br>\
+                    🔸Sviluppare una Content Strategy basata su dati", unsafe_allow_html=True)
+        text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il numero di domande<br>3️⃣ Premere <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
+        
     st.write("  ")
     st.write("  ")
-    text = st.text_area("Inserisci la keyword", height=50, key=1)
+    v1,v2 = st.columns(2)
+    text = v1.text_input("Inserisci la keyword", height=50, key=1)
     numeroDomande= 0
     if st.session_state.premium == True:
-        numeroDomande = st.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
+        numeroDomande = v2.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
     else:
-        numeroDomande = st.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 1, 1)
+        numeroDomande = v2.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 1, 1)
         numeroDomande+=2
 
 
