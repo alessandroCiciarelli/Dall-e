@@ -127,9 +127,10 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
 
 #def function to generate multiple texts with ai.generate_samples()
 @st.cache()
-def ai_text(ai,inp,lunghezza, temp, num):
+def ai_text(inp,lunghezza, temp, num):
     listaTesti = []
     try:
+        ai = aitextgen()
         for i in range(num):
             generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
             listaTesti.append(entoit(generated_text))
@@ -1197,12 +1198,11 @@ if choose=="Contenuti":
         numTesti = 1
 
     try:
-        ai = aitextgen()
         if st.button("Genera testo🤘") :
             nuovo = ittoen(inp)
             try:
                 with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
-                    inp = ai_text(ai,nuovo,lunghezza,follia,numTesti)
+                    inp = ai_text(nuovo,lunghezza,follia,numTesti)
                     for i in range(len(inp)):
                         with st.expander(f"Genero il testo {str(i+1)}"):
                             st.write(inp[i])
