@@ -974,7 +974,7 @@ if choose=="Competitor":
         text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Inserire le keywords, una per riga<br> 2️⃣ Clicca su <bold>'Svelami i Competitor🤘'</bold> ", unsafe_allow_html=True)
     st.write("  ")
     st.write("  ")
-    text = st.text_area("Inserisci la keyword")
+    text = st.text_area("Inserisci la keyword, una per riga ", height=150, key=1)
     selected_lang = ""
 
     if st.session_state.premium == True:
@@ -1108,7 +1108,7 @@ if choose=="Domande":
     st.write("  ")
     st.write("  ")
     v1,v2 = st.columns(2)
-    text = v1.text_input("Inserisci la keyword", height=50, key=1)
+    text = v1.text_input("Inserisci la keyword")
     numeroDomande= 0
     if st.session_state.premium == True:
         numeroDomande = v2.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
