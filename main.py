@@ -129,7 +129,7 @@ choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerc
 )
 
 #Funzioni di uso genrale
-@st.cache()
+
 def load_text_gen_model():
     return aitextgen()
 
