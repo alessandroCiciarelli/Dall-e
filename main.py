@@ -137,19 +137,19 @@ try:
     }
     )
 
+    
     #Funzioni di uso genrale
     @st.cache(allow_output_mutation=True, show_spinner=False)
     def load_text_gen_model(pid):
-        #def function to generate multiple texts with ai.generate_samples()
-        if 'aitextgen' not in st.session_state:
-                st.session_state['aitextgen'] =  aitextgen()
-                ai = st.session_state.aitextgen
-        else:
-            ai = st.session_state.aitextgen 
+        a = aitextgen()
+        return a
 
-    load_text_gen_model(pid)
-
-
+    #def function to generate multiple texts with ai.generate_samples()
+    if 'aitextgen' not in st.session_state:
+            st.session_state['aitextgen'] =  load_text_gen_model(pid)
+            ai = st.session_state.aitextgen
+    else:
+        ai = st.session_state.aitextgen 
 
     @st.cache()
     def ai_text(inp,lunghezza, temp, num):
