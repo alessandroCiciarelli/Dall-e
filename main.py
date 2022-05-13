@@ -50,24 +50,6 @@ from aitextgen import aitextgen
 
 
 
-st.write(" ")
-st.write(" ")
-
-if 'index' not in st.session_state:
-    st.session_state['index'] =  0
-
-choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti", "Testi"],
-                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'body-text'],
-                 menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
-                 styles={
-"container": {"color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
-"icon": {"color": "blak", "font-size": "13px", "margin":"0px"}, 
-"nav-link": {"color": "blak!important","font-size": "15px", "text-align": "left", "padding": "5px!important", "margin":"0px", "--hover-color": "#eee"},
-"nav-link-selected": {"color": "blak","background-color": "#02ab21"},
-}
-)
-
-
 ## GESTIONE UTENTI PREMIUM
 
 if 'premium' not in st.session_state:
@@ -120,13 +102,26 @@ if st.session_state.premium == False:
                     st.error("Codice o Nome Utente errati ❌")
             st.write(" ")    
             st.markdown("<center><h4>Vuoi Diventare un Utente Premium 👑 ?</h4>", unsafe_allow_html=True)
-            text2 = st.markdown(" ", unsafe_allow_html=True)
-            st.markdown('<center><b style="font-size:12px;">Tutti i tool di Analisi, Ricrca e Generazione Keyword e Contenuti in unico Posto ⚡</b><br></center> ', unsafe_allow_html=True)
             st.write(" ")
             st.markdown("<center><h5><a href='https://www.intelligenzaartificialeitalia.net/la-seo-con-intelligenza-artificiale-tool-gratuito' >Passa ORA a PREMIUM 👑 per SOLI 5€ , non te ne pentirai 🤓</a><h5>", unsafe_allow_html=True)
 else:
     st.success("Benvenuto "+st.session_state.nome+" 👑")
 
+
+#####MENU
+if 'index' not in st.session_state:
+    st.session_state['index'] =  0
+
+choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti", "Testi"],
+                 icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'body-text'],
+                 menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
+                 styles={
+"container": {"color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
+"icon": {"color": "blak", "font-size": "13px", "margin":"0px"}, 
+"nav-link": {"color": "blak!important","font-size": "15px", "text-align": "left", "padding": "5px!important", "margin":"0px", "--hover-color": "#eee"},
+"nav-link-selected": {"color": "blak","background-color": "#02ab21"},
+}
+)
 
 #Funzioni di uso genrale
 
@@ -283,8 +278,14 @@ def df_suggest(df, _type='liste', kwToRemove=[]):
 if choose=="Analisi":
     st.session_state['index'] =  0
     with st.expander("Cos'è e come funziona la sezione Analisi 🤔"):
-        text2 = st.markdown("In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni d'Italia ci sono più ricerche.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br>🔹Il trend di ricerca nelle regioni in Italia<br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword", unsafe_allow_html=True)
-        text3 = st.markdown("Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) [MAX FREE 3 keywords]<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
+        text2 = st.markdown("<b>Cosa puoi fare nella sezione Analisi ?</b><br>In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni del mercato selezionato ci sono più ricerche e quindi più interesse.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br> 🔹Il trend di ricerca nelle regioni <br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword <br>", unsafe_allow_html=True)
+        st.markdown("<b>Questa sezione ti permetterà di : </b><br>🔸Confrontare interessi dei consumatori nel tempo di keyword, prodotti o servizi<br> \
+                    🔸Sapere in quali regioni o città c'è più interesse\
+                    🔸Scoprire quali sono i trend più consolidati\
+                    🔸Trovare nuove tendenze più o meno correlate\
+                    🔸Scovare competitor e capire se il mercato è saturo\
+                    🔸Portare alla luce i dubbi dei consumatori<br>", unsafe_allow_html=True)
+        text3 = st.markdown("<b>Come funziona la seziona Analisi ? </b><br>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords (una per riga) <br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣ Premi <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
         st.write("  ")
         st.write("  ")
 
