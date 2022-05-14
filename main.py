@@ -139,7 +139,7 @@ try:
     
     #Funzioni di uso genrale
     @st.cache(allow_output_mutation=True, show_spinner=False)
-    def load_text_gen_model(pid):
+    def load_text_gen_model():
         a = aitextgen()
         return a
 
@@ -147,7 +147,7 @@ try:
     def ai_text(inp,lunghezza, temp, num):
         listaTesti = []
         try:
-            ai = load_text_gen_model(pid)
+            ai = load_text_gen_model()
             for i in range(num):
                 generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
                 listaTesti.append(entoit(generated_text))
@@ -1222,13 +1222,14 @@ try:
             if st.button("Genera testo🤘") :
                 nuovo = ittoen(inp)
                 try:
-                    ai = load_text_gen_model(pid)
+                    ai = load_text_gen_model()
                     with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
                         inp = ai_text(nuovo,lunghezza,follia,numTesti)
+                        ai = None
                         for i in range(len(inp)):
                             with st.expander(f"Genero il testo {str(i+1)}"):
                                 st.write(inp[i])
-                    ai = None
+                    
                 except:
                     st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
         except Exception as e:
