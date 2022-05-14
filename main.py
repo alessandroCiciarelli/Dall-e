@@ -53,8 +53,7 @@ if 'pid' not in st.session_state:
     st.session_state['pid'] = pid
 else:
     pid = st.session_state['pid']
-
-st.write(pid)
+    
 try:
 
     ## GESTIONE UTENTI PREMIUM
@@ -1235,7 +1234,6 @@ try:
         except Exception as e:
             st.error(e)
         finally:
-            st.balloons()
             st.stop()
 
         
