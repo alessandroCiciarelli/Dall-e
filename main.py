@@ -144,21 +144,15 @@ try:
         a = aitextgen()
         return a
 
-    #def function to generate multiple texts with ai.generate_samples()
-    if 'aitextgen' not in st.session_state:
-            st.session_state['aitextgen'] =  load_text_gen_model(pid)
-            ai = st.session_state.aitextgen
-    else:
-        ai = st.session_state.aitextgen 
-
     @st.cache()
     def ai_text(inp,lunghezza, temp, num):
         listaTesti = []
         try:
-            ai = st.session_state.aitextgen
+            ai = load_text_gen_model(pid)
             for i in range(num):
                 generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
                 listaTesti.append(entoit(generated_text))
+            ai = null
             return listaTesti
         except:
             return ["Errore","Riprova più tardi"]
