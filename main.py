@@ -1232,10 +1232,11 @@ try:
                     ai = None
                 except:
                     st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
-                st.balloons()
-                st.stop()
-        except:
-            st.error("Errore di connessione al server AI 🤔 Riprova più tardi 🙏")
+        except Exception as e:
+            st.error(e)
+        finally:
+            st.balloons()
+            st.stop()
 
         
         
