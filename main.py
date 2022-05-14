@@ -607,6 +607,7 @@ try:
                 st.markdown("""<hr/><br>""", unsafe_allow_html=True)
                 
             st.balloons()
+            st.stop()
 
     #2 Ricerca
     if choose=="Ricerca":
@@ -978,6 +979,9 @@ try:
                         allow_unsafe_jscode=True
                     )
                     st.write("Per esportare i dati, passa a PREMIUM 🚀")
+            st.balloons()
+            st.stop()
+        
             
 
     #3 Competitor principali 🏈
@@ -1112,6 +1116,8 @@ try:
                             st.write("Per esportare i dati, passa a PREIUM 🚀")
 
                     st.markdown("""<hr/><br>""", unsafe_allow_html=True)
+            st.balloons()
+            st.stop()
 
     #4 Domande
     if choose=="Domande":
@@ -1180,6 +1186,8 @@ try:
                             else:
                                 with st.expander(domandePulite[i]) :
                                     st.write("Solo per PREMIUM 👑")
+                st.balloons()
+                st.stop()
 
 
     #5 Contenuti
@@ -1222,6 +1230,8 @@ try:
                                 st.write(inp[i])
                 except:
                     st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
+                st.balloons()
+                st.stop()
         except:
             st.error("Errore di connessione al server AI 🤔 Riprova più tardi 🙏")
 
@@ -1502,6 +1512,8 @@ try:
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis("off")
             st.pyplot(fig)
+            st.balloons()
+            st.stop()
 
 except Exception as e:
     st.warning(e)
