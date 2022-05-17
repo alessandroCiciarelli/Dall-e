@@ -19,7 +19,6 @@ hide_st_style = """
     padding: 0.5rem!important;
     }
 
-    <!-- VISA Session Recording Code --><script>(function (_window, _document, _script_url, _extAndQuery) {if (!_window._ssrSettings) { _window._ssrSettings = {}; }_window._ssrSettings["8d51711f-19f8-43c4-891e-957f7bd4c740"] = { version: "0.1", websiteId: "8d51711f-19f8-43c4-891e-957f7bd4c740", };let bodyEl = _document.getElementsByTagName("body")[0];let jsScript = _document.createElement("script");jsScript.defer = true;jsScript.src = _script_url + _extAndQuery + _window._ssrSettings["8d51711f-19f8-43c4-891e-957f7bd4c740"].version;bodyEl.appendChild(jsScript);})(window, document, "//worker-visa.session-replays.io/ssr-worker.min", ".js?websiteId=8d51711f-19f8-43c4-891e-957f7bd4c740&v=");</script><!-- VISA Session Recording Code -->
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
@@ -43,8 +42,6 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
-from deep_translator import GoogleTranslator
-from aitextgen import aitextgen
 
 pid = 0
 if 'pid' not in st.session_state:
@@ -125,8 +122,8 @@ try:
     if 'index' not in st.session_state:
         st.session_state['index'] =  0
 
-    choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Contenuti", "Testi"],
-                    icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark', 'body-text'],
+    choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Testi", "Contenuti"],
+                    icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark'],
                     menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
                     styles={
     "container": {"color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
@@ -138,30 +135,6 @@ try:
 
     
     #Funzioni di uso genrale
-    @st.cache(allow_output_mutation=True, show_spinner=False)
-    def load_text_gen_model():
-        a = aitextgen()
-        return a
-
-    @st.cache()
-    def ai_text(inp,lunghezza, temp, num):
-        listaTesti = []
-        try:
-            ai = load_text_gen_model()
-            for i in range(num):
-                generated_text = ai.generate_one(max_length = lunghezza, prompt = inp, no_repeat_ngram_size = random.randint(3, 5) , temperature = temp)
-                listaTesti.append(entoit(generated_text))
-            ai = None
-            return listaTesti
-        except:
-            return ["Errore","Riprova più tardi"]
-
-    def ittoen(testo):
-        return GoogleTranslator(source='auto', target='en').translate(testo)
-
-    def entoit(testo):
-        return GoogleTranslator(source='auto', target='it').translate(testo)
-
 
     def removeRestrictedCharactersAndWhiteSpaces(keywords):
 
@@ -1191,7 +1164,7 @@ try:
 
     #5 Contenuti
     if choose=="Contenuti":
-        st.session_state['index'] =  4
+        st.session_state['index'] =  5
 
         with st.expander("Cos'è e come funziona la sezione Contenuti 🤔"):
 
@@ -1204,43 +1177,13 @@ try:
                         🔸Aumentare il tuo traffico producendo più contenuti rispetto ai competitor", unsafe_allow_html=True)
             text3 = st.markdown("<h4><b>Come funziona la seziona Contenuti ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paragrafo<br>2️⃣Scegliere lunghezza desiderata del testo generato<br>3️⃣Cliccare su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
 
-        st.write("  ")
-        st.write("  ")
-        inp = st.text_area('Scrivi una frase o un paragrafo di ispirazione per la nostra I.A.',height=200)
-        if st.session_state.premium == True:
-            lunghezza = st.slider('Lunghezza massima del testo generato :', 50, 700,200,10)
-            follia = st.slider('Imposta la "follia" del testo  :', 0.5, 1.0,0.6,0.1)
-            numTesti = st.slider('Numero di testi da generare :', 1, 5,1,1)
-        else:
-            lunghezza = st.slider('Genera testi da oltre 700 caratteri con PREMIUM 👑', 50, 300,200,10)
-            follia = st.slider('Controlla la "follia" del testo con PREMIUM 👑', 0.5, 1.0,0.7,0.1, disabled=True)
-            follia = 0.7
-            numTesti = st.slider('Genera più testi insieme con PREMIUM 👑)', 1, 5,1,1, disabled=True)
-            numTesti = 1
-
-        try:
-            if st.button("Genera testo🤘") :
-                nuovo = ittoen(inp)
-                try:
-                    ai = load_text_gen_model()
-                    with st.spinner('Aspetta mentre rapiamo un COPYWRITER ... 🤖 Potrebbe volerci qualche minuto 🙏'):
-                        inp = ai_text(nuovo,lunghezza,follia,numTesti)
-                        ai = None
-                        for i in range(len(inp)):
-                            with st.expander(f"Genero il testo {str(i+1)}"):
-                                st.write(inp[i])
-                    
-                except:
-                    st.error("Il COPYWRITER è riuscito a scappare, riprova 🤔")
-        except Exception as e:
-            st.error(e)
-        finally:
-            st.stop()
+       
 
         
         
 
     if choose == "Testi":
+        st.session_state['index'] =  4
         from keybert import KeyBERT
         # For Flair (Keybert)
         from flair.embeddings import TransformerDocumentEmbeddings
