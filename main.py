@@ -1,7 +1,6 @@
 #Librerie
 #Impostazioni pagina
 import streamlit as st
-from wordcloud import WordCloud
 st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 hide_st_style = """
@@ -30,6 +29,8 @@ from time import sleep
 from matplotlib import pyplot as plt
 from openpyxl import Workbook
 import pandas as pd
+import seaborn as sns
+from wordcloud import WordCloud
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
 import people_also_ask_it
@@ -346,6 +347,7 @@ try:
                 day_to = col23.selectbox("Giorno", days, key="5")
                 
                 selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
+            country_names, country_codes,idx = None, None, None
         else:
             country_code = ["IT", "EN"]
             country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True)
@@ -355,12 +357,6 @@ try:
             timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list)
             idx = period_list.index(timeframe_selectbox)
             selected_timeframe = tf[idx]
-            todays_date = date.today()
-            current_year = todays_date.year
-
-            years = list(range(2005, current_year + 1))
-            months = list(range(1, 13))
-            days = list(range(1, 32))
 
 
         if st.button("Scopri le tendenze🤘") and len(linesList) > 0:
@@ -372,7 +368,7 @@ try:
                 related_queries = pytrends.related_queries()
                 temp = pytrends.interest_over_time().drop('isPartial', axis=1)
                 citta = pytrends.interest_by_region(resolution='CITY', inc_low_vol=False, inc_geo_code=False)
-            
+
             else:
                 linesList = removeRestrictedCharactersAndWhiteSpaces(linesList)
                 pytrends.build_payload(linesList, timeframe=selected_timeframe, geo=country_code[0])
@@ -434,7 +430,8 @@ try:
                                     fit_columns_on_grid_load=True,
                                     allow_unsafe_jscode=True
                                 )
-                                st.write("Per esportare i dati, passa a Premium 🚀")             
+                                st.write("Per esportare i dati, passa a Premium 🚀")
+                            topTrendFree = None             
                     except:
                         st.warning("Non ci sono dati per questa keyword 😢")
 
@@ -476,6 +473,7 @@ try:
                                     allow_unsafe_jscode=True
                                 )
                                 st.write("Per esportare i dati, passa a Premium 🚀")
+                            topTrendenzeFree = None
 
                         
                     except:
@@ -512,7 +510,8 @@ try:
                     #st.write(title,link)
                     concorrenti.loc[h] = [h] + [subdomain] + [title] 
                     h=h+1
-                
+                resp, results = None, None
+
                 if st.session_state.premium == True:
                     gb = GridOptionsBuilder.from_dataframe(concorrenti)
                     gb.configure_default_column(editable=True)
@@ -525,6 +524,7 @@ try:
                             enable_enterprise_modules=True
                         )
                         st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
+                    concorrenti = None
                 else:
                     concorrentiFree = concorrenti
                     #iterate concorrentiFree and write on "Dominio" and "Titolo" column "Solo per PREMIUM" per le prime 4 righe
@@ -540,6 +540,7 @@ try:
                             allow_unsafe_jscode=True
                         )
                         st.write("Per esportare i dati, passa a Premium 🚀")
+                    concorrentiFree = None
 
                     
                 st.write("")
@@ -559,6 +560,7 @@ try:
                             enable_enterprise_modules=True
                         )
                         st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
+                    domandePremium = None
                 else:
                     domandeFree = pd.DataFrame(columns=['Domanda'])
                     for dom in domande:
@@ -575,7 +577,9 @@ try:
                             allow_unsafe_jscode=True
                         )
                         st.write("Per esportare i dati, passa a Premium 🚀")
+                    domandeFree = None
 
+                domande = None
                 st.markdown("""<hr/><br>""", unsafe_allow_html=True)
                 
             st.balloons()
@@ -608,10 +612,7 @@ try:
             get_suggests_tree,
             add_metanodes,
         )
-
-        import matplotlib as plt
-        import seaborn as sns
-
+        
         from pyecharts import options as opts
         from pyecharts.charts import Tree
         from streamlit_echarts import st_echarts
@@ -670,15 +671,7 @@ try:
                 maxDepth = 1
 
 
-        c10, c11, c12 = st.columns(3)
-
-        c = st.container()
-
-        if not keyword:
-            c.success("🔼 Scrivi una keyword per iniziare")
-
-
-        if st.button("Cerca nuove suggerimenti 🤘")  and keyword:
+        if st.button("Cerca nuove suggerimenti 🤘")  and keyword != "":
             # Patch suggests to support latin1 decoding
             def suggests_tree(*args, **kwargs):
                 try:
@@ -866,7 +859,8 @@ try:
                         csv = edges.to_csv(index=False)
                         #create href to download csv file
                         b64 = base64.b64encode(csv.encode()).decode()
-                        href = f'<a href="data:file/csv;base64,{b64}">Scarica i risultati in formato CSV 📎</a>'
+                        filename = f"{keyword}_{SearchEngineLowerCase}_suggestions.csv"
+                        href = f'<a href="data:file/csv;base64,{b64}" download="{filename}">Scarica ora i risultati 🎁</a>'
                         st.markdown(href, unsafe_allow_html=True)
 
                     else:
@@ -880,12 +874,10 @@ try:
                 st.markdown("## **👇 Ecco i suggerimenti generati**")
                 st.subheader("")
                 st.table(edgescoloured)
+                tree, edges, edgescoloured, jsonString, jsonJSON, opts = None, None, None, None, None, None
 
-            c.success("✅ Complimenti! I suggerimenti sono pronti!")
             
             st.subheader("Competitor principali 🏈")
-            import urllib
-            import requests
 
             query = {
                 "q": keyword,
@@ -916,6 +908,7 @@ try:
                 #st.write(title,link)
                 concorrenti.loc[i] = [i] + [subdomain] + [title] 
                 i=i+1
+            resp, results = None, None
 
             if st.session_state.premium == True:
                 gb = GridOptionsBuilder.from_dataframe(concorrenti)
@@ -930,6 +923,7 @@ try:
                         enable_enterprise_modules=True
                     )    
                     st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
+                concorrenti = None
             else:
                 concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Titolo Indicizzato'])
                 concorrentiFree = concorrenti
@@ -951,6 +945,8 @@ try:
                         allow_unsafe_jscode=True
                     )
                     st.write("Per esportare i dati, passa a PREMIUM 🚀")
+                concorrentiFree = None
+
             st.balloons()
             st.stop()
         
@@ -1011,8 +1007,6 @@ try:
             for keyword in linesList:
                 with st.spinner(f"Aspetta un attimo ... 🕐 Potrebbe volerci qualche minuto 🙏"):
                     st.subheader(f"Competitor principali {keyword}🏈 nel mercato {Lang_selectbox}")
-                    import urllib
-                    import requests
 
                     query = {
                         "q": keyword,
@@ -1043,6 +1037,7 @@ try:
                         #st.write(title,link)
                         concorrenti.loc[i] = [i] + [subdomain] + [link] + [title] + [nT] + [descrizione] + [nD] 
                         i=i+1
+                    resp, results = None, None
 
                     if st.session_state.premium == True:
                         gb = GridOptionsBuilder.from_dataframe(concorrenti)
@@ -1057,6 +1052,7 @@ try:
                                 enable_enterprise_modules=True
                             )   
                             st.write("Per esportare i dati, usa il tasto desto del mouse 🚀")
+                        concorrenti = None
                     else:
                         concorrentiFree = pd.DataFrame(columns=['Posizionamento su Google','Dominio', 'Pagina indicizzata' ,'Titolo' , 'Lunghezza Titolo', 'Descrizione', 'Lunghezza Descrizione'])
                         concorrentiFree = concorrenti
@@ -1086,8 +1082,10 @@ try:
                                 allow_unsafe_jscode=True
                             )   
                             st.write("Per esportare i dati, passa a PREIUM 🚀")
+                        concorrentiFree = None
 
                     st.markdown("""<hr/><br>""", unsafe_allow_html=True)
+            
             st.balloons()
             st.stop()
 
@@ -1148,6 +1146,7 @@ try:
                         if st.session_state.premium == True:
                             with st.expander(domandePulite[i]) :
                                 st.write(informazioni[i])
+                                
                         else:
                             if i == 0:
                                 with st.expander(domandePulite[i]) :
@@ -1158,6 +1157,9 @@ try:
                             else:
                                 with st.expander(domandePulite[i]) :
                                     st.write("Solo per PREMIUM 👑")
+
+                    domande, informazioni, domandePulite = None, None, None
+
                 st.balloons()
                 st.stop()
 
@@ -1189,7 +1191,6 @@ try:
         from keybert import KeyBERT
         # For Flair (Keybert)
         from flair.embeddings import TransformerDocumentEmbeddings
-        import seaborn as sns
         with st.expander("Cos'è e come funziona la sezione Testi 🤔", expanded=False):
 
             st.write(
@@ -1459,6 +1460,7 @@ try:
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis("off")
             st.pyplot(fig)
+
             st.balloons()
             st.stop()
 
