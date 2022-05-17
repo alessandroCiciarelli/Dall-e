@@ -3,9 +3,7 @@ sng==0.3.2
 openpyxl
 whois==0.9.13
 pytrends
-deep-translator
 streamlit-option-menu
-aitextgen==0.5.2
 pyecharts
 seaborn==0.11.1
 streamlit-aggrid
