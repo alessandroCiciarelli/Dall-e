@@ -153,7 +153,6 @@ try:
     if 'premium' not in st.session_state:
         #set session premium key to false
         st.session_state['premium'] =  False
-    st.markdown('<div id="MainMenu" style="border: 1 solid #eee;">ciaoooo', unsafe_allow_html=True)
     if st.session_state.premium == False:
         with st.expander("👑 Sei un UTENTE PREMIUM ? 👑"):
                 st.markdown("<center><h5>Login Utenti Premium 👑</h5>", unsafe_allow_html=True)
@@ -173,7 +172,7 @@ try:
                 st.markdown("<center><h5><a href='https://www.intelligenzaartificialeitalia.net/la-seo-con-intelligenza-artificiale-tool-gratuito' >Passa ORA a PREMIUM 👑 per SOLI 5€ , non te ne pentirai 🤓</a><h5>", unsafe_allow_html=True)
     else:
         st.success("Benvenuto "+st.session_state.nome+" 👑")
-    st.markdown("</div>", unsafe_allow_html=True)
+
 
 
     if 'nome' not in st.session_state:
