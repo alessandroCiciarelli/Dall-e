@@ -45,8 +45,8 @@ hide_st_style = """
 
     .css-1cpxqw2:active {
         color: rgb(255, 255, 255);
-        border-color: rgb(46, 170, 0)
-        background-color: rgb(46, 170, 0)
+        border-color: rgb(46, 170, 0);
+        background-color: rgb(46, 170, 0);
     }
 
     </style>
