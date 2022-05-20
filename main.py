@@ -269,7 +269,7 @@ try:
     #1 Analisi
     if choose=="Analisi":
         st.session_state['index'] =  0
-        with st.expander(" ** Cos'è e come funziona la sezione Analisi 🤔 ** "):
+        with st.expander(" **_Cos_è_e_come_funziona_la_sezione_Analisi_🤔** "):
             text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Analisi ?</b></h4>In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni del mercato selezionato ci sono più ricerche e quindi più interesse.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br> 🔹Il trend di ricerca nelle regioni <br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword <br>", unsafe_allow_html=True)
             st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Confrontare interessi dei consumatori nel tempo di keyword, prodotti o servizi<br> \
                         🔸Sapere in quali regioni o città c'è più interesse<br>\
