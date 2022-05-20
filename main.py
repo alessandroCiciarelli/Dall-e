@@ -269,7 +269,7 @@ try:
     #1 Analisi
     if choose=="Analisi":
         st.session_state['index'] =  0
-        with st.expander("Cos'è e come funziona la sezione Analisi 🤔"):
+        with st.expander(" ** Cos'è e come funziona la sezione Analisi 🤔 ** "):
             text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Analisi ?</b></h4>In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni del mercato selezionato ci sono più ricerche e quindi più interesse.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br> 🔹Il trend di ricerca nelle regioni <br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword <br>", unsafe_allow_html=True)
             st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Confrontare interessi dei consumatori nel tempo di keyword, prodotti o servizi<br> \
                         🔸Sapere in quali regioni o città c'è più interesse<br>\
@@ -282,7 +282,9 @@ try:
             st.write("  ")
 
         #Inserimento Keyword    
-        text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1)
+        text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1, help="""
+        All'interno di questo campo puoi inserire le keywords mi raccomando una per riga ! ⚠️Gli utenti FREE possono inserire al massimo 3 Keywords.  
+        👑Gli utenti PREMIUM possono inserire anche 10 Keywords.""")
 
         #pulisco il teso in input
         linesDeduped2 = []
@@ -312,7 +314,8 @@ try:
             from parseCountries import parse
             country_names, country_codes = parse()
             country_names, country_codes = country_names[:243], country_codes[:243]
-            country = st.selectbox("Scegli il paese", country_names)
+            country = st.selectbox("Scegli il paese", country_names, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖 
+            👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
             st.write(f"Hai selezionato " + country)
             idx = country_names.index(country)
             country_code = country_codes[idx],
@@ -320,7 +323,8 @@ try:
             selected_timeframe = ""
             period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
             tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
-            timeframe_selectbox = st.selectbox("Scegli il periodo", period_list)
+            timeframe_selectbox = st.selectbox("Scegli il periodo", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖 
+            👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
             idx = period_list.index(timeframe_selectbox)
             selected_timeframe = tf[idx]
             todays_date = date.today()
@@ -350,11 +354,15 @@ try:
             country_names, country_codes,idx = None, None, None
         else:
             country_code = ["IT", "EN"]
-            country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True)
+            country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖
+            ⚠️Gli utenti FREE non possono scegliere.  
+            👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
             selected_timeframe = ""
             period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
             tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all"]
-            timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list)
+            timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖
+            ⚠️Gli utenti FREE possono scegliere tra i periodi a disposizione.  
+            👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
             idx = period_list.index(timeframe_selectbox)
             selected_timeframe = tf[idx]
 
@@ -634,17 +642,20 @@ try:
         c1, c2, c3 = st.columns(3)
         SearchEngineLowerCase = ""
         with c1:
-            keyword = st.text_input("Keyword", value="Marketing")
+            keyword = st.text_input("Keyword", help="Inserisci UNA SOLA keyword per scoprire Tutte le Keyword correlate")
 
         with c2:
             if st.session_state.premium == True:
-                SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing"))
+                SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing")help="""Scegli quale motore di ricerca usare 🤖
+            👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
                 if SearchEngine == "Bing":
                     SearchEngineLowerCase="bing"
                 else:
                     SearchEngineLowerCase="google"
             else:
-                SearchEngine = st.selectbox("Google o Bing ? (PREMIUM 👑) ", ("Google", "Bing"), disabled=True)
+                SearchEngine = st.selectbox("Google o Bing ? (PREMIUM 👑) ", ("Google", "Bing"), disabled=True, help="""Scegli quale motore di ricerca usare 🤖
+            ⚠️Gli utenti FREE non possono scegliere.  
+            👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
                 SearchEngineLowerCase="google"
 
     
@@ -657,7 +668,10 @@ try:
                     1,
                     1,
                     key=None,
-                )
+                    help="""Scegli quale motore di ricerca usare 🤖
+            ⚠️Gli utenti FREE non possono scegliere.  
+            👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
+                
             else:
                 maxDepth = st.slider(
                     "Scegli la profondità di ricerca (PREMIUM 👑)",
@@ -667,7 +681,9 @@ try:
                     1,
                     key=None,
                     disabled=True,
-                )
+                    help="""Scegli il livello di ricorsività da usare 🤖
+            👑Gli utenti PREMIUM possono scegliere per ottenere fino a 5000 nuove keyword.""" )
+                
                 maxDepth = 1
 
 
@@ -1258,22 +1274,21 @@ try:
                         help="Puoi scegliere il numero di parole chiave/frasi chiave da visualizzare. Tra 1 e 30, il numero predefinito è 10.",
                     )
                     min_Ngrams = st.number_input(
-                        "Minimum Ngram",
+                        "Numero minimo di parole chiave",
                         min_value=1,
                         max_value=4,
                         help="""Il valore minimo per l'intervallo di ngram.
-            *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
-            Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+            Se vuoi indicizzarti sulla parola ' marketing ' dovrai impostare il valore minimo e il massimo a 1.""",
                     )
 
                     max_Ngrams = st.number_input(
-                        "Maximum Ngram",
+                        "Numero massimo di parole chiave",
                         value=2,
                         min_value=1,
                         max_value=4,
                         help="""Il valore massimo per keyphrase_ngram_range.
-            *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
-            Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+            Se vuoi indicizzarti sulla parola 'strategie marketing ' dovrai impostare il valore minimo e il massimo a 2.
+            Se vuoi indicizzarti sulla parola 'strategie marketing digitale' dovrai impostare il valore minimo e il massimo a 3.""",
                     )
 
                     StopWordsCheckbox = st.checkbox(
@@ -1287,17 +1302,16 @@ try:
                         help="È possibile utilizzare la rilevanza del margine massimo (MMR) per diversificare i risultati. Crea parole chiave/frasi chiave basate sulla somiglianza del coseno. Prova le impostazioni 'Diversità' alta/bassa di seguito per variazioni interessanti."
                     )
 
-                    Diversity = st.slider(
-                        "Diversità keyword",
-                        value=0.5,
-                        min_value=0.0,
-                        max_value=1.0,
-                        step=0.1,
-                        help="""Maggiore è l'impostazione, più diverse saranno le parole chiave.
-                        
-            Nota che il dispositivo di scorrimento *Diversità delle parole chiave* funziona solo se la casella di controllo *MMR* è spuntata.
-            """,
-                    )
+                    Diversity = 0.5
+                    if use_MMR == True:
+                        Diversity = st.slider(
+                            "Diversità keyword",
+                            value=0.5,
+                            min_value=0.0,
+                            max_value=1.0,
+                            step=0.1,
+                            help="""Maggiore è il valore MMR, più diverse saranno le parole chiave."""
+                        )
                 else:
                     top_N = st.slider(
                         "Numero di keywords da visualizzare disponibile in PREMIUM 👑",
@@ -1313,8 +1327,7 @@ try:
                         min_value=1,
                         max_value=4,
                         help="""Il valore minimo per l'intervallo di ngram.
-            *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
-            Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+            Se vuoi indicizzarti sulla parola ' marketing ' dovrai impostare il valore minimo e il massimo a 1.""",
                         disabled=True
                     )
                     min_Ngrams = 1
@@ -1324,8 +1337,8 @@ try:
                         min_value=1,
                         max_value=4,
                         help="""Il valore massimo per keyphrase_ngram_range.
-            *Keyphrase_ngram_range* imposta la lunghezza delle parole chiave/frasi chiave risultanti.
-            Per estrarre le frasi chiave, imposta semplicemente *keyphrase_ngram_range* su (1, 2) o superiore a seconda del numero di parole che desideri nelle frasi chiave risultanti.""",
+            Se vuoi indicizzarti sulla parola 'strategie marketing ' dovrai impostare il valore minimo e il massimo a 2.
+            Se vuoi indicizzarti sulla parola 'strategie marketing digitale' dovrai impostare il valore minimo e il massimo a 3.""",
                         disabled=True
                     )
                     max_Ngrams = 2
@@ -1414,11 +1427,14 @@ try:
                 .sort_values(by="Rilevanza", ascending=False)
                 .reset_index(drop=True)
             )
-            dfTemKey = df.copy()
-            csv = df.to_csv(index=False)
-            b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-            href = f'<a href="data:file/csv;base64,{b64}">Download csv file 📎</a>'
-            st.markdown(href, unsafe_allow_html=True)
+            if st.session_state.premium == True:
+                dfTemKey = df.copy()
+                csv = df.to_csv(index=False)
+                b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+                href = f'<a href="data:file/csv;base64,{b64} download="keywords.csv">Scarica il file CSV </a>'
+                st.markdown(href, unsafe_allow_html=True)
+            else:
+                st.markdown("#### Passa a PREMIUM 👑 per scaricare il file CSV")
 
             df.index += 1
 
