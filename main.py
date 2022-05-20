@@ -153,7 +153,7 @@ try:
     if 'premium' not in st.session_state:
         #set session premium key to false
         st.session_state['premium'] =  False
-    st.markdown('<div id="MainMenu" style="border: 1 solid #eee;>', unsafe_allow_html=True)
+    st.markdown('<div id="MainMenu" style="border: 1 solid #eee;">ciaoooo', unsafe_allow_html=True)
     if st.session_state.premium == False:
         with st.expander("👑 Sei un UTENTE PREMIUM ? 👑"):
                 st.markdown("<center><h5>Login Utenti Premium 👑</h5>", unsafe_allow_html=True)
