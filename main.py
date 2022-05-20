@@ -1110,7 +1110,7 @@ try:
         if st.session_state.premium == True:
             numeroDomande = v2.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
         else:
-            numeroDomande = v2.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 1, 1)
+            numeroDomande = v2.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 5, 1)
             numeroDomande+=2
 
 
@@ -1180,7 +1180,7 @@ try:
             text3 = st.markdown("<h4><b>Come funziona la seziona Contenuti ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire una frase o un paragrafo<br>2️⃣Scegliere lunghezza desiderata del testo generato<br>3️⃣Cliccare su <bold>'Genera testo🤘'</bold> ", unsafe_allow_html=True)
 
         if st.session_state.premium == True:
-            st.markdown("### [Clicca qui per accedere alla sezione Genera Contenuti](https://www.intelligenzaartificialeitalia.net/generatesticonIA)")
+            st.markdown("### [Clicca qui per accedere alla sezione Genera Contenuti](https://www.intelligenzaartificialeitalia.net/generatesticonia)")
         else:
             st.markdown("### Questa sezione è disponibile solo per utenti PREMIUM 🤗")
         
