@@ -737,7 +737,7 @@ try:
             IniziaRicerca = st.form_submit_button("🤘 CERCAMI NUOVI SUGGERIMENTI 🤘")
 
 
-        if IniziaRicerca  and keyword != "":
+        if IniziaRicerca  and len(keyword)>=1:
             # Patch suggests to support latin1 decoding
             def suggests_tree(*args, **kwargs):
                 try:
@@ -1056,7 +1056,7 @@ try:
 
             IniziaCompetitor = st.form_submit_button("🤘 CERCAMI i COMPETIOR 🤘")
 
-        if IniziaCompetitor:
+        if IniziaCompetitor and len(text) >= 1:
             if st.session_state.premium == True:
                 MAX_LINES = 10
             else:
@@ -1194,7 +1194,7 @@ try:
             IniziaDomande = st.form_submit_button("🤘 CERCAMI DUBBI e DOMANDE 🤘")
 
 
-        if IniziaDomande:
+        if IniziaDomande and len(text)>0:
             lines = text.split("\n")  # A list of lines
             linesList = []
             for x in lines:
@@ -1470,7 +1470,7 @@ try:
             st.warning("min_Ngrams non può essere maggiore di max_Ngrams")
 
 
-        if  streamlit_button is True:
+        if  streamlit_button is True and doc is not None and len(doc)> 3:
             keywords = kw_model.extract_keywords(
                 doc,
                 keyphrase_ngram_range=(min_Ngrams, max_Ngrams),
