@@ -269,7 +269,7 @@ try:
     #1 Analisi
     if choose=="Analisi":
         st.session_state['index'] =  0
-        with st.expander(" **_Cos_è_e_come_funziona_la_sezione_Analisi_🤔** "):
+        with st.expander("Cos'è e come funziona la sezione Analisi 🤔"):
             text2 = st.markdown("<h4><b>Cosa puoi fare nella sezione Analisi ?</b></h4>In questa sezione potrai analizzare l'interesse nel tempo delle keyword e in quali regiorni del mercato selezionato ci sono più ricerche e quindi più interesse.<br> La sezione di <b>Analisi Keyword</b> per ogni keyword inserita il tool genererà:<br>🔹Il trend di ricerca nel tempo<br> 🔹Il trend di ricerca nelle regioni <br>🔹Top Trend correlati alla Keyword<br>🔹Tendenze in aumento correlate alla Keyword<br>🔹I competitor più forti sulla keyword<br>🔹Le domande più frequenti fatte sulla keyword <br>", unsafe_allow_html=True)
             st.markdown("<h4><b>Questa sezione ti permetterà di : </b></h4>🔸Confrontare interessi dei consumatori nel tempo di keyword, prodotti o servizi<br> \
                         🔸Sapere in quali regioni o città c'è più interesse<br>\
@@ -280,94 +280,95 @@ try:
             text3 = st.markdown("<h4><b>Come funziona la seziona Analisi ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords, una per riga<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣Premere <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
             st.write("  ")
             st.write("  ")
+            
+        with st.form("my_form_analisi", clear_on_submit=False):
+            #Inserimento Keyword    
+            text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1, help="""
+            All'interno di questo campo puoi inserire le keywords mi raccomando una per riga ! ⚠️Gli utenti FREE possono inserire al massimo 3 Keywords.  
+            👑Gli utenti PREMIUM possono inserire anche 10 Keywords.""")
 
-        #Inserimento Keyword    
-        text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1, help="""
-        All'interno di questo campo puoi inserire le keywords mi raccomando una per riga ! ⚠️Gli utenti FREE possono inserire al massimo 3 Keywords.  
-        👑Gli utenti PREMIUM possono inserire anche 10 Keywords.""")
+            #pulisco il teso in input
+            linesDeduped2 = []
+            MAX_LINES = 5
 
-        #pulisco il teso in input
-        linesDeduped2 = []
-        MAX_LINES = 5
-
-        if st.session_state.premium == True:
-            MAX_LINES = 10
-        else:
-            MAX_LINES = 3
-
-        lines = text.split("\n")  # A list of lines
-        linesList = []
-        for x in lines:
-            linesList.append(x)
-        linesList = list(dict.fromkeys(linesList))  # Remove dupes
-        linesList = list(filter(None, linesList))  # Remove empty
-
-        if len(linesList) > MAX_LINES:
             if st.session_state.premium == True:
-                st.warning(f"⚠️ Attenzione, Puoi inserire al massima 10 keywords. ⚠️")
-                linesList = linesList[:MAX_LINES]
+                MAX_LINES = 10
             else:
-                st.warning(f"⚠️ Attenzione, Puoi inserire al massima 3 keywords. ⚠️")
-                linesList = linesList[:MAX_LINES]
+                MAX_LINES = 3
 
-        if st.session_state.premium == True:
-            from parseCountries import parse
-            country_names, country_codes = parse()
-            country_names, country_codes = country_names[:243], country_codes[:243]
-            country = st.selectbox("Scegli il paese", country_names, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖 
-            👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
-            st.write(f"Hai selezionato " + country)
-            idx = country_names.index(country)
-            country_code = country_codes[idx],
-            #carico i periodi di tempo
-            selected_timeframe = ""
-            period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
-            tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
-            timeframe_selectbox = st.selectbox("Scegli il periodo", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖 
-            👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
-            idx = period_list.index(timeframe_selectbox)
-            selected_timeframe = tf[idx]
-            todays_date = date.today()
-            current_year = todays_date.year
+            lines = text.split("\n")  # A list of lines
+            linesList = []
+            for x in lines:
+                linesList.append(x)
+            linesList = list(dict.fromkeys(linesList))  # Remove dupes
+            linesList = list(filter(None, linesList))  # Remove empty
 
-            years = list(range(2005, current_year + 1))
-            months = list(range(1, 13))
-            days = list(range(1, 32))
+            if len(linesList) > MAX_LINES:
+                if st.session_state.premium == True:
+                    st.warning(f"⚠️ Attenzione, Puoi inserire al massima 10 keywords. ⚠️")
+                    linesList = linesList[:MAX_LINES]
+                else:
+                    st.warning(f"⚠️ Attenzione, Puoi inserire al massima 3 keywords. ⚠️")
+                    linesList = linesList[:MAX_LINES]
 
-            if selected_timeframe == "custom":
-                
-                st.write(f"Da")
+            if st.session_state.premium == True:
+                from parseCountries import parse
+                country_names, country_codes = parse()
+                country_names, country_codes = country_names[:243], country_codes[:243]
+                country = st.selectbox("Scegli il paese", country_names, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖 
+                👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
+                st.write(f"Hai selezionato " + country)
+                idx = country_names.index(country)
+                country_code = country_codes[idx],
+                #carico i periodi di tempo
+                selected_timeframe = ""
+                period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
+                tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
+                timeframe_selectbox = st.selectbox("Scegli il periodo", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖 
+                👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
+                idx = period_list.index(timeframe_selectbox)
+                selected_timeframe = tf[idx]
+                todays_date = date.today()
+                current_year = todays_date.year
 
-                col11, col12, col13 = st.columns(3)
-                year_from = col11.selectbox("Anno", years, key="0")
-                month_from = col12.selectbox("Mese", months, key="1")
-                day_from = col13.selectbox("Giorno", days, key="2")
-                
-                st.write(f"a")
+                years = list(range(2005, current_year + 1))
+                months = list(range(1, 13))
+                days = list(range(1, 32))
 
-                col21, col22, col23 = st.columns(3)
-                year_to = col21.selectbox("Anno", years, key="3")
-                month_to = col22.selectbox("Mese", months, key="4")
-                day_to = col23.selectbox("Giorno", days, key="5")
-                
-                selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
-            country_names, country_codes,idx = None, None, None
-        else:
-            country_code = ["IT", "EN"]
-            country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖
-            ⚠️Gli utenti FREE non possono scegliere.  
-            👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
-            selected_timeframe = ""
-            period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
-            tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all"]
-            timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖
-            ⚠️Gli utenti FREE possono scegliere tra i periodi a disposizione.  
-            👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
-            idx = period_list.index(timeframe_selectbox)
-            selected_timeframe = tf[idx]
+                if selected_timeframe == "custom":
+                    
+                    st.write(f"Da")
+
+                    col11, col12, col13 = st.columns(3)
+                    year_from = col11.selectbox("Anno", years, key="0")
+                    month_from = col12.selectbox("Mese", months, key="1")
+                    day_from = col13.selectbox("Giorno", days, key="2")
+                    
+                    st.write(f"a")
+
+                    col21, col22, col23 = st.columns(3)
+                    year_to = col21.selectbox("Anno", years, key="3")
+                    month_to = col22.selectbox("Mese", months, key="4")
+                    day_to = col23.selectbox("Giorno", days, key="5")
+                    
+                    selected_timeframe = str(year_from) + "-" + str(month_from) + "-" + str(day_from) + " " + str(year_to) + "-" + str(month_to) + "-" + str(day_to)
+                country_names, country_codes,idx = None, None, None
+            else:
+                country_code = ["IT", "EN"]
+                country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖
+                ⚠️Gli utenti FREE non possono scegliere.  
+                👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
+                selected_timeframe = ""
+                period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
+                tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all"]
+                timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖
+                ⚠️Gli utenti FREE possono scegliere tra i periodi a disposizione.  
+                👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
+                idx = period_list.index(timeframe_selectbox)
+                selected_timeframe = tf[idx]
 
 
-        if st.button("Scopri le tendenze🤘") and len(linesList) > 0:
+        if st.form_submit_button("Scopri le tendenze🤘") and len(linesList) > 0:
 
             
             if len(linesList) == 1:
