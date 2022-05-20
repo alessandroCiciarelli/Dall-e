@@ -658,18 +658,18 @@ try:
             c1, c2, c3 = st.columns(3)
             SearchEngineLowerCase = ""
             with c1:
-                keyword = st.text_input("Keyword", help="Inserisci UNA SOLA keyword per scoprire Tutte le Keyword correlate")
+                keyword = st.text_input("Inserisci la Keyword", help="Inserisci UNA SOLA keyword per scoprire Tutte le Keyword correlate")
 
             with c2:
                 if st.session_state.premium == True:
-                    SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing"),help="""Scegli quale motore di ricerca usare 🤖.
+                    SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing"),help="""Scegli quale motore di ricerca usare 🤖.  
                 👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
                     if SearchEngine == "Bing":
                         SearchEngineLowerCase="bing"
                     else:
                         SearchEngineLowerCase="google"
                 else:
-                    SearchEngine = st.selectbox("Google o Bing ? (PREMIUM 👑) ", ("Google", "Bing"), disabled=True, help="""Scegli quale motore di ricerca usare 🤖.
+                    SearchEngine = st.selectbox("Google o Bing ? (PREMIUM 👑) ", ("Google", "Bing"), disabled=True, help="""Scegli quale motore di ricerca usare 🤖.  
                 ⚠️Gli utenti FREE non possono scegliere.  
                 👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
                     SearchEngineLowerCase="google"
@@ -684,7 +684,7 @@ try:
                         1,
                         1,
                         key=None,
-                        help="""Scegli quale motore di ricerca usare 🤖.
+                        help="""Scegli quale motore di ricerca usare 🤖.  
                 ⚠️Gli utenti FREE non possono scegliere.  
                 👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
                     
@@ -697,7 +697,7 @@ try:
                         1,
                         key=None,
                         disabled=True,
-                        help="""Scegli il livello di ricorsività da usare 🤖.
+                        help="""Scegli il livello di ricorsività da usare 🤖.  
                 👑Gli utenti PREMIUM possono scegliere per ottenere fino a 5000 nuove keyword.""" )
                     
                     maxDepth = 1
@@ -1002,21 +1002,29 @@ try:
             
         st.write("  ")
         st.write("  ")
-        text = st.text_area("Inserisci la keyword, una per riga ", height=150, key=1)
-        selected_lang = ""
+        with st.form("my_form_Competitor", clear_on_submit=False):
+            text = st.text_area("Inserisci la keyword, una per riga ", height=150, key=1 , help="""Inserisci le Keyword/Prodotti/Servizi uno per Riga di cui vuoi scovare i Competitor 🤖.  
+                    ⚠️Gli utenti FREE possono inserire una keyword per volta .  
+                    👑Gli utenti PREMIUM possono inserire anche 10 Keyword per volta""" )
+            selected_lang = ""
 
-        if st.session_state.premium == True:
-            listLang = ["Italiano", "English", "German", "Spanish", "French", "Portuguese", "Russian", "Japanese", "Chinese", "Korean", "Arabic", "Polish", "Turkish", "Thai", "Vietnamese", "Indonesian", "Czech", "Dutch", "Greek", "Hindi", "Hungarian", "Norwegian", "Swedish", "Ukrainian", "Afrikaans", "Bengali", "Bulgarian", "Danish", "Finnish", "Filipino", "Georgian", "Hebrew", "Hmong", "Hungarian", "Kazakh", "Kyrgyz", "Latvian", "Lithuanian", "Malay", "Mongolian", "Myanmar", "Nepali", "Norwegian", "Pashto", "Persian", "Punjabi", "Romanian", "Serbian", "Somali", "Sotho", "Sundanese", "Tajik", "Tagalog", "Tamil", "Telugu", "Thai", "Turkish", "Uzbek", "Urdu", "Uighur", "Yiddish"]
-            tfLang = ["lang_it", "lang_en", "lang_de", "lang_es", "lang_fr", "lang_pt", "lang_ru", "lang_ja", "lang_zh", "lang_ko", "lang_ar", "lang_pl", "lang_tr", "lang_th", "lang_vi", "lang_id", "lang_cs", "lang_nl", "lang_el", "lang_hi", "lang_hu", "lang_no", "lang_sv", "lang_uk", "lang_af", "lang_bn", "lang_bg", "lang_da", "lang_fi", "lang_fil", "lang_ka", "lang_gu", "lang_ht", "lang_ha", "lang_kn", "lang_kk", "lang_lv", "lang_lt", "lang_ms", "lang_mn", "lang_ne", "lang_ps", "lang_fa", "lang_pa", "lang_ro", "lang_sr", "lang_so", "lang_su", "lang_sd", "lang_tg", "lang_tl", "lang_ta", "lang_te", "lang_th", "lang_uz", "lang_ur", "lang_yi"]
-            Lang_selectbox = st.selectbox("In che mercato vuoi cercare", listLang)
-            idxL = listLang.index(Lang_selectbox)
-            selected_lang = tfLang[idxL]
-        else:
-            listLang = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco", "Portoghese", "Russo"]
-            Lang_selectbox = st.selectbox("In che mercato vuoi cercare (PREMIUM 👑)", listLang, disabled=True)
-            selected_lang = "lang_it"
+            if st.session_state.premium == True:
+                listLang = ["Italiano", "English", "German", "Spanish", "French", "Portuguese", "Russian", "Japanese", "Chinese", "Korean", "Arabic", "Polish", "Turkish", "Thai", "Vietnamese", "Indonesian", "Czech", "Dutch", "Greek", "Hindi", "Hungarian", "Norwegian", "Swedish", "Ukrainian", "Afrikaans", "Bengali", "Bulgarian", "Danish", "Finnish", "Filipino", "Georgian", "Hebrew", "Hmong", "Hungarian", "Kazakh", "Kyrgyz", "Latvian", "Lithuanian", "Malay", "Mongolian", "Myanmar", "Nepali", "Norwegian", "Pashto", "Persian", "Punjabi", "Romanian", "Serbian", "Somali", "Sotho", "Sundanese", "Tajik", "Tagalog", "Tamil", "Telugu", "Thai", "Turkish", "Uzbek", "Urdu", "Uighur", "Yiddish"]
+                tfLang = ["lang_it", "lang_en", "lang_de", "lang_es", "lang_fr", "lang_pt", "lang_ru", "lang_ja", "lang_zh", "lang_ko", "lang_ar", "lang_pl", "lang_tr", "lang_th", "lang_vi", "lang_id", "lang_cs", "lang_nl", "lang_el", "lang_hi", "lang_hu", "lang_no", "lang_sv", "lang_uk", "lang_af", "lang_bn", "lang_bg", "lang_da", "lang_fi", "lang_fil", "lang_ka", "lang_gu", "lang_ht", "lang_ha", "lang_kn", "lang_kk", "lang_lv", "lang_lt", "lang_ms", "lang_mn", "lang_ne", "lang_ps", "lang_fa", "lang_pa", "lang_ro", "lang_sr", "lang_so", "lang_su", "lang_sd", "lang_tg", "lang_tl", "lang_ta", "lang_te", "lang_th", "lang_uz", "lang_ur", "lang_yi"]
+                Lang_selectbox = st.selectbox("In che mercato vuoi cercare", listLang, help="""Inserisci in che Paese o Mercato vuoi cercare competitor 🤖.  
+                    👑Gli utenti PREMIUM possono scegliere tra oltre 50 mercati""" )
+                idxL = listLang.index(Lang_selectbox)
+                selected_lang = tfLang[idxL]
+            else:
+                listLang = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco", "Portoghese", "Russo"]
+                Lang_selectbox = st.selectbox("In che mercato vuoi cercare (PREMIUM 👑)", listLang, disabled=True , help="""Inserisci in che Paese o Mercato vuoi cercare competitor 🤖  
+                    ⚠️Gli utenti FREE possono scegliere .  
+                    👑Gli utenti PREMIUM possono scegliere tra oltre 50 mercati""" )
+                selected_lang = "lang_it"
 
-        if st.button("Svelami i Competitors🤘"):
+            IniziaCompetitor = st.form_submit_button("Cerca nuove suggerimenti 🤘")
+
+        if IniziaCompetitor:
             if st.session_state.premium == True:
                 MAX_LINES = 10
             else:
