@@ -485,7 +485,7 @@ try:
                 query = {
                     "q": str(keykey),
                     "num" : 10,
-                    "lr": "lang_" + country_code[0].str.lower()
+                    "lr": "lang_" + country_code[0].lower()
 
                 }
 
