@@ -280,7 +280,7 @@ try:
             text3 = st.markdown("<h4><b>Come funziona la seziona Analisi ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Incollare le keywords, una per riga<br> 2️⃣ Scegliere il paese<br>3️⃣ Scegli il periodo di tempo<br>4️⃣Premere <b>'Scopri le tendenze🤘'</b> ", unsafe_allow_html=True)
             st.write("  ")
             st.write("  ")
-            
+
         with st.form("my_form_analisi", clear_on_submit=False):
             #Inserimento Keyword    
             text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1, help="""
@@ -366,9 +366,11 @@ try:
                 👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
                 idx = period_list.index(timeframe_selectbox)
                 selected_timeframe = tf[idx]
+                
+            okVai = st.form_submit_button("Scopri le tendenze🤘")
 
 
-        if st.form_submit_button("Scopri le tendenze🤘") and len(linesList) > 0:
+        if okVai and len(linesList) > 0:
 
             
             if len(linesList) == 1:
