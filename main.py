@@ -19,8 +19,13 @@ hide_st_style = """
     }
 
     .st-c5 {
-    font-weight: 900;
+    font-weight: 300;
     font-size: medium;
+    }
+
+    .menu-title .icon[data-v-4323f8ce], .menu-title[data-v-4323f8ce] {
+    font-size: 1.7rem;
+    font-weight: 500;
     }
     </style>
 
