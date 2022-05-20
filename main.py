@@ -296,7 +296,7 @@ try:
         with st.form("my_form_analisi", clear_on_submit=False):
             #Inserimento Keyword    
             text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1, help="""
-            All'interno di questo campo puoi inserire le keywords mi raccomando una per riga. 
+            All'interno di questo campo puoi inserire le keywords mi raccomando una per riga.  
             ⚠️Gli utenti FREE possono inserire al massimo 3 Keywords.  
             👑Gli utenti PREMIUM possono inserire anche 10 Keywords.""")
 
@@ -368,13 +368,13 @@ try:
                 country_names, country_codes,idx = None, None, None
             else:
                 country_code = ["IT", "EN"]
-                country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite🤖. 
-                ⚠️Gli utenti FREE non possono scegliere.   
+                country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite🤖.  
+                ⚠️Gli utenti FREE non possono scegliere.  
                 👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
                 selected_timeframe = ""
                 period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
                 tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all"]
-                timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖. 
+                timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖.  
                 ⚠️Gli utenti FREE possono scegliere tra i periodi a disposizione.  
                 👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
                 idx = period_list.index(timeframe_selectbox)
