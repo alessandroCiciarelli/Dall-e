@@ -485,7 +485,7 @@ try:
                 query = {
                     "q": str(keykey),
                     "num" : 10,
-                    "lr": "lang_it"
+                    "lr": "lang_" + country_code[0].str.lower()
 
                 }
 
@@ -972,8 +972,8 @@ try:
         selected_lang = ""
 
         if st.session_state.premium == True:
-            listLang = ["Italiano", "Inglese", "Spagnolo", "Francese", "Tedesco", "Portoghese", "Russo"]
-            tfLang = ["lang_it", "lang_en", "lang_es", "lang_fr", "lang_de", "lang_pt", "lang_ru"]
+            listLang = ["Italiano", "English", "German", "Spanish", "French", "Portuguese", "Russian", "Japanese", "Chinese", "Korean", "Arabic", "Polish", "Turkish", "Thai", "Vietnamese", "Indonesian", "Czech", "Dutch", "Greek", "Hindi", "Hungarian", "Norwegian", "Swedish", "Ukrainian", "Afrikaans", "Bengali", "Bulgarian", "Danish", "Finnish", "Filipino", "Georgian", "Hebrew", "Hmong", "Hungarian", "Kazakh", "Kyrgyz", "Latvian", "Lithuanian", "Malay", "Mongolian", "Myanmar", "Nepali", "Norwegian", "Pashto", "Persian", "Punjabi", "Romanian", "Serbian", "Somali", "Sotho", "Sundanese", "Tajik", "Tagalog", "Tamil", "Telugu", "Thai", "Turkish", "Uzbek", "Urdu", "Uighur", "Yiddish"]
+            tfLang = ["lang_it", "lang_en", "lang_de", "lang_es", "lang_fr", "lang_pt", "lang_ru", "lang_ja", "lang_zh", "lang_ko", "lang_ar", "lang_pl", "lang_tr", "lang_th", "lang_vi", "lang_id", "lang_cs", "lang_nl", "lang_el", "lang_hi", "lang_hu", "lang_no", "lang_sv", "lang_uk", "lang_af", "lang_bn", "lang_bg", "lang_da", "lang_fi", "lang_fil", "lang_ka", "lang_gu", "lang_ht", "lang_ha", "lang_kn", "lang_kk", "lang_lv", "lang_lt", "lang_ms", "lang_mn", "lang_ne", "lang_ps", "lang_fa", "lang_pa", "lang_ro", "lang_sr", "lang_so", "lang_su", "lang_sd", "lang_tg", "lang_tl", "lang_ta", "lang_te", "lang_th", "lang_uz", "lang_ur", "lang_yi"]
             Lang_selectbox = st.selectbox("In che mercato vuoi cercare", listLang)
             idxL = listLang.index(Lang_selectbox)
             selected_lang = tfLang[idxL]
