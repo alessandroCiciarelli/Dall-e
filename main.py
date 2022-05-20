@@ -23,6 +23,11 @@ hide_st_style = """
         font-size: medium;
     }
 
+    .st-c5:hover {
+        font-weight: 800;
+        color: rgb(46, 170, 0);
+    }
+
     .menu-title .icon[data-v-4323f8ce], .menu-title[data-v-4323f8ce] {
         font-size: 1.7rem;
         font-weight: 500;
@@ -37,6 +42,13 @@ hide_st_style = """
         border-color: rgb(46, 170, 0);
         color: rgb(46, 170, 0);
     }
+
+    .css-1cpxqw2:active {
+        color: rgb(255, 255, 255);
+        border-color: rgb(46, 170, 0)
+        background-color: rgb(46, 170, 0)
+    }
+
     </style>
 
     """
