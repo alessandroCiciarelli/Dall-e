@@ -296,7 +296,7 @@ try:
         with st.form("my_form_analisi", clear_on_submit=False):
             #Inserimento Keyword    
             text = st.text_area("Inserisci le keywords, una per riga", height=150, key=1, help="""
-            All'interno di questo campo puoi inserire le keywords mi raccomando una per riga ! ⚠️Gli utenti FREE possono inserire al massimo 3 Keywords.  
+            All'interno di questo campo puoi inserire le keywords mi raccomando una per riga . ⚠️Gli utenti FREE possono inserire al massimo 3 Keywords.  
             👑Gli utenti PREMIUM possono inserire anche 10 Keywords.""")
 
             #pulisco il teso in input
@@ -327,7 +327,7 @@ try:
                 from parseCountries import parse
                 country_names, country_codes = parse()
                 country_names, country_codes = country_names[:243], country_codes[:243]
-                country = st.selectbox("Scegli il paese", country_names, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖 
+                country = st.selectbox("Scegli il paese", country_names, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite🤖.
                 👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
                 st.write(f"Hai selezionato " + country)
                 idx = country_names.index(country)
@@ -336,7 +336,7 @@ try:
                 selected_timeframe = ""
                 period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi", "CUSTOM"]
                 tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all", "custom"]
-                timeframe_selectbox = st.selectbox("Scegli il periodo", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖 
+                timeframe_selectbox = st.selectbox("Scegli il periodo", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite🤖.
                 👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
                 idx = period_list.index(timeframe_selectbox)
                 selected_timeframe = tf[idx]
@@ -367,13 +367,13 @@ try:
                 country_names, country_codes,idx = None, None, None
             else:
                 country_code = ["IT", "EN"]
-                country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖
+                country = st.selectbox("Scegli tra oltre 250 paesi con Premium 👑" , ["Italia", "Inglese"], disabled=True, help="""Scegli in che paese/mercato vuoi analizzare le keywords inserite 🤖.
                 ⚠️Gli utenti FREE non possono scegliere.  
                 👑Gli utenti PREMIUM possono scegliere tra oltre 250 paesi.""" )
                 selected_timeframe = ""
                 period_list = ["Ultimi 12 Mesi", "Ultima Ora", "Ultime 4 Ore", "Ultime 24 Ore", "Ultimi 7 Giorni", "Ultimi 30 Giorni", "Ultimi 90 Giorni", "Ultimi 5 Anni", "2004 - Oggi"]
                 tf = ["today 12-m", "now 1-H", "now 4-H", "now 1-d", "now 7-d", "today 1-m", "today 3-m", "today 5-y", "all"]
-                timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖
+                timeframe_selectbox = st.selectbox("Scegli periodi CUSTOM con Premium 👑", period_list, help="""Inserisci il periodo di tempo in cui vuoi analizzare le keywords inserite 🤖.
                 ⚠️Gli utenti FREE possono scegliere tra i periodi a disposizione.  
                 👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
                 idx = period_list.index(timeframe_selectbox)
@@ -653,56 +653,58 @@ try:
 
         # endregion Top area ############################################################
 
+        with st.form("my_form_Ricerca", clear_on_submit=False):
+            c1, c2, c3 = st.columns(3)
+            SearchEngineLowerCase = ""
+            with c1:
+                keyword = st.text_input("Keyword", help="Inserisci UNA SOLA keyword per scoprire Tutte le Keyword correlate")
 
-        c1, c2, c3 = st.columns(3)
-        SearchEngineLowerCase = ""
-        with c1:
-            keyword = st.text_input("Keyword", help="Inserisci UNA SOLA keyword per scoprire Tutte le Keyword correlate")
-
-        with c2:
-            if st.session_state.premium == True:
-                SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing"),help="""Scegli quale motore di ricerca usare 🤖
-            👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
-                if SearchEngine == "Bing":
-                    SearchEngineLowerCase="bing"
+            with c2:
+                if st.session_state.premium == True:
+                    SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing"),help="""Scegli quale motore di ricerca usare 🤖.
+                👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
+                    if SearchEngine == "Bing":
+                        SearchEngineLowerCase="bing"
+                    else:
+                        SearchEngineLowerCase="google"
                 else:
+                    SearchEngine = st.selectbox("Google o Bing ? (PREMIUM 👑) ", ("Google", "Bing"), disabled=True, help="""Scegli quale motore di ricerca usare 🤖.
+                ⚠️Gli utenti FREE non possono scegliere.  
+                👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
                     SearchEngineLowerCase="google"
-            else:
-                SearchEngine = st.selectbox("Google o Bing ? (PREMIUM 👑) ", ("Google", "Bing"), disabled=True, help="""Scegli quale motore di ricerca usare 🤖
-            ⚠️Gli utenti FREE non possono scegliere.  
-            👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
-                SearchEngineLowerCase="google"
 
-    
-        with c3:
-            if st.session_state.premium == True:
-                maxDepth = st.slider(
-                    "Scegli la profondità massima di ricerca",
-                    1,
-                    3,
-                    1,
-                    1,
-                    key=None,
-                    help="""Scegli quale motore di ricerca usare 🤖
-            ⚠️Gli utenti FREE non possono scegliere.  
-            👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
-                
-            else:
-                maxDepth = st.slider(
-                    "Scegli la profondità di ricerca (PREMIUM 👑)",
-                    1,
-                    3,
-                    1,
-                    1,
-                    key=None,
-                    disabled=True,
-                    help="""Scegli il livello di ricorsività da usare 🤖
-            👑Gli utenti PREMIUM possono scegliere per ottenere fino a 5000 nuove keyword.""" )
-                
-                maxDepth = 1
+        
+            with c3:
+                if st.session_state.premium == True:
+                    maxDepth = st.slider(
+                        "Scegli la profondità massima di ricerca",
+                        1,
+                        3,
+                        1,
+                        1,
+                        key=None,
+                        help="""Scegli quale motore di ricerca usare 🤖.
+                ⚠️Gli utenti FREE non possono scegliere.  
+                👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
+                    
+                else:
+                    maxDepth = st.slider(
+                        "Scegli la profondità di ricerca (PREMIUM 👑)",
+                        1,
+                        3,
+                        1,
+                        1,
+                        key=None,
+                        disabled=True,
+                        help="""Scegli il livello di ricorsività da usare 🤖.
+                👑Gli utenti PREMIUM possono scegliere per ottenere fino a 5000 nuove keyword.""" )
+                    
+                    maxDepth = 1
+
+            IniziaRicerca = st.form_submit_button("Cerca nuove suggerimenti 🤘")
 
 
-        if st.button("Cerca nuove suggerimenti 🤘")  and keyword != "":
+        if IniziaRicerca  and keyword != "":
             # Patch suggests to support latin1 decoding
             def suggests_tree(*args, **kwargs):
                 try:
