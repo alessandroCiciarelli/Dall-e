@@ -18,6 +18,12 @@ hide_st_style = """
     padding: 0.5rem!important;
     }
 
+    .st-c5 {
+    font-weight: 900;
+    font-size: medium;
+    }
+    </style>
+
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
@@ -81,6 +87,32 @@ try:
             st.session_state.premium = False
             return False
 
+    
+
+    if 'primaVolta' not in st.session_state:
+        st.session_state['primavolta'] = TrendReq()
+        nltk.download('punkt')
+        pytrends = st.session_state.primavolta
+    else:
+        pytrends = st.session_state.primavolta
+
+
+
+    #####MENU
+    if 'index' not in st.session_state:
+        st.session_state['index'] =  0
+
+    choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Testi", "Contenuti"],
+                    icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark'],
+                    menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
+                    styles={
+    "container": {"color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
+    "icon": {"color": "blak", "font-size": "13px", "margin":"0px"}, 
+    "nav-link": {"color": "blak!important","font-size": "15px", "text-align": "left", "padding": "5px!important", "margin":"0px", "--hover-color": "#eee"},
+    "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
+    }
+    )
+
     if 'premium' not in st.session_state:
         #set session premium key to false
         st.session_state['premium'] =  False
@@ -109,31 +141,6 @@ try:
 
     if 'nome' not in st.session_state:
         st.session_state['nome'] =  ""
-
-    if 'primaVolta' not in st.session_state:
-        st.session_state['primavolta'] = TrendReq()
-        nltk.download('punkt')
-        pytrends = st.session_state.primavolta
-    else:
-        pytrends = st.session_state.primavolta
-
-
-
-    #####MENU
-    if 'index' not in st.session_state:
-        st.session_state['index'] =  0
-
-    choose = option_menu("Intelligenza Artificiale e SEO 🤖", ["Analisi" , "Ricerca", "Domande" , "Competitor", "Testi", "Contenuti"],
-                    icons=[ 'body-text', 'keyboard', 'patch-question' , 'exclamation-triangle', 'journal-bookmark'],
-                    menu_icon="app-indicator", default_index=st.session_state.index ,orientation='horizontal',
-                    styles={
-    "container": {"color": "blak","padding": "0!important", "background-color": "transparent", "width": "100%"},
-    "icon": {"color": "blak", "font-size": "13px", "margin":"0px"}, 
-    "nav-link": {"color": "blak!important","font-size": "15px", "text-align": "left", "padding": "5px!important", "margin":"0px", "--hover-color": "#eee"},
-    "nav-link-selected": {"color": "blak","background-color": "#02ab21"},
-    }
-    )
-
     
     #Funzioni di uso genrale
 
@@ -366,7 +373,7 @@ try:
                 👑Gli utenti PREMIUM possono scegliere periodi CUSTOM per analisi impeccabili.""" )
                 idx = period_list.index(timeframe_selectbox)
                 selected_timeframe = tf[idx]
-                
+
             okVai = st.form_submit_button("Scopri le tendenze🤘")
 
 
