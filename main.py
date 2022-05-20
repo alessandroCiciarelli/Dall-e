@@ -646,7 +646,7 @@ try:
 
         with c2:
             if st.session_state.premium == True:
-                SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing")help="""Scegli quale motore di ricerca usare 🤖
+                SearchEngine = st.selectbox("Motore di Ricerca", ("Google", "Bing"),help="""Scegli quale motore di ricerca usare 🤖
             👑Gli utenti PREMIUM possono scegliere tra Google e Bing.""" )
                 if SearchEngine == "Bing":
                     SearchEngineLowerCase="bing"
