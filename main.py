@@ -29,11 +29,10 @@ hide_st_style = """
     }
 
     .css-1cpxqw2{
-        width: 90%;
+        width: 100%;
         font-weight: 700;
     }
     .css-1cpxqw2:hover {
-        width: 100%;
         font-weight: 800;
         border-color: rgb(46, 170, 0);
         color: rgb(46, 170, 0);
@@ -391,7 +390,7 @@ try:
                 idx = period_list.index(timeframe_selectbox)
                 selected_timeframe = tf[idx]
 
-            okVai = st.form_submit_button("Scopri le tendenze🤘")
+            okVai = st.form_submit_button("🤘 ANALIZZAMI le TENDENZE 🤘")
 
 
         if okVai and len(linesList) > 0:
@@ -713,7 +712,7 @@ try:
                     
                     maxDepth = 1
 
-            IniziaRicerca = st.form_submit_button("Cerca nuove suggerimenti 🤘")
+            IniziaRicerca = st.form_submit_button("🤘 CERCAMI NUOVI SUGGERIMENTI 🤘")
 
 
         if IniziaRicerca  and keyword != "":
@@ -1033,7 +1032,7 @@ try:
                     👑Gli utenti PREMIUM possono scegliere tra oltre 50 mercati""" )
                 selected_lang = "lang_it"
 
-            IniziaCompetitor = st.form_submit_button("Cerca i miei COMPETIOR 🤘")
+            IniziaCompetitor = st.form_submit_button("🤘 CERCAMI i COMPETIOR 🤘")
 
         if IniziaCompetitor:
             if st.session_state.premium == True:
@@ -1170,7 +1169,7 @@ try:
             else:
                 numeroDomande = v2.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 5, 1, help="Scegli il numero di domande che vuoi che cerchiamo 🤔.")
                 numeroDomande+=2
-            IniziaDomande = st.form_submit_button("Cerca i principali DUBBI dei clienti 🤘")
+            IniziaDomande = st.form_submit_button("🤘 CERCAMI DUBBI e DOMANDE 🤘")
 
 
         if IniziaDomande:
@@ -1273,7 +1272,7 @@ try:
         st.markdown("#### 📌 Incolla qui sotto il testo che vuoi indicizzare 📌")
 
 
-        with st.form(key="my_form"):
+        with st.form(key="my_form", clear_on_submit=False):
 
             c1, c2= st.columns([2,3])
             with c1:
@@ -1320,7 +1319,7 @@ try:
                         "Numero minimo di parole chiave",
                         min_value=1,
                         max_value=4,
-                        help="""Il valore minimo per l'intervallo di ngram.
+                        help="""Il valore minimo per l'intervallo di ngram.  
             Se vuoi indicizzarti sulla parola ' marketing ' dovrai impostare il valore minimo e il massimo a 1.""",
                     )
 
@@ -1329,8 +1328,8 @@ try:
                         value=2,
                         min_value=1,
                         max_value=4,
-                        help="""Il valore massimo per keyphrase_ngram_range.
-            Se vuoi indicizzarti sulla parola 'strategie marketing ' dovrai impostare il valore minimo e il massimo a 2.
+                        help="""Il valore massimo per keyphrase_ngram_range.  
+            Se vuoi indicizzarti sulla parola 'strategie marketing ' dovrai impostare il valore minimo e il massimo a 2.  
             Se vuoi indicizzarti sulla parola 'strategie marketing digitale' dovrai impostare il valore minimo e il massimo a 3.""",
                     )
 
@@ -1342,7 +1341,7 @@ try:
                     use_MMR = st.checkbox(
                         "Usa MMR",
                         value=True,
-                        help="È possibile utilizzare la rilevanza del margine massimo (MMR) per diversificare i risultati. Crea parole chiave/frasi chiave basate sulla somiglianza del coseno. Prova le impostazioni 'Diversità' alta/bassa di seguito per variazioni interessanti."
+                        help="È possibile utilizzare la rilevanza del margine massimo (MMR) per diversificare i risultati.  Crea parole chiave/frasi chiave basate sulla somiglianza del coseno.  Prova le impostazioni 'Diversità' alta/bassa di seguito per variazioni interessanti."
                     )
 
                     Diversity = 0.5
@@ -1369,7 +1368,7 @@ try:
                         "Minimum Ngram disponibile in PREMIUM 👑",
                         min_value=1,
                         max_value=4,
-                        help="""Il valore minimo per l'intervallo di ngram.
+                        help="""Il valore minimo per l'intervallo di ngram.  
             Se vuoi indicizzarti sulla parola ' marketing ' dovrai impostare il valore minimo e il massimo a 1.""",
                         disabled=True
                     )
@@ -1379,8 +1378,8 @@ try:
                         value=2,
                         min_value=1,
                         max_value=4,
-                        help="""Il valore massimo per keyphrase_ngram_range.
-            Se vuoi indicizzarti sulla parola 'strategie marketing ' dovrai impostare il valore minimo e il massimo a 2.
+                        help="""Il valore massimo per keyphrase_ngram_range.  
+            Se vuoi indicizzarti sulla parola 'strategie marketing ' dovrai impostare il valore minimo e il massimo a 2.  
             Se vuoi indicizzarti sulla parola 'strategie marketing digitale' dovrai impostare il valore minimo e il massimo a 3.""",
                         disabled=True
                     )
@@ -1394,7 +1393,7 @@ try:
                     use_MMR = st.checkbox(
                         "Usa MMR disponibile in PREMIUM 👑",
                         value=True,
-                        help="È possibile utilizzare la rilevanza del margine massimo (MMR) per diversificare i risultati. Crea parole chiave/frasi chiave basate sulla somiglianza del coseno. Prova le impostazioni 'Diversità' alta/bassa di seguito per variazioni interessanti.",
+                        help="È possibile utilizzare la rilevanza del margine massimo (MMR) per diversificare i risultati.  Crea parole chiave/frasi chiave basate sulla somiglianza del coseno.  Prova le impostazioni 'Diversità' alta/bassa di seguito per variazioni interessanti.",
                         disabled=True
                     )
                     use_MMR = True
@@ -1405,10 +1404,7 @@ try:
                         min_value=0.0,
                         max_value=1.0,
                         step=0.1,
-                        help="""Maggiore è l'impostazione, più diverse saranno le parole chiave.
-                        
-            Nota che il dispositivo di scorrimento *Diversità delle parole chiave* funziona solo se la casella di controllo *MMR* è spuntata.
-            """,
+                        help="""Maggiore è il valore MMR, più diverse saranno le parole chiave.""",
                         disabled=True
                     )
                     Diversity = 0.5
@@ -1436,7 +1432,7 @@ try:
                     )
 
                     doc = doc[:MAX_WORDS]
-                streamlit_button = st.form_submit_button(label="✨ Analizza il mio testo")
+            streamlit_button = st.form_submit_button(label="🤖 ANALIZZAMI IL TESTO 🤖")
 
             if use_MMR:
                 mmr = True
