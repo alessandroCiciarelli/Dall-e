@@ -9,23 +9,34 @@ hide_st_style = """
     footer {visibility: hidden;}
     header {visibility: hidden;margin:0;}
     .css-18e3th9 { 
-    flex: 1 1 0%; 
-    width: 100%;
-    padding: 1rem!important;
+        flex: 1 1 0%; 
+        width: 100%;
+        padding: 1rem!important;
     }
     @media (min-width: 576px)
-    .css-18e3th9 {
-    padding: 0.5rem!important;
+        .css-18e3th9 {
+        padding: 0.5rem!important;
     }
 
     .st-c5 {
-    font-weight: 300;
-    font-size: medium;
+        font-weight: 300;
+        font-size: medium;
     }
 
     .menu-title .icon[data-v-4323f8ce], .menu-title[data-v-4323f8ce] {
-    font-size: 1.7rem;
-    font-weight: 500;
+        font-size: 1.7rem;
+        font-weight: 500;
+    }
+
+    .css-1cpxqw2{
+        width: 90%;
+        font-weight: 700;
+    }
+    .css-1cpxqw2:hover {
+        width: 100%;
+        font-weight: 800;
+        border-color: rgb(46, 170, 0);
+        color: rgb(46, 170, 0);
     }
     </style>
 
@@ -1022,7 +1033,7 @@ try:
                     👑Gli utenti PREMIUM possono scegliere tra oltre 50 mercati""" )
                 selected_lang = "lang_it"
 
-            IniziaCompetitor = st.form_submit_button("Cerca nuove suggerimenti 🤘")
+            IniziaCompetitor = st.form_submit_button("Cerca i miei COMPETIOR 🤘")
 
         if IniziaCompetitor:
             if st.session_state.premium == True:
@@ -1146,17 +1157,23 @@ try:
             text3 = st.markdown("<h4><b>Come funziona la seziona Ricerca ? </b></h4>Per iniziare ti basterà :<br>1️⃣ Inserire la keyword <br>2️⃣ Scegliere il numero di domande<br>3️⃣ Premere <b>'Svelami i Dubbi🤘'</b><br><br>", unsafe_allow_html=True)
             
         st.write("  ")
-        v1,v2 = st.columns(2)
-        text = v1.text_input("Inserisci la keyword", value="Marketing")
-        numeroDomande= 0
-        if st.session_state.premium == True:
-            numeroDomande = v2.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1)
-        else:
-            numeroDomande = v2.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 5, 1)
-            numeroDomande+=2
+        with st.form("my_form_Domande", clear_on_submit=False):
+            v1,v2 = st.columns(2)
+            text = v1.text_input("Inserisci la keyword", help="""Inserisci la Keyword/Prodotto/Servizo di cui vuoi conoscere i dubbi dei clienti 🤖.  
+                        ⚠️Gli utenti FREE NON possono ricevere più di 8 domande.  
+                        ⚠️Gli utenti FREE NON possono ricevere le informazioni sulla domanda.  
+                        👑Gli utenti PREMIUM possono ricevere fino a 25 domande per keyword.  
+                        👑Gli utenti PREMIUM possono ricevere le informazioni sulla domanda.  """ )
+            numeroDomande= 0
+            if st.session_state.premium == True:
+                numeroDomande = v2.slider("Quante domande vuoi che cerchiamo 🤔 ", 1, 25, 10, 1, help="Scegli il numero di domande che vuoi che cerchiamo 🤔.")
+            else:
+                numeroDomande = v2.slider("Cerca fino a 25 domande con PREMIUM 👑", 1, 8, 5, 1, help="Scegli il numero di domande che vuoi che cerchiamo 🤔.")
+                numeroDomande+=2
+            IniziaDomande = st.form_submit_button("Cerca i principali DUBBI dei clienti 🤘")
 
 
-        if st.button("Svelami i Dubbi🤘"):
+        if IniziaDomande:
             lines = text.split("\n")  # A list of lines
             linesList = []
             for x in lines:
